@@ -1,0 +1,379 @@
+# Paper status registry -- the single source of truth for paper status on the website.
+#
+# Edit with:  python scripts/paper_status.py set|event|add|list|check|build ...
+# Hand edits are fine too; then run `paper_status.py build`. Comments other than this
+# header are not preserved when the script rewrites the file.
+#
+# status:     accepted | in-review | wip | working-paper
+# substatus:  free text, e.g. submitted, under review, major revision, minor revision, in press
+# events:     dated public milestones (presentations, submissions, acceptance), newest shown first
+# wip:        only id/label, summary and events are published -- never title, abstract or links,
+#             and never a subpage under papers/<slug>/.
+papers:
+- id: Pub_OptimismBias_PartA
+  status: accepted
+  substatus: published
+  title: 'On the theoretical distribution of cost overruns: A lognormal baseline'
+  authors: Jeppe Rich
+  venue: Transportation Research Part A
+  year: 2026
+  volume: Vol. 212, 105189
+  slug: optimism-bias-part-a
+  featured: true
+  summary: Develops a two-level stochastic framework showing how multiplicative within-project updates
+    yield a lognormal cost-ratio baseline while portfolio-level right-skewness diagnoses correlated shocks
+    across projects.
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.tra.2026.105189
+  - label: 6-Slide Brief
+    url: slides_6.pdf
+  events: []
+- id: Pub_ActionSpace_TG
+  status: accepted
+  substatus: in press
+  title: 'Generational action-space dynamics over two decades: A continuity density-field perspective'
+  authors: Jeppe Rich
+  venue: Journal of Transport Geography
+  year: 2026
+  slug: action-space-tg
+  featured: true
+  summary: Physics-inspired continuity-field framework analyzing how six birth cohorts reorganize daily
+    activity in space and time across 18 years of Danish National Travel Survey data (115,338 person-days).
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.jtrangeo.2026.104847
+  - label: 'GitHub: Public Code'
+    url: https://github.com/jepperich69/Pub_ActionSpace_TG
+    kind: public
+  events:
+  - date: 2026-11
+    text: Accepted in Journal of Transport Geography
+- id: Pub_NonlinearDiffusion_PartB
+  status: accepted
+  substatus: published
+  title: 'Beyond Box-Cox: A diffusion-inspired functional framework for nonlinear demand and discrete
+    choice modeling'
+  authors: Jeppe Rich
+  venue: Transportation Research Part B
+  year: 2026
+  volume: Vol. 204, 103380
+  slug: nonlinear-diffusion-part-b
+  featured: true
+  summary: Introduces a diffusion-inspired functional framework for nonlinear demand and discrete choice
+    models capturing cost damping, saturation, and flexible elasticities.
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.trb.2025.103380
+  events: []
+- id: Pub_Letswalk_Transp
+  status: accepted
+  substatus: published
+  title: Let's walk! The fallacy of urban first- and last-mile public transport
+  authors: Rich J.
+  venue: Transportation
+  year: 2026
+  volume: 53, 511–533
+  links:
+  - label: DOI
+    url: https://doi.org/10.1007/s11116-024-10505-5
+  events: []
+- id: Pub_EV_geografi
+  status: accepted
+  substatus: published
+  title: 'Spatial differences in PEV demand: The case of Denmark'
+  authors: Mabit S.E., Bunch D.S., Jensen A.F., Rich J.
+  venue: Journal of Transport Geography
+  year: 2026
+  volume: 131, 104538
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.jtrangeo.2025.104538
+  events: []
+- id: Pub_FareWelfare_TRA
+  status: accepted
+  substatus: published
+  title: Welfare-optimal public transport fares in Denmark
+  authors: Argyros D., Fjendbo Jensen A., Rich J.
+  venue: Transportation Research Part A
+  year: 2026
+  volume: 204, 104790
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.tra.2025.104790
+  events: []
+- id: Pub_ConditionalAgreement_TBA
+  status: accepted
+  substatus: published
+  title: 'Conditional connection agreements for electric vehicle charging: Review, design, and implementation
+    of solutions for the low-voltage power distribution grid'
+  authors: Unterluggauer T., Hipolito F., Andersen P.B., Rich J., Marinelli M.
+  venue: Renewable and Sustainable Energy Reviews
+  year: 2026
+  volume: 227, 116427
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.rser.2025.116427
+  events: []
+- id: Pub_Battery_Swap
+  status: accepted
+  substatus: published
+  title: Electric bus battery swapping and charging management across multiple depots
+  authors: Yang S., An K., Rich J.
+  venue: Omega
+  year: 2026
+  volume: 138, 103434
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.omega.2025.103434
+  events: []
+- id: Pub_RangeAnexity_Transp
+  status: accepted
+  substatus: published
+  title: 'Charging behaviour and range anxiety in long-distance EV travel: an adaptive choice design study'
+  authors: Thorhauge M., Rich J., Mabit S.E.
+  venue: Transportation
+  year: 2026
+  volume: 53, 2197–2219
+  links:
+  - label: DOI
+    url: https://doi.org/10.1007/s11116-024-10561-x
+  events: []
+- id: Pub_ActionSpace_NatComm
+  status: in-review
+  title: 'The Diverging Action-Space: Evolving Rhythms and Changing Habits in Daily Mobility'
+  authors: Jeppe Rich
+  venue: Nature Communications
+  slug: action-space-natcomm
+  featured: true
+  summary: Using 18 years of Danish travel data (115,338 weekday diaries), we analyze daily action-spaces
+    across five age groups and identify a two-regime divergence between long-run spatial expansion and
+    post-2019 temporal contraction below age 56.
+  links:
+  - label: 'GitHub: Public Code'
+    url: https://github.com/jepperich69/Pub_ActionSpace_NatComm
+    kind: public
+  events: []
+- id: Pub_PopInt_PartB
+  status: in-review
+  title: 'From Fractions to Individuals: Information-Theoretic Integerization for Population Synthesis'
+  authors: Jeppe Rich
+  venue: Transportation Research Part B
+  slug: popint-part-b
+  featured: true
+  summary: Recasts contingency-table integerization as deterministic Kullback–Leibler inference via two
+    sparse IPF runs and largest-remainder allocation, achieving 98.4% mass overlap across 98 Danish municipalities.
+  links:
+  - label: 'GitHub: Private Repo'
+    url: https://github.com/jepperich69/Pub_PopInt_PartB
+    kind: private
+  events: []
+- id: Pub_EbikeAdaptation_TRC
+  status: in-review
+  title: 'Modelling transport market adaptation using synthetic pseudo-panels: Application to e-bike diffusion'
+  authors: Dimitrios Argyros, Anders Fjendbo Jensen, Jeppe Rich
+  venue: Transportation Research Part C
+  slug: ebike-adaptation-trc
+  featured: true
+  summary: Introduces a synthetic pseudo-panel (SPP) framework using conditional variational autoencoders
+    (CVAE) to reconstruct ten-year e-bike adoption trajectories from repeated cross-sectional data.
+  links: []
+  events: []
+- id: Pub_StopGeometry_TBA
+  status: wip
+  summary: Stopping burden as a structural property of urban cycling networks.
+  events: []
+  label: Pub_StopGeometry
+- id: Pub_PopInt_Part2_TBA
+  label: Pub_PopInt_Part2
+  status: wip
+  summary: Information-theoretic constraint pricing and feasibility certificates for multi-margin population
+    synthesis.
+  events: []
+- id: Pub_Seed_TBA
+  label: Pub_Seed
+  status: wip
+  summary: Statistical sufficiency and maximum-entropy seed construction for synthetic populations.
+  events: []
+- id: Pub_SAA_PMIP_MC
+  status: wip
+  summary: Risk-sensitive optimization and analytical cost transformations for stochastic mixed-integer
+    programs.
+  events: []
+- id: Pub_PMIP_VSP
+  status: wip
+  summary: Operational vehicle scheduling for heavy-duty fleet electrification and automation in line-haul
+    freight networks.
+  events: []
+- id: Pub_NapstiGranularity_TBA
+  label: Pub_NapstiGranularity
+  title: 'Optimal Stop Spacing and Service Frequency in Public Transport Networks: A Continuous Fixed-Point Approach'
+  authors: Jeppe Rich, Lawrence Duncan, Oded Cats, David Watling, Mads Paulsen, Thomas Kjær Rasmussen
+  slug: stop-spacing-part-b
+  featured: true
+  status: in-review
+  summary: Joint stop spacing and service frequency under a fixed budget, solved to global optimality by a fixed point of closed-form blocks and applied to 450 bus segments in Copenhagen.
+  links:
+  - label: 'GitHub: Private Repo'
+    url: https://github.com/jepperich69/Napsti_Paper1
+    kind: private
+  events:
+  - date: '2026-11-24'
+    text: Submitted to Transportation Research Part B
+  venue: Transportation Research Part B
+- id: Pub_AssesTiming_Raoul_TBA
+  status: wip
+  summary: Strategic timing of commercial fleet electrification under charging costs, capital budgets
+    and leasing.
+  events: []
+  label: Pub_AssesTiming
+- id: Pub_DistributionNetworks_TBA
+  status: wip
+  summary: How electrification and automation reshape the optimal spatial structure of national freight
+    distribution networks.
+  events: []
+  label: Pub_DistributionNetworks
+- id: Pub_DP_Logsum_TBA
+  status: wip
+  summary: Exact dynamic programming for risk-sensitive sequential decisions under uncertain costs.
+  events: []
+  label: Pub_DP_Logsum
+- id: Pub_DP_RL_TBA
+  status: wip
+  summary: Combining exact dynamic programming and reinforcement learning for risk-sensitive sequential
+    decision problems.
+  events: []
+  label: Pub_DP_RL
+- id: Pub_DrivenThroughTime_TBA
+  status: wip
+  summary: Lifetime household car availability across birth cohorts and its outlook for 2030-2040.
+  events: []
+  label: Pub_DrivenThroughTime
+- id: Pub_FleetStochastic_TBA
+  status: wip
+  summary: Stochastic optimization of line-haul truck fleet electrification under uncertainty.
+  events: []
+  label: Pub_FleetStochastic
+- id: Pub_FunctionClass_SR_TBA
+  status: wip
+  summary: A unified function class for nonlinear utility in demand and discrete choice models.
+  events: []
+  label: Pub_FunctionClass_SR
+- id: Pub_ML_Entropy
+  status: wip
+  summary: Probabilistic analysis of the space of near-optimal transparent classification policies.
+  events: []
+  label: Pub_ML_Entropy
+- id: Pub_QP_SAA_MC
+  status: wip
+  summary: Risk-averse stochastic linear and mixed-integer programming under correlated Gaussian uncertainty.
+  events: []
+  label: Pub_QP_SAA_MC
+- id: Pub_Riskadversion_MS
+  status: wip
+  summary: A statistical explanation of corporate risk aversion rooted in compounding earnings.
+  events: []
+  label: Pub_Riskadversion
+- id: Pub_Fleet_Ahmed
+  status: accepted
+  substatus: published
+  title: 'Planning the transition to electric trucks: An optimization framework for line-haul logistics'
+  authors: Karam A., Rich J.
+  venue: Research in Transportation Business & Management
+  year: 2025
+  volume: 61, 101413
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.rtbm.2025.101413
+  events: []
+- id: Pub_FlowPaperSP2_TRD
+  status: accepted
+  substatus: published
+  title: Would you let your car feed the grid? Comparing vehicle-to-grid smart charging preferences across
+    six European countries
+  authors: Jensen A.F., Mabit S.E., Rich J.
+  venue: Energy Research & Social Science
+  year: 2026
+  volume: 139, 104855
+  links:
+  - label: DOI
+    url: https://doi.org/10.1016/j.erss.2026.104855
+  events:
+  - date: 2026-09
+    text: Published in Energy Research & Social Science
+- id: Pub_FlowSP1_TBA
+  status: in-review
+  title: 'Plug-in electric vehicle adoption in Europe: A cross-country analysis of preferences and willingness-to-pay
+    in six markets'
+  authors: Stefan E. Mabit, Anders F. Jensen, Símun P. Pálsson, Jeppe Rich
+  venue: Transportation Research Part D
+  summary: Cross-country comparison of preferences and willingness-to-pay for plug-in electric vehicles
+    in six European markets, based on a harmonised stated-preference survey.
+  links: []
+  events: []
+- id: Pub_pLCA_Trucks_TBA
+  status: in-review
+  title: Future environmental impacts of electric heavy-duty trucks
+  authors: Raoul Nicolodi, Jeppe Rich, Alexis Laurent
+  venue: Journal of Cleaner Production
+  summary: Prospective life cycle assessment of diesel and battery-electric 40-tonne long-haul trucks
+    across world regions from 2025 to 2050.
+  links: []
+  events: []
+- id: Ext_YangAn_HybridChargingBus
+  status: in-review
+  title: Battery Electric Bus Scheduling for Hybrid Charging Systems Considering Travel Time and Energy
+    Consumption Uncertainty
+  authors: Siyuan Yang, Kun An, Shu Chen, Jeppe Rich
+  venue: Omega
+  summary: Scheduling of battery electric bus fleets with hybrid charging systems under uncertain travel
+    times and energy consumption.
+  links: []
+  events: []
+- id: Pub_PMIP_AOR
+  status: in-review
+  title: Recasting Mixed-Integer Programs as Probability Problems
+  authors: Jeppe Rich, Kun An
+  venue: Annals of Operations Research
+  summary: A probabilistic MIP framework that solves discrete optimization problems by Metropolis–Hastings
+    sampling with flip-and-repair moves, applied to population synthesis and set cover.
+  links: []
+  events: []
+- id: Pub_MIPEntropy_MPC
+  status: in-review
+  substatus: major revision
+  title: 'RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization'
+  authors: Jeppe Rich
+  venue: Mathematical Programming Computation
+  summary: A hybrid MIP heuristic that uses an entropy relaxation (IPF/Sinkhorn) as a warm start, followed
+    by rounding, local repair and restricted-MIP polishing.
+  links:
+  - label: 'GitHub: Public Code'
+    url: https://github.com/jepperich69/RICH-MIP
+    kind: public
+  events: []
+- id: Pub_PopSynthReview_TBA
+  status: wip
+  summary: A review of population synthesis methods for transport and activity-based models.
+  events: []
+  label: Pub_PopSynthReview
+- id: Pub_CongestionPMIP_TBA
+  status: wip
+  summary: Bilevel optimization of congested multimodal transport networks.
+  events: []
+  label: Pub_CongestionPMIP
+- id: Pub_PopulationVianuey_TBA
+  status: wip
+  summary: Population and travel behaviour analysis based on the Danish National Travel Survey.
+  events: []
+  label: Pub_PopulationVianuey
+- id: Pub_ModelComplexity_TBA
+  status: wip
+  summary: Model complexity and out-of-sample forecasting performance.
+  events: []
+  label: Pub_ModelComplexity
+- id: Pub_TruckTransitionMeta_TBA
+  status: wip
+  summary: Simplified models of the transition of truck fleets to zero-emission vehicles.
+  events: []
+  label: Pub_TruckTransitionMeta

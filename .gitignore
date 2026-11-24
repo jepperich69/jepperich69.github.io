@@ -1,0 +1,18 @@
+.quarto/
+.Rhistory
+__pycache__/
+_session_draft.md
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Internal working files: never published
+_ai_log.md
+_ai_log_archive.md
+_handover.html
+_handover.json
+AGENTS.md
+.claude/
+_state/
+_cvbuild/
+papers/_rundown_*.md

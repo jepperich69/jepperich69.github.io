@@ -1,0 +1,13 @@
+---
+title: "From Fractions to Individuals: Information-Theoretic Integerization for Population Synthesis"
+subtitle: "Status: In review · Transportation Research Part B"
+author: "Jeppe Rich"
+date: "2026-10-13"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Abstract
+
+High-dimensional population synthesis produces sparse contingency tables with many fractional counts that must be integerized for agent-based models. Standard sampling approaches introduce stochastic noise. We recast integerization as an information-theoretic inference problem: among all integer tables consistent with the margins, select the one closest to the fractional IPF solution in Kullback–Leibler divergence. We restrict the search to integerizations that assign each cell either its floor or ceiling value, which yields a simple two-step algorithm that is reproducible and efficient. Applied to 98 Danish municipalities with 635,000 joint cells across socio-economic groups, the integer table overlaps 98.4% with the fractional IPF solution, versus 92.1% for multinomial sampling. Identical inputs produce identical outputs, eliminating sampling variance. Primary margins are exact; secondary margins may carry small residuals. The method replaces traditional sampling-based integerization with deterministic inference that yields a single, stable, reproducible solution. The algorithm consists of two sparse IPF runs and a largest-remainder allocation, so it scales as IPF itself; an extension to 397 million cells is integerized in 16 minutes.

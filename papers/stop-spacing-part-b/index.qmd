@@ -1,0 +1,13 @@
+---
+title: "Optimal Stop Spacing and Service Frequency in Public Transport Networks: A Continuous Fixed-Point Approach"
+subtitle: "Status: In review · Transportation Research Part B"
+author: "Jeppe Rich, Lawrence Duncan, Oded Cats, David Watling, Mads Paulsen, Thomas Kjær Rasmussen"
+date: "2026-11-24"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Abstract
+
+Removing stops shortens vehicle cycles but lengthens passenger access. Under a fixed operating budget, the released cycle time can fund higher frequency. We formulate the joint spacing–frequency problem as a continuous programme and solve it by a fixed point between two closed-form blocks. For fixed frequencies, each segment has an independent spacing condition. For fixed spacings, line frequencies follow a generalised Mohring rule under a fixed budget. The programme is convex in the logarithms of spacing and frequency, so the fixed point gives the global optimum. On a controlled three-line instance it reaches this optimum in six iterations and 0.009 seconds, whereas spatial branch-and-bound requires 527 thousand nodes and 17 seconds. The model yields an interior welfare optimum, and we bound the loss from rounding the continuous spacing to a whole number of stops. Health valuation shifts optimal spacing upward, and omitting it understates the Danish single-line optimum by 13%. We also apply the method to 450 segments on 172 bus lines in Copenhagen, where it solves in milliseconds. Under the existing bus budget, demand-weighted spacing rises from 0.51 to 0.57 km and frequency from 7.3 to 9.2 trips per hour. With walking valued at 7.5 DKK/km for its health benefit, optimal spacing is 11% wider than the operated design. Without that value it is slightly tighter. The larger change is that frequency moves toward the central network and away from the outer lines.

@@ -1,0 +1,13 @@
+---
+title: "Modelling transport market adaptation using synthetic pseudo-panels: Application to e-bike diffusion"
+subtitle: "Status: In review · Transportation Research Part C"
+author: ["Dimitrios Argyros", "Anders Fjendbo Jensen", "Jeppe Rich"]
+date: "2026-10-19"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Abstract
+
+Emerging transport technologies often diffuse through niche segments, where survey-based methods struggle to capture adoption dynamics due to limited sample sizes. To address this, we introduce a synthetic pseudo-panel (SPP) framework employing conditional variational autoencoders (CVAE) to reconstruct consistent adoption trajectories from repeated cross-sectional data. Applied to e-bike adoption in Denmark over a ten-year period, the framework enables decomposition of mileage changes and reveals modal reallocation patterns through shifts in preference distributions over time. Results highlight distinct socio-demographic and geographic pathways, with early signals detectable before they appear in raw data. Adoption is strongest in suburban areas and city centres, while rural regions lag. Women and elderly adults emerge as leading adopters, primarily reallocating bicycle trips, though effects extend to other modes as well. Evidence of induced demand suggests e-bikes may enable mobility among previously non-travelling individuals. The framework is broadly applicable to domains characterised by gradual behavioural diffusion, including automated vehicles, electric mobility, and energy transitions.

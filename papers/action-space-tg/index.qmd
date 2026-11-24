@@ -1,0 +1,21 @@
+---
+title: "Generational action-space dynamics over two decades: A continuity density-field perspective"
+subtitle: "Journal of Transport Geography (2026)"
+author: "Jeppe Rich"
+date: "2026-11-06"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+This paper introduces a physics-inspired framework for analyzing how six birth cohorts reorganize their daily activity in space and time over two decades, using **18 survey years of Danish National Travel Survey data** (2007–2024, $N = 115,338$ retained person-days).
+
+- **Action-Space Continuity Field:** Each survey wave defines a cohort-level action-space density field $\rho_c(d, t; \tau)$ — the probability of being active at distance $d$ from home at time of day $t$ in period $\tau$.
+- **Continuity Equation & Drift:** Successive temporal snapshots are linked via an analogy to the fluid-mechanics continuity equation, extracting drift vectors, speed fields, and source/sink terms that characterize how spatial reach and out-of-home duration co-evolve.
+- **Empirical Findings:** Results reveal spatial expansion paired with reduced time away from home for cohorts born 1960–2000, predominantly temporal contraction for the oldest cohort, and spatial expansion at an almost unchanged away-time fraction for the youngest cohort.
+
+## Reproduction Repository
+
+The complete R and Python reproduction pipeline (`Code/run_paper.R`, weighted KDE estimators, drift vector solvers, and figure generators with checksum manifest verification) is publicly available at [`github.com/jepperich69/Pub_ActionSpace_TG`](https://github.com/jepperich69/Pub_ActionSpace_TG).

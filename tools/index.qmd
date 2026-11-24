@@ -1,0 +1,30 @@
+---
+title: "Interactive Tools & Calculators"
+subtitle: "Browser-based transport demand, elasticity, and welfare models"
+toc: false
+---
+
+These interactive tools run **100% client-side in your browser** (compiled JavaScript engines with pre-calibrated aggregate parameters). No data leaves your browser, and underlying restricted micro-data pipelines (such as raw TU travel survey tabulations) remain isolated in private project repositories.
+
+```{=html}
+<div class="card-grid">
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">National Transport Demand &amp; Welfare Surrogate · Denmark (2023 Baseline)</div>
+      <h3><a href="elasticity/index.qmd">LTM 2.3 Transport Cost &amp; Fare Elasticity Calculator</a></h3>
+      <p>
+        A fast, calibrated Nested Logit / Multinomial Logit surrogate of the Danish National Transport Model (LTM 2.3, Rich 2022), rebased to 2023 with Danish National Travel Survey (TU 0624v1), TERESA 6.21 value-of-time, and TØE 2.2 unit cost data. Available in Danish and English.
+      </p>
+      <p>
+        Evaluate uniform or differentiated changes in <strong>car driving cost</strong>, <strong>car travel time</strong>, <strong>public transport fares</strong>, <strong>public transport travel time</strong>, and <strong>annual car ownership cost</strong> across trip purposes, distance bands, income quintiles, and household car-ownership segments.
+      </p>
+    </div>
+    <div class="badge-row">
+      <a href="elasticity/index.qmd" class="jr-badge badge-tool">🚀 Open Calculator &amp; Documentation</a>
+      <a href="elasticity/app/index.html" class="jr-badge badge-pdf" target="_blank">⤢ Launch Full-Window App</a>
+    </div>
+  </div>
+
+</div>
+```

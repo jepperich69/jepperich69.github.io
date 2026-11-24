@@ -1,0 +1,73 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - "tools/elasticity/app/**"
+    - "tools/elasticity/*.pdf"
+    - "papers/**/*.pdf"
+    - "group-cv/*.pdf"
+    - "assets/**"
+
+website:
+  title: "Jeppe Rich"
+  description: "Professor of Transport Modelling, Optimization & Econometrics at DTU Management"
+  favicon: assets/profile.jpeg
+  page-navigation: true
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Papers"
+        href: papers/index.qmd
+      - text: "Code & Algorithms"
+        href: software/index.qmd
+      - text: "Interactive Tools"
+        href: tools/index.qmd
+      - text: "Projects"
+        href: projects/index.qmd
+      - text: "AI Workflow"
+        href: ai-workflow/index.qmd
+      - text: "CV"
+        href: group-cv/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/jepperich69
+        aria-label: GitHub
+      - icon: mortarboard-fill
+        href: https://scholar.google.dk/citations?user=dLP3kAMAAAAJ
+        aria-label: Google Scholar
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jeppe-rich-b6125841/
+        aria-label: LinkedIn
+      - icon: envelope
+        href: mailto:rich@dtu.dk
+        aria-label: Email
+
+  page-footer:
+    left: "© 2026 Jeppe Rich · Professor, DTU Management · Technical University of Denmark"
+    right:
+      - text: "Google Scholar"
+        href: https://scholar.google.dk/citations?user=dLP3kAMAAAAJ
+      - text: "ORCID"
+        href: https://orcid.org/0000-0001-5706-3836
+      - text: "ResearchGate"
+        href: https://www.researchgate.net/profile/J_Rich
+      - text: "LinkedIn"
+        href: https://www.linkedin.com/in/jeppe-rich-b6125841/
+      - text: "Web of Science"
+        href: https://www.webofscience.com/wos/author/record/L-8864-2016
+      - text: "GitHub"
+        href: https://github.com/jepperich69
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+      dark: [slate, styles-dark.scss]
+    toc: true
+    toc-depth: 3
+    html-math-method: katex
+    code-copy: true
+    link-external-newwindow: false

@@ -1,0 +1,157 @@
+---
+title: "CV"
+subtitle: "Biography, PhD & Postdoc supervision, editorial roles, and contact information"
+toc: true
+---
+
+```{=html}
+<div class="badge-row" style="margin-bottom: 1.5rem;">
+  <a href="cv_jeppe_rich.pdf" class="jr-badge badge-pdf" target="_blank">⬇️ Download Full Curriculum Vitae (PDF)</a>
+  <a href="https://scholar.google.dk/citations?user=dLP3kAMAAAAJ" class="jr-badge badge-public" target="_blank">🎓 Google Scholar</a>
+  <a href="https://orcid.org/0000-0001-5706-3836" class="jr-badge badge-public" target="_blank">🆔 ORCID: 0000-0001-5706-3836</a>
+  <a href="https://www.researchgate.net/profile/J_Rich" class="jr-badge badge-public" target="_blank">🔬 ResearchGate</a>
+  <a href="https://www.webofscience.com/wos/author/record/L-8864-2016" class="jr-badge badge-public" target="_blank">📚 ResearcherID: L-8864-2016</a>
+  <a href="https://www.linkedin.com/in/jeppe-rich-b6125841/" class="jr-badge badge-tool" target="_blank">🔗 LinkedIn</a>
+  <a href="https://github.com/jepperich69" class="jr-badge badge-tool" target="_blank">💻 GitHub (@jepperich69)</a>
+  <a href="https://orbit.dtu.dk/en/persons/jeppe-rich" class="jr-badge badge-tool" target="_blank">🏛️ DTU Orbit</a>
+  <a href="mailto:rich@dtu.dk" class="jr-badge badge-request">✉️ rich@dtu.dk</a>
+</div>
+```
+
+## Short Biography
+
+**Jeppe Rich** is Professor at the Technical University of Denmark (DTU Management, Department of Technology, Management and Economics) specializing in large-scale transport modelling, optimization, and econometrics. Holding an M.Sc. in Mathematical Planning from the University of Aarhus (1995) and a Ph.D. from DTU (2001), he works across quantitative transportation science, including discrete choice and demand models, mixed-integer and stochastic optimization, population synthesis, charging infrastructure planning, freight electrification, and bicycle demand.
+
+In March 2023, he was appointed Co-Editor-in-Chief and Founding Editor of the Elsevier journal *Journal of Cycling and Micromobility Research*, co-founded with Professor Eva Heinen. Throughout his career he has led numerous national and European transport modelling programmes, notably serving as chief designer for the **Danish National Transport Model (LTM)**, a €7 million venture. He is the recipient of the **2025 Danish Transport Research Prize**.
+
+He collaborates closely with international academic partners (including TU Delft, NTNU, ETH Zurich, University of Leeds, KU, TUM, KTH, Tongji, Technion, and MIT) as well as ministries, public authorities, and the European Commission.
+
+---
+
+## Honors, Appointments & Editorial Roles
+
+- **2025:** Recipient, **Danish Transport Research Prize** (DKK 75,000), awarded biennially for significant contributions to transport research and knowledge transfer in Denmark.
+- **2025:** Member, expert group on green transitions in heavy freight transport (led by DI and 3F).
+- **2023–2026:** **Editor-in-Chief and Founding Editor**, *Journal of Cycling and Micromobility Research* (Elsevier).
+- **2020–present:** Board Member, Danish Aeromobilities Academy.
+- **2020–2024:** Guest Professor, Southeast University, China.
+- **2017–2021:** Member of the Committee for the Bibliometric Research Indicator (BFI).
+- **2016–2019:** Advisory Board Member, *European Transport Research Review* (ETRR).
+
+---
+
+## PhD & Postdoc Supervision
+
+In addition to supervising postdocs and 30+ M.Sc./B.Sc. theses, I have supervised or co-supervised the following PhD and postdoctoral researchers:
+
+| Period | Researcher | Topic | Co-Supervisors |
+|---|---|---|---|
+| **2026–2028** | **Matthew Davidson** | Postdoc (two years, from December 2026) | Allan Larsen |
+| **2026–2029** | **Rasmus Weibull** | PhD on the *Traction* project (Hedorfs Fond) | Thomas Kjær Rasmussen |
+| **2024–2027** | **Raoul Nicolodi** | *Sustainable Roadmap Scenarios for the Electrification of Long-Haul Transport* (DESERTLE) | Prof. Alexis Laurent |
+| **2023–2026** | **Dimitrios Argyros** | *Micromobility Users' Behaviour and Safety from Multiple Large-Scale Data Sources* | Anders Fjendbo Jensen |
+| **2021–2024** | **Tim Unterluggauer** | *Urban Electric Vehicle Charging Infrastructure: Planning, Grid Impact and Grid Integration* | Peter Bach Andersen, Mattia Marinelli |
+| **2019–2021** | **Sergio Garrido** | *Machine Learning for Demand Modelling and Population Synthesis* | Francisco C. Pereira |
+| **2018–2021** | **Andrea Papu Carrone** | *Demand and Behaviour Models for Shared, Electric and Autonomous Car Mobility* | Anders Fjendbo Jensen |
+| **2011–2015** | **Mikkel Thorhauge** | *Departure Time Choice: Modelling Individual Preferences, Intention and Constraints* | Prof. Elisabetta Cherchi |
+| **2007–2013** | **Mette Aagaard Knudsen** | *Danish Long-Distance Travel Demand Modelling* | Prof. Otto Anker Nielsen |
+
+### Recent Visiting Researchers Hosted at DTU
+- **2025:** Vianey Darsel (*Université Gustave Eiffel, Paris*), Rubina Singh (*Washington State University*), Mohammad Mehdi Oshanreh (*University of Washington*, Valle Scholarship).
+- **2024:** Leonard Arning (*University of Wuppertal* — e-bike & regional cycling demand).
+- **2023:** Lucas Ballo (*ETH Zurich* — 15-minute city), Christoph Steinacker (*TU Dresden* — robust bicycle networks).
+- **2022:** Sagi Dalyot (*Tel Aviv University* — micromobility), Haiming Cai (*Harbin Institute of Technology*), Ellen Heffer Flaata (*NTNU*).
+
+---
+
+## Education & Academic Career at DTU
+
+- **2016–present:** Professor, DTU Management, Department of Technology, Management and Economics (Section Leader, Demand Modelling Group 2018–2020; Professor with special responsibilities in large-scale transport models 2016).
+- **2008–2016:** Associate Professor, DTU Transport (Coordinator of the Large-Scale Modelling team from 2014).
+- **2002–2008:** Assistant Professor, Centre for Traffic and Transport, DTU (and Senior Consultant, Atkins Denmark A/S, 2002–2003).
+- **2001:** Ph.D. in Transport Demand Modelling, Technical University of Denmark (*Long-term Travel Demand Modelling*).
+- **1995–1998:** Researcher, National Environmental Research Institute (NERI), Ministry of the Environment.
+- **1995:** M.Sc. in Mathematical Planning, University of Aarhus (*Spatial Econometric Models*).
+
+---
+
+## Recent Invited Talks & Keynotes (Selected, 2022–2026)
+
+- **2026, March:** Invited Speaker, Transport Symposium, GIPSA-lab, Grenoble, France.
+- **2025, November:** Invited Speaker, Transportation and Mobility Planning Colloquium, ETH Zurich.
+- **2025, October:** DI & 3F Expert Group for Green Transition of Heavy Transport.
+- **2025, May:** Invited Talk, Danske Erhverv (*"Line-Haul Electrification"*) and Jan Nygaard A/S (*"Nytidens og fremtidens transport"*).
+- **2024, December:** Invited Seminar, KTH Stockholm (*"Transport should not be smart – it should be simple"*).
+- **2024, November:** Invited Lecturer, ETH Zurich.
+- **2024, October:** Invited Speaker, Movia (*"The future of public transport"*), EcomExpo Copenhagen, and Review Board for the Compass model.
+- **2024, February:** Keynote, FUSE Project Final Event (Frederiksberg); Invited Speaker, Mayor Summit (Copenhagen City Hall); Invited Expert, Dutch National Transport Model Webinar.
+- **2023:** Invited Speaker, Aalto University (Finland); Agent-Based Modelling Seminar (Oslo); TØF CO₂ Policy Debate with Mogens Fosgerau (Copenhagen).
+- **2022:** Invited Keynote, Workshop on Population Synthesis and Sustainable Mobility (Göteborg).
+
+---
+
+## Teaching Activities at DTU
+
+| Period | Course | Role |
+|---|---|---|
+| **2023–present (Fall)** | *Exploring the State-of-the-Art in Quantitative Transport Science* (42787, PhD course) | Course Responsible |
+| **2019–2023 (Fall)** | *Analysis of Transport Systems – Demand and Planning* (42178) | Examinator |
+| **2019–2022 (Fall)** | *Agent-Based Modelling and Simulation* (42188, M.Sc. course) | Course Responsible |
+| **2017–2023 (Spring)** | *Quantitative Modelling of Behaviour* (M.Sc. course) | Lecturer |
+| **2004–2016** | *Advanced Transport Models* / *Transport Models* (M.Sc. course) | Course Responsible |
+
+---
+
+## Academic Assessment & PhD Committees (2019–2026)
+
+- **2026**
+    - Invited examiner, PhD committee for Ehsan Saqib (KTH, December)
+    - Chair, PhD committees for Mina and Alexander Hammel (DTU, May)
+    - Rapporteur, PhD committee for Manuel Campero Jurado (GIPSA-lab, Grenoble, March)
+- **2025**
+    - PhD committee for David Zani (ETH Zurich, November)
+    - Chair, PhD committee for Kim Jiwon (DTU, October)
+    - Promotion committee for David Gundlegård (VTI, September)
+    - Chair, PhD committee for KuanYeh Chou (DTU, May)
+- **2024**
+    - PhD opponent for Stephen McCarthy (KTH, November)
+    - PhD opponent for Angelica Andersson (Linköping University, September)
+    - Chair, promotion board for Associate Professor Rico Krueger (DTU)
+    - Midterm evaluation panels for Rico Krueger and Guido Cantelmo (DTU)
+- **2023**
+    - Promotion board for Professor Erik Jenelius (KTH)
+    - Chair, PhD committee for Miroslawa Lukawska (DTU)
+- **2022**
+    - PhD opponent for Bhavana Vaddadi (KTH)
+    - Chair, PhD committee for Marcus Myhrmann (DTU)
+- **2021**
+    - Assessor, professor assessment committee in Transport Economics (VTI)
+    - Chair, PhD committee for Andreas Thingvad
+- **2020**
+    - Chair, PhD committees for Mads Paulsen and Raffaele Salvucci (DTU)
+    - Chair, assessment committee for Associate Professor in Behavioural Transport Science (DTU)
+    - Assessment committee for Associate Professor in Applied Economics within Energy, Climate and Transport (DTU)
+- **2019**
+    - Chair, assessment committees for Associate Professor in Machine Learning and Mobility and in Quantitative Behavioural Modelling of Transport (DTU)
+    - Chair, PhD committee for Ioulia Markou (DTU)
+    - PhD committee for Juan Manuel Lorenzo Varela (KTH)
+
+---
+
+## Public Outreach & Media Presence
+
+Regular contributor to Danish public policy debates on infrastructure appraisal, road pricing, public transport fares, transport electrification, and cycling investments, with **50+ television, radio, and print interviews (2021–2025)** across *DR TV-Avisen*, *TV2 News*, *Altinget*, *Politiken*, *Berlingske*, *Ingeniøren*, and *Radio4*.
+
+---
+
+## Contact & Academic Profiles
+
+- **Office:** Department of Technology, Management and Economics, Technical University of Denmark (DTU), Akademivej, Building 358, 2800 Kgs. Lyngby, Denmark
+- **Email:** [`rich@dtu.dk`](mailto:rich@dtu.dk) · **Phone (DTU):** +45 4525 4556
+- **Google Scholar:** [scholar.google.dk/citations?user=dLP3kAMAAAAJ](https://scholar.google.dk/citations?user=dLP3kAMAAAAJ)
+- **ORCID:** [0000-0001-5706-3836](https://orcid.org/0000-0001-5706-3836)
+- **ResearchGate:** [researchgate.net/profile/J_Rich](https://www.researchgate.net/profile/J_Rich)
+- **Web of Science ResearcherID:** [L-8864-2016](https://www.webofscience.com/wos/author/record/L-8864-2016)
+- **LinkedIn:** [linkedin.com/in/jeppe-rich-b6125841](https://www.linkedin.com/in/jeppe-rich-b6125841/)
+- **GitHub:** [github.com/jepperich69](https://github.com/jepperich69)
+- **DTU Orbit:** [orbit.dtu.dk/en/persons/jeppe-rich](https://orbit.dtu.dk/en/persons/jeppe-rich)

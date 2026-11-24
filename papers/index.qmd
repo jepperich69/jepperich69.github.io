@@ -1,0 +1,138 @@
+---
+title: "Papers & Publications"
+subtitle: "Classified by peer-review status: Accepted · In review · Work-in-progress"
+toc: true
+---
+
+Papers are organized by status:
+
+1. **Accepted (Peer-Reviewed Journal Articles):** Full citation, DOI, slide decks, technical one-pagers, and public reproduction repositories.
+2. **In review:** Submitted manuscripts currently under peer review (title, authors, target journal, and abstract).
+3. **Work-in-progress:** Active pre-submission research listed strictly by internal project code (`Pub_xxx`) and a one-sentence topic description.
+{{< include _gen/working-paper-intro.md >}}
+
+---
+
+## 1. Accepted & Published Papers (Recent)
+
+{{< include _gen/accepted.md >}}
+
+---
+
+## 2. In review (Abstracts Available)
+
+{{< include _gen/in-review.md >}}
+
+---
+
+## 3. Work-in-progress
+
+Pre-submission research projects are listed by internal project identifier (`Pub_xxx`) and a brief one-sentence topic summary:
+
+{{< include _gen/wip.md >}}
+
+---
+
+{{< include _gen/working-paper.md >}}
+
+## Complete Archive of Accepted Journal Papers (2004–2026)
+
+### 2026
+1. **Rich J.** (2026). On the theoretical distribution of cost overruns: A lognormal baseline. *Transportation Research Part A*, 212, 105189. [DOI](https://doi.org/10.1016/j.tra.2026.105189) · [Detail & Slides](optimism-bias-part-a/index.qmd)
+2. **Rich J.** (2026). Generational action-space dynamics over two decades: A continuity density-field perspective. *Journal of Transport Geography* (in press). [DOI](https://doi.org/10.1016/j.jtrangeo.2026.104847) · [Detail & Code](action-space-tg/index.qmd)
+3. **Jensen A.F., Mabit S.E., Rich J.** (2026). Would you let your car feed the grid? Comparing vehicle-to-grid smart charging preferences across six European countries. *Energy Research & Social Science*, 139, 104855. [DOI](https://doi.org/10.1016/j.erss.2026.104855)
+3. **Mabit S.E., Bunch D.S., Jensen A.F., Rich J.** (2026). Spatial differences in PEV demand: The case of Denmark. *Journal of Transport Geography*, 131, 104538. [DOI](https://doi.org/10.1016/j.jtrangeo.2025.104538)
+4. **Rich J.** (2026). Beyond Box-Cox: A diffusion-inspired functional framework for nonlinear demand and discrete choice modeling. *Transportation Research Part B*, 204, 103380. [DOI](https://doi.org/10.1016/j.trb.2025.103380) · [Detail Page](nonlinear-diffusion-part-b/index.qmd)
+5. **Argyros D., Fjendbo Jensen A., Rich J.** (2026). Welfare-optimal public transport fares in Denmark. *Transportation Research Part A*, 204, 104790. [DOI](https://doi.org/10.1016/j.tra.2025.104790)
+6. **Unterluggauer T., Hipolito F., Andersen P.B., Rich J., Marinelli M.** (2026). Conditional connection agreements for electric vehicle charging: Review, design, and implementation of solutions for the low-voltage power distribution grid. *Renewable and Sustainable Energy Reviews*, 227, 116427. [DOI](https://doi.org/10.1016/j.rser.2025.116427)
+7. **Yang S., An K., Rich J.** (2026). Electric bus battery swapping and charging management across multiple depots. *Omega*, 138, 103434. [DOI](https://doi.org/10.1016/j.omega.2025.103434)
+8. **Thorhauge M., Rich J., Mabit S.E.** (2026). Charging behaviour and range anxiety in long-distance EV travel: an adaptive choice design study. *Transportation*, 53, 2197–2219. [DOI](https://doi.org/10.1007/s11116-024-10561-x)
+9. **Rich J.** (2026). Let's walk! The fallacy of urban first- and last-mile public transport. *Transportation*, 53, 511–533. [DOI](https://doi.org/10.1007/s11116-024-10505-5)
+
+### 2025
+10. **Arning L., Paulsen M., Rich J., Kaths H.** (2025). Is it cycling culture? Explaining regional bicycle use in Denmark and Germany using a joint trip-level mode choice model. *Journal of Cycling and Micromobility Research*, 6, 100096. [DOI](https://doi.org/10.1016/j.jcmr.2025.100096)
+11. **Servizi V., Persson D.R., Pereira F.C., Villadsen H., Bækgaard P., Rich J., Nielsen O.A.** (2025). Large Scale Passenger Detection with Smartphone/Bus implicit interaction and Multisensory Unsupervised Cause-effect learning. *IEEE Intelligent Transportation Systems Magazine*. [IEEE](https://ieeexplore.ieee.org/document/11218216)
+12. **Karam A., Rich J.** (2025). Planning the transition to electric trucks: An optimization framework for line-haul logistics. *Research in Transportation Business & Management*, 61, 101413. [DOI](https://doi.org/10.1016/j.rtbm.2025.101413)
+13. **Steinacker C., Paulsen M., Schröder M., Rich J.** (2025). Robust design of bicycle infrastructure networks. *Scientific Reports*, 15, 15471. [DOI](https://doi.org/10.1038/s41598-025-99976-9)
+14. **Argyros D., Rich J., Jensen A.F.** (2025). The Overlooked Role of Roadworks in Micromobility's Accessibility. *Findings*. [DOI](https://doi.org/10.32866/001c.128226)
+15. **Jenn A., et al. (incl. Rich J.)** (2025). Supply-side challenges and research needs on the road to 100% zero-emissions vehicle sales. *Progress in Energy*, 7, 022002. [DOI](https://doi.org/10.1088/2516-1083/ada199)
+
+### 2023–2024
+16. **Hipolito F., Rich J., Andersen P.B.** (2024). The role of EV fast charging in the urban context: An agent-based model approach. *eTransportation*, 22, 100369. [DOI](https://doi.org/10.1016/j.etran.2024.100369)
+17. **Paulsen M., Rich J.** (2024). Welfare optimal bicycle network expansions with induced demand. *Transportation Research Part B*, 190, 103095. [DOI](https://doi.org/10.1016/j.trb.2024.103095)
+18. **Carrone A.P., Rich J., Watling D.** (2024). Analysis of car sharing operation area performance: An idle time prediction approach. *Transportation Research Part A*, 190, 104241. [DOI](https://doi.org/10.1016/j.tra.2024.104241)
+19. **Argyros D., Jensen A.F., Rich J., Dalyot S.** (2024). Riding smooth: A cost-benefit assessment of surface quality on Copenhagen's bicycle network. *Sustainable Cities and Society*, 108, 105473. [DOI](https://doi.org/10.1016/j.scs.2024.105473)
+20. **Rich J., Fox J.** (2024). Cost sharing in passenger transport models: specification, implementation, and impacts. *Transportation Research Part A*, 179, 103897. [DOI](https://doi.org/10.1016/j.tra.2023.103897)
+21. **Rich J., Heinen E.** (2023). Editorial: Welcome to the Journal of Cycling and Micromobility Research. *Journal of Cycling and Micromobility Research*, 1, 100002. [DOI](https://doi.org/10.1016/j.jcmr.2023.100002)
+22. **Paulsen M., Rich J.** (2023). Societally optimal expansion of bicycle networks. *Transportation Research Part B*, 174, 102778. [DOI](https://doi.org/10.1016/j.trb.2023.06.002)
+23. **Unterluggauer T., Hipolito F., Rich J., Marinelli M., Andersen P.B.** (2023). Impact of cost-based smart electric vehicle charging on urban low voltage power distribution networks. *Sustainable Energy, Grids and Networks*, 35, 101085. [DOI](https://doi.org/10.1016/j.segan.2023.101085)
+24. **Rich J., Seshadri R., Jomeh A.J., Clausen S.R.** (2023). Fixed routing or demand-responsive? Agent-based modelling of autonomous first and last mile services in light-rail systems. *Transportation Research Part A*, 173, 103676. [DOI](https://doi.org/10.1016/j.tra.2023.103676)
+25. **Ingvardson J.B., Weisshaar M., Rich J.** (2023). Will good public transport substitute free-floating car sharing? A case study from Copenhagen. *Case Studies on Transport Policy*, 12, 100975. [DOI](https://doi.org/10.1016/j.cstp.2023.100975)
+26. **Rich J., Myhrmann M.S., Mabit S.E.** (2023). Our children cycle less – A Danish pseudo-panel analysis. *Journal of Transport Geography*, 106, 103519. [DOI](https://doi.org/10.1016/j.jtrangeo.2022.103519)
+27. **Vandet C.A., Rich J.** (2023). Optimal placement and sizing of charging infrastructure for EVs under information-sharing. *Technological Forecasting and Social Change*, 187, 122205. [DOI](https://doi.org/10.1016/j.techfore.2022.122205)
+
+### 2020–2022
+28. **Rich J., Vandet C.A., Pilegaard N.** (2022). Cost–benefit of a state-road charging system: The case of Denmark. *Transportation Research Part D*, 109, 103330. [DOI](https://doi.org/10.1016/j.trd.2022.103330)
+29. **Thorhauge M., Fjendbo Jensen A., Rich J.** (2022). Effects of autonomous first- and last mile transport in the transport chain. *Transportation Research Interdisciplinary Perspectives*, 15, 100623. [DOI](https://doi.org/10.1016/j.trip.2022.100623)
+30. **Hipolito F., Vandet C.A., Rich J.** (2022). Charging, steady-state SoC and energy storage distributions for EV fleets. *Applied Energy*, 317, 119065. [DOI](https://doi.org/10.1016/j.apenergy.2022.119065)
+31. **Unterluggauer T., Rich J., Andersen P.B., Hashemi S.** (2022). Electric vehicle charging infrastructure planning for integrated transportation and power distribution networks: A review. *eTransportation*, 12, 100163. [DOI](https://doi.org/10.1016/j.etran.2022.100163)
+32. **Huang K., An K., Correia G.H.D.A., Rich J., Ma W.** (2021). An innovative approach to solve the carsharing demand-supply imbalance problem under demand uncertainty. *Transportation Research Part C*, 132, 103369. [DOI](https://doi.org/10.1016/j.trc.2021.103369)
+33. **Papu Carrone A., Monteiro M.M., Rich J.** (2021). Modelling car ownership dynamics based on irregularly spaced panel data. *Travel Behaviour and Society*, 25, 223–232. [DOI](https://doi.org/10.1016/j.tbs.2021.07.008)
+34. **Garrido S., Borysov S., Rich J., Pereira F.** (2021). Estimating causal effects with the neural autoregressive density estimator. *Journal of Causal Inference*, 9, 211–228. [DOI](https://doi.org/10.1515/jci-2020-0007)
+35. **Jensen A.F., Thorhauge M., Mabit S.E., Rich J.** (2021). Demand for plug-in electric vehicles across segments in the future vehicle market. *Transportation Research Part D*, 98, 102976. [DOI](https://doi.org/10.1016/j.trd.2021.102976)
+36. **Hallberg M., Rasmussen T.K., Rich J.** (2021). Modelling the impact of cycle superhighways and electric bicycles. *Transportation Research Part A*, 149, 397–418. [DOI](https://doi.org/10.1016/j.tra.2021.04.015)
+37. **Rich J., Nielsen T.S.** (2021). How adaptive cruise control systems may increase congestion: An MFD perspective. *Danish Journal of Transportation Research*. [DOI](https://doi.org/10.5278/ojs.djtr.v3i1.4619)
+38. **Rich J.** (2021). Generalized Cost for Transport. *International Encyclopedia of Transportation*, 555–559. [DOI](https://doi.org/10.1016/B978-0-08-102671-7.10513-5)
+39. **Rich J., Jensen A.F., Pilegaard N., Hallberg M.** (2021). Cost-benefit of bicycle infrastructure with e-bikes and cycle superhighways. *Case Studies on Transport Policy*, 9, 608–615. *(Best Research Award)*. [DOI](https://doi.org/10.1016/j.cstp.2021.02.015)
+40. **Carrone A.P., Rich J., Vandet C.A., An K.** (2021). Autonomous vehicles in mixed motorway traffic: capacity utilisation, impact and policy implications. *Transportation*, 48, 2907–2938. [DOI](https://doi.org/10.1007/s11116-020-10154-4)
+41. **Borysov S.S., Rich J.** (2021). Introducing synthetic pseudo panels: application to transport behaviour dynamics. *Transportation*, 48, 2493–2520. [DOI](https://doi.org/10.1007/s11116-020-10137-5)
+42. **Papu Carrone A., Rich J.** (2021). A micro-model of car ownership dynamics: are preferences changing? *Transportation Letters*, 13, 138–147. [DOI](https://doi.org/10.1080/19427867.2020.1716473)
+43. **Huang K., An K., Rich J., Ma W.** (2020). Vehicle relocation in one-way station-based electric carsharing systems: A comparative study of operator-based and user-based methods. *Transportation Research Part E*, 142, 102081. [DOI](https://doi.org/10.1016/j.tre.2020.102081)
+44. **Garrido S., Borysov S.S., Pereira F.C., Rich J.** (2020). Prediction of rare feature combinations in population synthesis: Application of deep generative modelling. *Transportation Research Part C*, 120, 102787. [DOI](https://doi.org/10.1016/j.trc.2020.102787)
+45. **Becker H., et al. (incl. Rich J.)** (2020). Impact of vehicle automation and electric propulsion on production costs for mobility services worldwide. *Transportation Research Part A*, 138, 105–126. [DOI](https://doi.org/10.1016/j.tra.2020.04.021)
+46. **Papu Carrone A., Hoening V.M., Jensen A.F., Mabit S.E., Rich J.** (2020). Understanding car sharing preferences and mode substitution patterns: A stated preference experiment. *Transport Policy*, 98, 139–147. [DOI](https://doi.org/10.1016/j.tranpol.2020.03.010)
+47. **Christensen L., Nielsen O.A., Rich J., Knudsen M.** (2020). Optimizing airport infrastructure for a country: The case of Greenland. *Research in Transportation Economics*, 79, 100773. [DOI](https://doi.org/10.1016/j.retrec.2019.100773)
+48. **Rich J.** (2020). A spline function class suitable for demand models. *Econometrics and Statistics*, 14, 24–37. [DOI](https://doi.org/10.1016/j.ecosta.2018.02.002)
+
+### 2004–2019
+49. **Borysov S.S., Rich J., Pereira F.C.** (2019). How to generate micro-agents? A deep generative modeling approach to population synthesis. *Transportation Research Part C*, 106, 73–97. [DOI](https://doi.org/10.1016/J.TRC.2019.07.006)
+50. **Larsen R., Rich J., Rasmussen T.K.** (2019). Hub-based truck platooning: Potentials and profitability. *Transportation Research Part E*, 127, 249–264. [DOI](https://doi.org/10.1016/j.tre.2019.05.005)
+51. **Rich J., Vandet C.A.** (2019). Is the value of travel time savings increasing? Analysis throughout a financial crisis. *Transportation Research Part A*, 124, 145–168. [DOI](https://doi.org/10.1016/j.tra.2019.03.012)
+52. **Jensen A.F., Thorhauge M., de Jong G., Rich J., Dekker T., Johnson D., Cabral M.O., Bates J., Nielsen O.A.** (2019). A disaggregate freight transport chain choice model for Europe. *Transportation Research Part E*, 121, 43–62. [DOI](https://doi.org/10.1016/j.tre.2018.10.004)
+53. **Thorhauge M., Cherchi E., Walker J.L., Rich J.** (2019). The role of intention as mediator between latent effects and behavior: application of a hybrid choice model to study departure time choices. *Transportation*, 46, 1421–1445. [DOI](https://doi.org/10.1007/s11116-017-9839-2)
+54. **Rich J.** (2018). Large-scale spatial population synthesis for Denmark. *European Transport Research Review*, 10, 63. [DOI](https://doi.org/10.1186/s12544-018-0336-2)
+55. **de Jong G., Tanner R., Rich J., Thorhauge M., Nielsen O.A., Bates J.** (2017). Modelling production-consumption flows of goods in Europe: the trade model within Transtools3. *Journal of Shipping and Trade*, 2, 5. [DOI](https://doi.org/10.1186/s41072-017-0023-9)
+56. **Abegaz D., Hjorth K., Rich J.** (2017). Testing the slope model of scheduling preferences on stated preference data. *Transportation Research Part B*, 104, 409–436. [DOI](https://doi.org/10.1016/j.trb.2017.08.001)
+57. **Rich J., Overgaard Hansen C.** (2016). The Danish National Passenger Model – model specification and results. *European Journal of Transport and Infrastructure Research*, 16(4). [DOI](https://doi.org/10.18757/ejtir.2016.16.4.3159)
+58. **Thorhauge M., Cherchi E., Rich J.** (2016). How flexible is flexible? Accounting for the effect of rescheduling possibilities in choice of departure time for work trips. *Transportation Research Part A*, 86, 177–193. [DOI](https://doi.org/10.1016/j.tra.2016.02.006)
+59. **Rich J., Mabit S.L.** (2016). Cost damping and functional form in transport models. *Transportation*, 43, 889–912. [DOI](https://doi.org/10.1007/s11116-015-9628-8)
+60. **Rich J., Nielsen O.A.** (2015). System convergence in transport models: algorithms efficiency and output uncertainty. *European Journal of Transport and Infrastructure Research*, 15(3). [DOI](https://doi.org/10.18757/ejtir.2015.15.3.3081)
+61. **Mabit S.L., Rich J., Burge P., Potoglou D.** (2013). Valuation of travel time for international long-distance travel – results from the Fehmarn Belt stated choice experiment. *Journal of Transport Geography*, 33, 153–161. [DOI](https://doi.org/10.1016/j.jtrangeo.2013.10.003)
+62. **Knudsen M.A., Rich J.** (2013). Ex post socio-economic assessment of the Øresund Bridge. *Transport Policy*, 27, 53–65. [DOI](https://doi.org/10.1016/j.tranpol.2012.12.002)
+63. **Rich J., Prato C.G., Hels T., Lyckegaard A., Kristensen N.B.** (2013). Analyzing the relationship between car generation and severity of motor-vehicle crashes in Denmark. *Accident Analysis & Prevention*, 54, 81–89. [DOI](https://doi.org/10.1016/j.aap.2013.02.016)
+64. **Rich J., Mulalic I.** (2012). Generating synthetic baseline populations from register data. *Transportation Research Part A*, 46, 467–479. [DOI](https://doi.org/10.1016/j.tra.2011.11.002)
+65. **Rich J., Mabit S.L.** (2012). A Long-Distance Travel Demand Model for Europe. *European Journal of Transport and Infrastructure Research*, 12(1). [DOI](https://doi.org/10.18757/ejtir.2012.12.1.2946)
+66. **Rich J., Kveiborg O., Hansen C.O.** (2011). On structural inelasticity of modal substitution in freight transport. *Journal of Transport Geography*, 19, 134–146. [DOI](https://doi.org/10.1016/j.jtrangeo.2009.09.012)
+67. **Rich J., Holmblad P.M., Hansen C.O.** (2009). A weighted logit freight mode-choice model. *Transportation Research Part E*, 45, 1006–1019. [DOI](https://doi.org/10.1016/j.tre.2009.02.001)
+68. **Gehlert T., Nielsen O.A., Rich J., Schlag B.** (2008). Public acceptability change of urban road pricing schemes. *Proceedings of the Institution of Civil Engineers – Transport*, 161, 111–121. [DOI](https://doi.org/10.1680/tran.2008.161.3.111)
+69. **Schönfelder S., Rich J., Nielsen O.A., Würtz C.J., Axhausen K.W.** (2007). Road Pricing and its Consequences for Individual Travel Patterns. *Mobilities*, 2, 75–98. [DOI](https://doi.org/10.1080/17450100601106401)
+70. **Rich J., Nielsen O.A.** (2007). A socio-economic assessment of proposed road user charging schemes in Copenhagen. *Transport Policy*, 14, 330–345. [DOI](https://doi.org/10.1016/j.tranpol.2007.03.003)
+71. **Rich J.H., Nielsen O.A.** (2004). Assessment of traffic noise impacts. *International Journal of Environmental Studies*, 61, 19–29. [DOI](https://doi.org/10.1080/0020723032000113790)
+
+---
+
+## Books, Book Chapters & Dissertations
+
+- **Rich J.** (2016). *Transport Models – From Theory to Practice*. 400 pages, Lulu Press. [Download Book (PDF)](https://www.dropbox.com/s/dve9zjppd0iy29p/Book_JR2016.pdf)
+- **Hansen C.O., Rich J.** (2011). TRANS-TOOLS. In *FREIGHTVISION – Sustainable European Freight Transport 2050*, Chapter 4, pp. 43–65. Springer Verlag. ISBN 978-3-642-13370-1.
+- **Schmiele J., et al.** (2011). Forecasts. In *FREIGHTVISION*, Chapter 6, pp. 109–127. Springer Verlag.
+- **Rich J.H., Nielsen O.A.** (2008). External Effects of Road-pricing. In Jensen-Butler C. et al. (eds.), *Road-pricing, the Economy and the Environment*, Chapter 13. Advances in Spatial Science, Springer.
+- **Bjørner T.B., Rich J.H., Nielsen O.A.** (2003). TRIP and the price of silence (in Danish). *Environmental Research*, Strategic Research Programme, No. 57.
+- **Rich J.H.** (2002). *Long-term Travel Demand Modelling*. PhD Thesis, Technical University of Denmark, 220 pages.
+- **Rich J.H.** (2001). Two aspects of location modelling. In Hensher D. (ed.), *Travel Behaviour Research – The Leading Edge*, Chapter 24, pp. 397–409, Pergamon.
+- **Rich J.H.** (1995). *Spatial Econometric Models*. Master Thesis, University of Aarhus, 138 pages.
+
+## Danish Industry & Policy Articles
+
+- **Rich J., Nielsen O.A., Gaudry M.** (2018). Nationale trafikmodeller og deres organisering: En international sammenligning. *Trafik og Veje*, November 2018. [PDF](http://asp.vejtid.dk/Artikler/2018/11x/9150.pdf)
+- **Rich J., Nielsen O.A.** (2018). Den danske landstrafikmodel version 2.0. *Trafik og Veje*, November 2018. [PDF](http://asp.vejtid.dk/Artikler/2018/11x/9148.pdf)

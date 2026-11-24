@@ -1,0 +1,34 @@
+name: Update Citation Metrics Daily
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # Runs automatically once per day at 06:00 UTC
+  workflow_dispatch:      # Can also be triggered manually anytime
+
+permissions:
+  contents: write
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch latest H-index & citation metrics
+        run: python scripts/update_metrics.py
+
+      - name: Commit and push if metrics changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/metrics.json docs/assets/metrics.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: daily citation & H-index update"
+            git push
+          fi

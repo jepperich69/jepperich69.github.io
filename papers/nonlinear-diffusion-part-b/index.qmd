@@ -1,0 +1,27 @@
+---
+title: "Beyond Box-Cox: A diffusion-inspired functional framework for nonlinear demand and discrete choice modeling"
+subtitle: "Transportation Research Part B (2026) · Vol. 204, 103380"
+author: "Jeppe Rich"
+date: "2026-01-15"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+Standard linear-in-attributes and Box–Cox utility specifications struggle when travel cost or distance spans wide ranges, often producing unrealistic tail elasticities or requiring ad-hoc spline knots. This paper introduces a **diffusion-inspired functional family** for nonlinear demand and discrete choice models that naturally captures cost damping, saturation, and distance-decay profiles with parsimonious parameters and well-behaved derivatives.
+
+## Citation (BibTeX)
+
+```bibtex
+@article{rich2026beyondboxcox,
+  author  = {Rich, Jeppe},
+  title   = {Beyond Box-Cox: A diffusion-inspired functional framework for nonlinear demand and discrete choice modeling},
+  journal = {Transportation Research Part B: Methodological},
+  volume  = {204},
+  pages   = {103380},
+  year    = {2026},
+  doi     = {10.1016/j.trb.2025.103380}
+}
+```

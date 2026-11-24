@@ -1,0 +1,25 @@
+---
+title: "Danish Transport Cost & Fare Elasticity Calculator"
+subtitle: "Interactive LTM 2.3 surrogate rebased to 2023 Danish National Travel Survey (TU) data"
+page-layout: full
+toc: false
+---
+
+```{=html}
+<div class="badge-row" style="margin-bottom: 1rem;">
+  <a href="app/index.html" class="jr-badge badge-tool" target="_blank">⤢ Open Calculator in Full Browser Tab</a>
+  <a href="model_documentation.pdf" class="jr-badge badge-pdf" target="_blank">📄 Download Technical Model Documentation (PDF)</a>
+  <span class="jr-badge badge-private" title="Raw TU data preparation scripts live in a private DTU project repository">🔒 Source Data Repo: Private (TU / TERESA Restricted)</span>
+</div>
+```
+
+**Overview:** This interactive model is a calibrated fast surrogate of the Danish National Transport Model (**LTM 2.3**, Rich 2022), rebased to 2023 using Danish National Travel Survey (**TU 0624v1**), **TERESA 6.21** values of time, **TØE 2.2** vehicle operating costs, and distance-dependent public transport fare profiles (Argyros, Jensen & Rich, 2026; Rich & Fox, 2024). The calculator is available in Danish and English; switch language in the app header.
+
+- **100% browser-based:** All calibration, scenario evaluation, and rule-of-half distributional welfare calculations run locally in your browser via `engine2.js`.
+- **Custom workbooks:** You can save scenarios locally or upload a modified `.xlsx` input workbook directly inside the interface to recalibrate in ~8 seconds.
+
+```{=html}
+<div class="tool-iframe-wrap">
+  <iframe src="app/index.html" title="LTM 2.3 Transport Cost and Fare Elasticity Calculator" loading="lazy"></iframe>
+</div>
+```

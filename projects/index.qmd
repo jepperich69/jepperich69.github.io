@@ -1,0 +1,94 @@
+---
+title: "Collaborative & Applied Projects"
+subtitle: "Research grants, national transport model infrastructure, and private/collaborative GitHub repositories"
+toc: true
+---
+
+Many applied projects, solver testbeds, and ministry/industry collaborations maintain dedicated GitHub repositories under `@jepperich69`. Repositories that contain restricted data, proprietary operator networks, or pre-publication models are kept **Private** and shared directly with project collaborators.
+
+> **Collaborator Access:** If you are a co-author, PhD student, or project partner and need access to one of the private repositories listed below, click **Request Access** (or email [`rich@dtu.dk`](mailto:rich@dtu.dk) with your GitHub username). Invited collaborators can follow the repository links directly.
+
+## Active Project & Model Repositories
+
+```{=html}
+<div class="card-grid">
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">National Transport Demand · Ministry of Transport / DTU</div>
+      <h3>GMM4_INT &amp; gmm-household-synth</h3>
+      <p>Green Mobility Model (GMM 4.0) demand integration and large-scale spatial household population synthesis for Vejdirektoratet (VD) and the Danish Ministry of Transport.</p>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/GMM4_INT" class="jr-badge badge-private" target="_blank">🔒 GitHub: GMM4_INT (Private · Collaborators)</a>
+      <a href="https://github.com/jepperich69/gmm-household-synth" class="jr-badge badge-private" target="_blank">🔒 GitHub: gmm-household-synth (Private)</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Transport Demand Surrogate · DTU Management</div>
+      <h3>ElasticitetsModel (LTM 2.3 Surrogate)</h3>
+      <p>TU 0624v1 tabulation pipeline, TERESA/TØE workbook builder, and Nested Logit calibration engine backing the public <a href="../tools/elasticity/index.qmd">Interactive Elasticity Calculator</a>.</p>
+    </div>
+    <div class="badge-row">
+      <a href="../tools/elasticity/index.qmd" class="jr-badge badge-tool">🚀 Public Web Calculator</a>
+      <span class="jr-badge badge-private">🔒 Source Repo: Private (TU Microdata)</span>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Freight Electrification · Teddy / PostNord</div>
+      <h3>Pub_PMIP_VSP</h3>
+      <p>Operational vehicle scheduling models for heavy-duty fleet electrification and automation in line-haul freight networks.</p>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/Pub_PMIP_VSP" class="jr-badge badge-private" target="_blank">🔒 GitHub: Pub_PMIP_VSP (Private)</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Stochastic Mixed-Integer Optimization</div>
+      <h3>Pub_SAA_PMIP_MC</h3>
+      <p>Risk-sensitive optimization and analytical cost transformations for stochastic mixed-integer programs.</p>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/logsum-risk-programming" class="jr-badge badge-private" target="_blank">🔒 GitHub: Private Repo</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Public Transport &amp; Cycling Network Design · DFF NaPSTI</div>
+      <h3>Pub_NapstiGranularity &amp; StopDensity</h3>
+      <p>Public transport network granularity and urban cycling stopping geometry models under the DFF NaPSTI programme.</p>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/Napsti_Paper1" class="jr-badge badge-private" target="_blank">🔒 GitHub: Napsti_Paper1 (Private)</a>
+      <a href="https://github.com/jepperich69/StopDensity" class="jr-badge badge-private" target="_blank">🔒 GitHub: StopDensity (Private)</a>
+    </div>
+  </div>
+
+</div>
+```
+
+---
+
+## Major Funded Research Grants (Selected, 2014–2029)
+
+Acquired external funding with PI responsibility (excluding the €7M National Transport Model total budget) in 2020–2025 exceeds **€2.66 million**.
+
+| Period | Project | Funder | Scope & Role | Budget |
+|---|---|---|---|---|
+| **2026–2029** | **Traction** | Hedorfs Fond | Research project granted in 2025 and started September 2026, including a PhD (Rasmus Weibull, from October 2026) | DKK 3 million (≈ €400,000) |
+| **2025–2028** | **NaPSTI** | Independent Research Fund Denmark (DFF) | *Navigating the Path to Sustainable Transport Infrastructure* — expansion strategies for combined bicycle and public transport networks (PI) | €400,000 |
+| **2024–2027** | **DESERTLE** | DTU Strategic PhD Initiative | *Developing Absolute Environmentally Sustainable Roadmap for Electrification of Long-Haul Transport in Europe* (with Prof. Alexis Laurent) | €260,000 |
+| **2023–2026** | **Teddy** | Hedorf & FD Fonden | *Towards Electrified Goods Distribution with Heavy-Duty Trucks* — business case, barriers, and charging infrastructure for line-haul distribution (PI) | €480,000 |
+| **2023–2026** | **Micromobility PhD** | EuroTech Alliance / DTU | Micromobility behaviour and safety barriers analysed with large-scale tracking data (PI) | €200,000 |
+| **2023–2026** | **PYNT** | Vejdirektoratet (VD) Bicycle Foundation | Methods for optimal bicycle infrastructure design with the Office of Cycle Superhighways (Project Leader) | €250,000 |
+| **2022–2025** | **FLOW** | Horizon 2020 | Perceived vs. revealed EV charging behaviour (€9.95M total; DTU Management Project Leader) | €240,000 (DTU) |
+| **2020–2024** | **FUSE** | EUDP | Urban EV charging infrastructure simulation and optimization for Copenhagen and Frederiksberg (€1.5M total; DTU Management Project Leader) | €350,000 (DTU) |
+| **2021–2022** | **CHARGO & ELISA** | Danish Ministry of Transport | National EV charging infrastructure microsimulation (€95k) and EV demand/preference choice models (€150k) (Project Leader) | €245,000 |
+| **2014–2021** | **Danish National Transport Model (LTM)** | Danish Ministry of Transport | Chief designer and Project Leader for the national passenger demand model (~€1M) and baseline matrices (~€500k) within the €7M national model programme | €7,000,000 (total) |

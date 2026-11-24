@@ -1,0 +1,38 @@
+---
+title: "On the theoretical distribution of cost overruns: A lognormal baseline"
+subtitle: "Transportation Research Part A (2026) · Vol. 212, 105189"
+author: "Jeppe Rich"
+date: "2026-08-07"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+Why do infrastructure cost overruns exhibit persistent right-skewness and systematic mean–median gaps? This paper develops a two-level stochastic framework separating **within-project compounding** from **cross-project dependence**:
+
+1. **Within-project multiplicative baseline:** When project costs evolve through sequential proportional updates between baseline and completion, the cost ratio $R = C_a / C_e$ converges under weak dependence toward a **lognormal benchmark**. Compounding alone generates a structural gap between mean and median cost ratios ($\mathbb{E}[R] = \exp(\mu + \tfrac{1}{2}\sigma^2) > \exp(\mu) = \mathrm{Med}[R]$), even when individual stage updates have zero log-drift.
+2. **Portfolio aggregation & correlation (Proposition 1):** Under cross-project independence, portfolio aggregation restores asymptotic symmetry by the Central Limit Theorem. Persistent right-skewness at the portfolio level is therefore a mathematical diagnostic of **correlated shocks** (shared macro, regulatory, or factor exposures across projects in a portfolio).
+3. **Empirical calibration:** The framework is illustrated across international transport infrastructure datasets (Flyvbjerg), Swedish stage-split transport projects (Eliasson: early plan-to-start stage vs. late start-to-completion stage), and IT project portfolios (Flyvbjerg & Budzier, $N = 4,677$).
+
+> **Key takeaway:** Part of what is commonly attributed purely to behavioral "optimism bias" reflects the structural mathematics of multiplicative compounding combined with correlated portfolio shocks.
+
+## Presentation & Video Brief
+
+- **6-Slide Visual Summary:** [Download 6-Slide Deck (`slides_6.pdf`)](slides_6.pdf)
+- **3-Minute Paper Video:** *(Recorded via the 1080p OBS 6-slide presentation workflow; hosted via GitHub Releases once final take is uploaded.)*
+
+## Citation (BibTeX)
+
+```bibtex
+@article{rich2026overruns,
+  author  = {Rich, Jeppe},
+  title   = {On the theoretical distribution of cost overruns: A lognormal baseline},
+  journal = {Transportation Research Part A: Policy and Practice},
+  volume  = {212},
+  pages   = {105189},
+  year    = {2026},
+  doi     = {10.1016/j.tra.2026.105189}
+}
+```

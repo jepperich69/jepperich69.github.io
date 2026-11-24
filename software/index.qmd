@@ -1,0 +1,113 @@
+---
+title: "Code bases and Algorithms"
+subtitle: "The group's algorithm library, research infrastructure and field tools, plus every repository under @jepperich69"
+toc: true
+---
+
+The three code bases below are the core of the group's software. Algorithms developed for individual papers are moved into `jr_optlib`, so the library is the one place to find them. Paper-specific code is also linked from each paper's entry in [Papers](../papers/index.qmd), and collaborative projects are described under [Projects](../projects/index.qmd).
+
+```{=html}
+<div class="card-stack">
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Python · Optimization, sampling and choice-model library</div>
+      <h3>jr_optlib</h3>
+      <p>The group's library of optimization and sampling primitives. Each primitive ships with an <strong>oracle</strong>, an independent check that re-derives a property the true answer must have (feasibility, a duality or gap certificate, agreement with an independent solver, or an invariant under a known transformation). A solve is therefore followed by a certification, and every result is labelled CERTIFIED, CHECKED, FAIL or UNVALIDATED. The runtime needs only NumPy; SciPy, Gurobi and numba are optional. The library contains:</p>
+      <ul>
+        <li><strong>Transportation and optimal transport:</strong> IPF / raking (Furness), entropic optimal transport (Sinkhorn, with dual scalings), exact min-cost transport by LP, and a family of rounders that turn fractional plans into integer tables without breaking the marginals.</li>
+        <li><strong>Population synthesis and integerization:</strong> sparse N-dimensional IPF over long record tables, and a floor split, anchor-conditioned PPS and anchor-preserving swap repair that give an integer population matching the controlling margins.</li>
+        <li><strong>Entropy-guided set cover:</strong> the RICH entropy relaxation with dual-guided rounding, plus an exact MIP, a restricted polish step and benchmark instances with known optima.</li>
+        <li><strong>Assignment under risk:</strong> closed-form entropic risk of Gaussian costs, a convex QP over the Birkhoff polytope, exact Hungarian solutions for the independent case, and a MIQP for correlated costs.</li>
+        <li><strong>Chance-constrained selection sampling:</strong> a Metropolis–Hastings sampler with O(1) incremental updates (optionally JIT-compiled, about 50 times faster) that bounds sample-average-approximation optima.</li>
+        <li><strong>Generic MCMC and dual ascent:</strong> Metropolis–Hastings, simulated annealing, temperature-ladder burn-in, a vehicle-scheduling local search, and Lagrangian subgradient dual ascent.</li>
+        <li><strong>Discrete choice:</strong> numerically stable multinomial and nested logit probabilities, logsums, stochastic user-equilibrium route shares, and recursive-logit (route-free) link assignment.</li>
+        <li><strong>Dynamic programming and reinforcement learning:</strong> exact finite-horizon backward induction over tensor grids, and tabular Q-learning, both risk-neutral and risk-sensitive.</li>
+        <li><strong>Nonlinear programming and routing:</strong> coordinate-wise NLP block solves and grid shortest-distance helpers.</li>
+        <li><strong>Oracle catalogue:</strong> generic gap, differential and metamorphic certificates, and about twenty domain-specific certifiers, one or more for each primitive above.</li>
+      </ul>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/jr_optlib" class="jr-badge badge-public" target="_blank">🟢 GitHub: jepperich69/jr_optlib (Public)</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">PowerShell / Python · AI research infrastructure</div>
+      <h3>ai-infrastructure (AI_auto)</h3>
+      <p>A local, file-based backbone for running long-lived projects with AI agents. Context, decisions, sources, code, logs and handovers live in ordinary files, so work survives across sessions, agents and machines. One command wrapper, <code>helpi</code>, drives it all. Functionality:</p>
+      <ul>
+        <li><strong>Project continuity:</strong> every project gets a permanent brief, a session log and a generated handover, so Claude Code, Codex and Gemini read the same context and continue one another's work.</li>
+        <li><strong>Project scaffolding:</strong> one command creates a paper project or a generic project (software, teaching, administration) with the full continuity layer.</li>
+        <li><strong>Overleaf and LaTeX:</strong> two-way Git synchronization with Overleaf, local compilation, manuscript snapshot tags and rollback.</li>
+        <li><strong>Research skills:</strong> referee-style paper review, pre-submission grilling, reviewer-response loops, style editing calibrated on the author's own papers, and journal submission packages.</li>
+        <li><strong>Verification:</strong> SymPy checks of the mathematics in a manuscript, and certification of optimization results against <code>jr_optlib</code> oracles.</li>
+        <li><strong>Multi-agent work:</strong> Convergence Forums (structured debate between Claude, Codex and Gemini) and background multi-agent pipelines.</li>
+        <li><strong>Cross-project context:</strong> feeder links let one project inherit a compact digest of another; a network graph and a status dashboard cover all projects.</li>
+        <li><strong>Compute:</strong> remote job submission to a home compute server, which is woken on demand, and profiling guidelines.</li>
+        <li><strong>Operations:</strong> automated backups, setup and restore on a new machine, a generated inventory of installed research software, and a known-issues register.</li>
+        <li><strong>NoteTaker bridge:</strong> dictated notes and photos from a phone arrive in the right project (see below).</li>
+      </ul>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/ai-infrastructure" class="jr-badge badge-public" target="_blank">🟢 GitHub: jepperich69/ai-infrastructure (Public)</a>
+      <a href="../ai-workflow/index.qmd" class="jr-badge badge-pdf">Read Architecture Overview</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Web app (PWA) · Voice and photo capture</div>
+      <h3>notetaker-app</h3>
+      <p>A phone app (an installable web app) that captures ideas in the field and files them in the right research project. Functionality:</p>
+      <ul>
+        <li><strong>Voice notes:</strong> record in the browser, pick the project from a list synchronized with the infrastructure, and send.</li>
+        <li><strong>Photos:</strong> take a picture with the phone camera, e.g. of a whiteboard, a page or a site, or import an existing image, and file it in the same way.</li>
+        <li><strong>Sharing in:</strong> recordings shared from other apps are received and can be assigned to a project afterwards.</li>
+        <li><strong>Transcript and summary:</strong> each note comes back with a transcript and a short summary, with a notification when it is ready.</li>
+        <li><strong>Offline-safe:</strong> notes are queued on the phone and uploaded with automatic retry when the connection returns, so nothing is lost.</li>
+        <li><strong>Into the workflow:</strong> notes pass through a private spool into the project folders, where the AI agents pick them up at the next session.</li>
+      </ul>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/notetaker-app" class="jr-badge badge-public" target="_blank">🟢 GitHub: jepperich69/notetaker-app (Public)</a>
+    </div>
+  </div>
+
+</div>
+```
+
+## All repositories
+
+Every repository under [@jepperich69](https://github.com/jepperich69). Public repositories are linked. Private repositories hold restricted data, client models or unpublished work, and are available to collaborators on request.
+
+| Repository | What it is | Status | Visibility |
+|---|---|---|---|
+| [`jr_optlib`](https://github.com/jepperich69/jr_optlib) | Optimization, sampling and choice-model library (above) | Library | <span class="jr-badge badge-public">Public</span> |
+| [`ai-infrastructure`](https://github.com/jepperich69/ai-infrastructure) | AI research infrastructure (above) | Infrastructure | <span class="jr-badge badge-public">Public</span> |
+| [`notetaker-app`](https://github.com/jepperich69/notetaker-app) | Voice and photo capture app (above) | Tool | <span class="jr-badge badge-public">Public</span> |
+| [`RICH-MIP`](https://github.com/jepperich69/RICH-MIP) | Code for *RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization*; its entropy set-cover method is in `jr_optlib` | <span class="jr-badge badge-private">In review</span> | <span class="jr-badge badge-public">Public</span> |
+| [`ML_entropy`](https://github.com/jepperich69/ML_entropy) | Information-theoretic machine learning: near-optimal transparent classifiers | Research code | <span class="jr-badge badge-public">Public</span> |
+| [`Pub_ActionSpace_TG`](https://github.com/jepperich69/Pub_ActionSpace_TG) | Reproduction code: generational action-space dynamics (*Journal of Transport Geography*, 2026) | <span class="jr-badge badge-public">Accepted</span> | <span class="jr-badge badge-public">Public</span> |
+| [`Pub_ActionSpace_NatComm`](https://github.com/jepperich69/Pub_ActionSpace_NatComm) | Reproduction code: the diverging action space in daily mobility | <span class="jr-badge badge-private">In review</span> | <span class="jr-badge badge-public">Public</span> |
+| [`Pub_Seed_TBA`](https://github.com/jepperich69/Pub_Seed_TBA) | Statistical sufficiency and maximum-entropy seed construction for synthetic populations | Work in progress | <span class="jr-badge badge-public">Public</span> |
+| [`Pub_PopInt_Part2_TBA`](https://github.com/jepperich69/Pub_PopInt_Part2_TBA) | Information-theoretic constraint pricing and feasibility certificates for population synthesis | Work in progress | <span class="jr-badge badge-public">Public</span> |
+| `Pub_PopInt_PartB` | Reproduction code: contingency-table integerization as Kullback–Leibler inference | <span class="jr-badge badge-private">In review</span> | <span class="jr-badge badge-private">Private</span> |
+| `Napsti_Paper1` | Joint stop spacing and service frequency under a fixed budget | <span class="jr-badge badge-private">In review</span> | <span class="jr-badge badge-private">Private</span> |
+| `StopDensity` | Stop density in public transport networks | Research code | <span class="jr-badge badge-private">Private</span> |
+| `GMM4_INT` | International demand models of the Danish national transport model (GMM 4.0) | Project | <span class="jr-badge badge-private">Private</span> |
+| `gmm-household-synth` | Household population synthesis for the Danish national transport model | Project | <span class="jr-badge badge-private">Private</span> |
+| `Pub_DistributionNetworks_TBA` | Electrification and automation in national freight distribution networks | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_AssesTiming_Raoul_TBA` | Strategic timing of commercial fleet electrification | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_PMIP_VSP` | Vehicle scheduling for heavy-duty fleet electrification and automation | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `pmip-vsp-code` | Solver code for the vehicle-scheduling project | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_MH_VSP` | Metropolis–Hastings vehicle-scheduling solver with an electric-bus benchmark | Research code | <span class="jr-badge badge-private">Private</span> |
+| `Pub_SAA_PMIP_MC` | Risk-sensitive optimization for stochastic mixed-integer programs | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_QP_SAA_MC` | Risk-averse stochastic programming under correlated Gaussian uncertainty | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `logsum-risk-programming` | Research code for risk-sensitive stochastic programming | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_DP_Logsum_TBA` | Exact dynamic programming for risk-sensitive sequential decisions | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `Pub_DP_RL_TBA` | Dynamic programming combined with reinforcement learning for risk-sensitive decisions | Work in progress | <span class="jr-badge badge-private">Private</span> |
+| `PMIP-solver` | Probabilistic mixed-integer programming solver | Solver | <span class="jr-badge badge-private">Private</span> |
+| `MIP-Variance` | Probabilistic MIP: variance experiments | Research code | <span class="jr-badge badge-private">Private</span> |
+| `notetaker-inbox` | Private spool for the NoteTaker app | Infrastructure | <span class="jr-badge badge-private">Private</span> |

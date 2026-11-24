@@ -1,0 +1,44 @@
+---
+title: "AI Research Infrastructure (AI_auto)"
+subtitle: "Multi-agent verification, Overleaf Git sync, and automated deliverables for quantitative research"
+toc: true
+---
+
+```{=html}
+<div class="badge-row" style="margin-bottom: 1.25rem;">
+  <a href="https://github.com/jepperich69/ai-infrastructure" class="jr-badge badge-public" target="_blank">🟢 GitHub: jepperich69/ai-infrastructure (Public)</a>
+  <a href="../software/index.qmd" class="jr-badge badge-pdf">⚙️ Code bases &amp; Algorithms</a>
+</div>
+```
+
+Modern quantitative research involves coordinating concurrent manuscripts, mathematical proofs, solver benchmarks, and co-author revisions. To maintain high scientific rigor and zero administrative drift across projects, I built **`AI_auto`** — a unified command-line and multi-agent infrastructure (`helpi`) connecting **Claude Code**, **OpenAI Codex**, and **Google Gemini** around standardized project folders.
+
+## Core Design Principles
+
+1. **Standalone Overleaf + GitHub Separation:** Every paper project (`Pub_*`, `Pro_*`, `PhD_*`) isolates `Overleaf_source/` as a direct Git remote to Overleaf (`helpi 3` pull, `helpi 4` push) while `code/` is a separate Git repository pushed to GitHub (`helpi 23`).
+2. **Machine-Verified Mathematics (SymPy Gate):** LLMs have no built-in symbolic engine and can make silent algebraic errors. Our infrastructure enforces a strict rule: every non-trivial algebraic derivation, Taylor expansion, moment derivation, and numerical calibration must be verified via executable **SymPy** scripts (`_math_checks/`) before entering a manuscript.
+3. **Multi-Agent Convergence Forum (`helpi 25`):** Complex modeling questions, literature audits, and pre-submission referee stress-tests are debated in an automated multi-round **Convergence Forum** where agents adopt distinct adversarial roles (*Critic*, *Advocate*, *Realist*, and *Moderator*) against a shared blackboard state until convergence.
+4. **Routine Scientific Code Review (`helpi 32`):** Before closing any session that modifies model code or empirical claims, an advisory review checks scientific correspondence between the paper's equations and the code, verifies reuse of verified [`jr_optlib`](https://github.com/jepperich69/jr_optlib) primitives, and audits numerical reproducibility.
+5. **Automated Communication Deliverables:**
+   - **Technical One-Pagers (`helpi 24`):** Boils a full manuscript down to a dense, self-contained 1-page A4 technical brief + 1-page equation/note supplement.
+   - **Beamer Slides & 3-Minute Video Decks (`helpi 19`):** Generates structured presentation decks and 6-slide video briefs.
+   - **Website Sync (`helpi 33`):** Publishes updated one-pagers, slides, 3-minute videos (via GitHub Releases), and repository status badges directly to this Quarto website.
+
+## The `helpi` Command Architecture
+
+| Command | Action | Purpose |
+|---|---|---|
+| `helpi 1` / `27` | Project Scaffold | Clones Overleaf repo, initializes `.claude/CLAUDE.md`, `_ai_log.md`, and `Literature/_retrieved_sources.md` |
+| `helpi 2` / `3` / `4` | Overleaf Git Sync | Non-interactive pull/push between local LaTeX workspace and Overleaf |
+| `helpi 6` | Local Compile | Runs `latexmk -pdf` with freshness verification |
+| `helpi 7` / `22` | Session Handover | Compresses `_ai_log.md` and regenerates `_handover.html` and `AGENTS.md` across all agents |
+| `helpi 10` / `11` / `12` | Submission & R&R Loop | Builds journal submission packages with UTF-8 `latexdiff-so` PDFs and scaffolds point-by-point reviewer responses |
+| `helpi 19` / `24` | Slides & One-Pager | Generates Beamer slide decks and 1-page A4 technical summaries |
+| `helpi 23` | GitHub Code Push | Creates or updates the paper's `code/` repository on GitHub (`public` or `private`) |
+| `helpi 25` | Convergence Forum | Runs multi-agent (*Critic / Advocate / Realist*) debate on math, code, or positioning |
+| `helpi 32` | Scientific Code Review | Bounded read-only audit of model-equation correspondence and benchmark integrity |
+| `helpi 33` | Publish to Web | Syncs paper metadata, one-pager PDF, slides, video, and repo status to this Quarto site |
+
+## Remote Compute Server ("Cellar")
+
+Long-running Gurobi MIP/MIQP benchmarks and multi-zone population synthesis grids are dispatched from the laptop to a dedicated WSL2 compute server (`cellar.py`) with content-addressed job snapshots, automatic Wake-on-LAN relay, live Tailscale status dashboard, and Intel RAPL energy monitoring.

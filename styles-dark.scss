@@ -1,0 +1,81 @@
+/*-- scss:defaults --*/
+$primary: #1e3a5f;
+$link-color: #60a5fa;
+
+/*-- scss:rules --*/
+.hero-banner {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #334155;
+}
+
+.hero-subtitle {
+  color: #cbd5e1;
+}
+
+.jr-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.jr-card p, .jr-card ul {
+  color: #cbd5e1;
+}
+
+.jr-card-meta {
+  color: #94a3b8;
+}
+
+.kpi-box {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.kpi-num {
+  color: #93c5fd;
+}
+
+.kpi-label {
+  color: #cbd5e1;
+}
+
+.badge-public {
+  background-color: rgba(22, 163, 74, 0.2);
+  color: #86efac;
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+.badge-private {
+  background-color: rgba(217, 119, 6, 0.2);
+  color: #fcd34d;
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+.badge-pdf {
+  background-color: rgba(37, 99, 235, 0.22);
+  color: #93c5fd;
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+.badge-video {
+  background-color: rgba(162, 28, 175, 0.25);
+  color: #f0abfc;
+  border-color: rgba(232, 121, 249, 0.35);
+}
+
+.badge-request {
+  background-color: rgba(100, 116, 139, 0.25);
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+.badge-tool {
+  background-color: rgba(2, 132, 199, 0.25);
+  color: #7dd3fc;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.badge-st-accepted { background-color: rgba(22, 163, 74, 0.2);  color: #86efac; border-color: rgba(74, 222, 128, 0.35); }
+.badge-st-review   { background-color: rgba(37, 99, 235, 0.22); color: #93c5fd; border-color: rgba(96, 165, 250, 0.35); }
+.badge-st-wip      { background-color: rgba(217, 119, 6, 0.2);  color: #fcd34d; border-color: rgba(251, 191, 36, 0.35); }
+.badge-st-wp       { background-color: rgba(100, 116, 139, 0.25); color: #e2e8f0; border-color: rgba(148, 163, 184, 0.35); }
+.jr-card-event, .paper-history { color: #94a3b8; }

@@ -1,0 +1,131 @@
+---
+title: ""
+page-layout: full
+toc: false
+---
+
+```{=html}
+<div class="hero-banner">
+  <img src="assets/profile.jpeg" alt="Professor Jeppe Rich" class="hero-avatar" />
+  <div class="hero-text" style="flex: 1; min-width: 280px;">
+    <h1>Jeppe Rich</h1>
+    <div class="hero-subtitle">
+      Professor of Transport Modelling, Optimization &amp; Econometrics<br/>
+      Department of Technology, Management and Economics · Technical University of Denmark (DTU)
+    </div>
+    <p style="margin-bottom: 0.75rem; max-width: 780px;">
+      I work at the intersection of <strong>stochastic and integer optimization</strong>, <strong>econometric demand modelling</strong>, <strong>population synthesis</strong>, and <strong>sustainable transport systems</strong>. Co-founder and Editor-in-Chief (2023–2026) of the Elsevier <em>Journal of Cycling and Micromobility Research</em>, chief designer of the Danish National Transport Model (LTM), and recipient of the 2025 Danish Transport Research Prize.
+    </p>
+    <div class="badge-row">
+      <a href="papers/index.qmd" class="jr-badge badge-pdf">📄 Papers &amp; Preprints</a>
+      <a href="software/index.qmd" class="jr-badge badge-public">⚙️ Code bases &amp; Algorithms</a>
+      <a href="tools/elasticity/index.qmd" class="jr-badge badge-tool">🧮 LTM 2.3 Elasticity Calculator</a>
+      <a href="projects/index.qmd" class="jr-badge badge-private">🔒 Collaborative Projects &amp; Repos</a>
+      <a href="ai-workflow/index.qmd" class="jr-badge badge-video">🤖 AI Research Infrastructure</a>
+      <a href="group-cv/cv_jeppe_rich.pdf" class="jr-badge badge-request" target="_blank">⬇️ Full CV (PDF)</a>
+    </div>
+    <div class="badge-row" style="margin-top: 0.45rem;">
+      <a href="https://scholar.google.dk/citations?user=dLP3kAMAAAAJ" class="jr-badge badge-request" target="_blank">🎓 Google Scholar</a>
+      <a href="https://orcid.org/0000-0001-5706-3836" class="jr-badge badge-request" target="_blank">🆔 ORCID: 0000-0001-5706-3836</a>
+      <a href="https://www.researchgate.net/profile/J_Rich" class="jr-badge badge-request" target="_blank">🔬 ResearchGate</a>
+      <a href="https://www.webofscience.com/wos/author/record/L-8864-2016" class="jr-badge badge-request" target="_blank">📚 Web of Science (L-8864-2016)</a>
+      <a href="https://www.linkedin.com/in/jeppe-rich-b6125841/" class="jr-badge badge-request" target="_blank">🔗 LinkedIn</a>
+      <a href="https://github.com/jepperich69" class="jr-badge badge-request" target="_blank">💻 GitHub (@jepperich69)</a>
+      <a href="https://orbit.dtu.dk/en/persons/jeppe-rich" class="jr-badge badge-request" target="_blank">🏛️ DTU Orbit</a>
+    </div>
+  </div>
+</div>
+
+<div class="kpi-bar">
+  <div class="kpi-box">
+    <div class="kpi-num">70+</div>
+    <div class="kpi-label">International Journal Articles</div>
+  </div>
+  <div class="kpi-box">
+    <div class="kpi-num" id="kpi-h-index">32</div>
+    <div class="kpi-label">Google Scholar H-index <span id="kpi-i10" style="font-size:0.75rem;opacity:0.85;">(i10: 64)</span></div>
+  </div>
+  <div class="kpi-box">
+    <div class="kpi-num" id="kpi-citations">3,571</div>
+    <div class="kpi-label">Google Scholar Citations <span id="kpi-updated" style="font-size:0.72rem;opacity:0.75;">(live)</span></div>
+  </div>
+  <div class="kpi-box">
+    <div class="kpi-num">2025</div>
+    <div class="kpi-label">Danish Transport Research Prize</div>
+  </div>
+</div>
+<script>
+(function() {
+  const dayKey = new Date().toISOString().slice(0, 10);
+  fetch('assets/metrics.json?d=' + dayKey)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (!d) return;
+      const hEl = document.getElementById('kpi-h-index');
+      const iEl = document.getElementById('kpi-i10');
+      const cEl = document.getElementById('kpi-citations');
+      const uEl = document.getElementById('kpi-updated');
+      if (hEl && d.h_index) hEl.textContent = d.h_index;
+      if (iEl && d.i10_index) iEl.textContent = '(i10: ' + d.i10_index + ')';
+      if (cEl && d.citations_all) {
+        cEl.textContent = Number(d.citations_all).toLocaleString('en-US');
+      }
+      if (uEl && d.updated_date) {
+        uEl.textContent = '(' + d.updated_date + ')';
+      }
+    })
+    .catch(() => {});
+})();
+</script>
+```
+
+## Featured Accepted & In-Review Papers
+
+{{< include papers/_gen/featured.md >}}
+
+[View all papers (Accepted · In review · Work-in-progress) $\rightarrow$](papers/index.qmd)
+
+---
+
+## Interactive Models, Code bases & Algorithms
+
+```{=html}
+<div class="card-grid">
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Interactive Browser Model · Client-Side JS Engine</div>
+      <h3><a href="tools/elasticity/index.qmd">Danish Transport Cost &amp; Fare Elasticity Calculator (LTM 2.3 Surrogate)</a></h3>
+      <p>Fast interactive surrogate of the Danish National Transport Model (LTM 2.3), rebased to 2023 TU data. Compute demand, mode-shift, revenue, and distributional rule-of-half welfare impacts across income quintiles, car ownership, and tour lengths directly in your browser.</p>
+    </div>
+    <div class="badge-row">
+      <a href="tools/elasticity/index.qmd" class="jr-badge badge-tool">🚀 Launch Interactive Calculator</a>
+      <a href="tools/elasticity/app/index.html" class="jr-badge badge-pdf" target="_blank">Full-Screen App</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Open-Source Optimization Library · Python</div>
+      <h3><a href="software/index.qmd">jr_optlib</a></h3>
+      <p>The group's library of optimization and sampling primitives, each shipped with an independent oracle: optimal transport and IPF, population synthesis, entropy-guided set cover, risk-sensitive assignment, MCMC, discrete choice, and dynamic programming.</p>
+    </div>
+    <div class="badge-row">
+      <a href="https://github.com/jepperich69/jr_optlib" class="jr-badge badge-public" target="_blank">GitHub: jr_optlib (Public)</a>
+    </div>
+  </div>
+
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Research Automation · Multi-Agent Infrastructure</div>
+      <h3><a href="ai-workflow/index.qmd">AI Research Infrastructure (AI_auto)</a></h3>
+      <p>Shared multi-agent workflow integrating Overleaf, GitHub, SymPy mathematical verification, multi-agent Convergence Forums, automated technical one-pagers, and local/remote Gurobi compute servers.</p>
+    </div>
+    <div class="badge-row">
+      <a href="ai-workflow/index.qmd" class="jr-badge badge-video">Architecture &amp; Workflow</a>
+      <a href="https://github.com/jepperich69/ai-infrastructure" class="jr-badge badge-public" target="_blank">GitHub: ai-infrastructure (Public)</a>
+    </div>
+  </div>
+
+</div>
+```
