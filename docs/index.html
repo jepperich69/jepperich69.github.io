@@ -433,7 +433,7 @@ window.Quarto = {
   </div>
   <div class="kpi-box kpi-scopus" id="kpi-scopus-h-box" hidden="">
     <div class="kpi-num" id="kpi-scopus-h"></div>
-    <div class="kpi-label">Scopus H-index</div>
+    <div class="kpi-label">Scopus H-index <span id="kpi-scopus-docs" style="font-size:0.75rem;opacity:0.85;"></span></div>
   </div>
   <div class="kpi-box kpi-scopus" id="kpi-scopus-c-box" hidden="">
     <div class="kpi-num" id="kpi-scopus-c"></div>
@@ -456,13 +456,16 @@ window.Quarto = {
       if (cEl && d.citations_all) {
         cEl.textContent = Number(d.citations_all).toLocaleString('en-US');
       }
-      if (uEl && d.updated_date) {
-        uEl.textContent = '(' + d.updated_date + ')';
+      // Date of the last successful Google Scholar fetch (not of the last run).
+      const gsDate = d.scholar_updated_date || d.updated_date;
+      if (uEl && gsDate) {
+        uEl.textContent = '(' + gsDate + ')';
       }
       // Scopus boxes stay hidden until the updater has real Scopus numbers.
       if (d.scopus_h_index && d.scopus_citations) {
         document.getElementById('kpi-scopus-h').textContent = d.scopus_h_index;
         document.getElementById('kpi-scopus-c').textContent = Number(d.scopus_citations).toLocaleString('en-US');
+        if (d.scopus_documents) document.getElementById('kpi-scopus-docs').textContent = '(' + d.scopus_documents + ' docs)';
         if (d.scopus_updated_date) document.getElementById('kpi-scopus-updated').textContent = '(' + d.scopus_updated_date + ')';
         document.getElementById('kpi-scopus-h-box').hidden = false;
         document.getElementById('kpi-scopus-c-box').hidden = false;

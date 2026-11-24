@@ -45,6 +45,7 @@ def fetch_google_scholar(user_id: str) -> dict | None:
             "h_index_5y": int(cells[3]),
             "i10_index": int(cells[4]),
             "i10_index_5y": int(cells[5]),
+            "scholar_updated_date": datetime.now().strftime("%Y-%m-%d"),
         }
     return None
 
