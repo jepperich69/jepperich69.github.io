@@ -7,6 +7,7 @@ project:
     - "papers/**/*.pdf"
     - "group-cv/*.pdf"
     - "assets/**"
+    - "CNAME"
 
 website:
   title: "Jeppe Rich"
