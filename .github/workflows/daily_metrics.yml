@@ -21,6 +21,9 @@ jobs:
           python-version: '3.12'
 
       - name: Fetch latest H-index & citation metrics
+        env:
+          SCOPUS_API_KEY: ${{ secrets.SCOPUS_API_KEY }}
+          SCOPUS_INSTTOKEN: ${{ secrets.SCOPUS_INSTTOKEN }}
         run: python scripts/update_metrics.py
 
       - name: Commit and push if metrics changed

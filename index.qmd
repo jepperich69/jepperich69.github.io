@@ -49,9 +49,17 @@ toc: false
     <div class="kpi-num" id="kpi-citations">3,571</div>
     <div class="kpi-label">Google Scholar Citations <span id="kpi-updated" style="font-size:0.72rem;opacity:0.75;">(live)</span></div>
   </div>
-  <div class="kpi-box">
+  <div class="kpi-box" id="kpi-prize-box">
     <div class="kpi-num">2025</div>
     <div class="kpi-label">Danish Transport Research Prize</div>
+  </div>
+  <div class="kpi-box kpi-scopus" id="kpi-scopus-h-box" hidden>
+    <div class="kpi-num" id="kpi-scopus-h"></div>
+    <div class="kpi-label">Scopus H-index</div>
+  </div>
+  <div class="kpi-box kpi-scopus" id="kpi-scopus-c-box" hidden>
+    <div class="kpi-num" id="kpi-scopus-c"></div>
+    <div class="kpi-label">Scopus Citations <span id="kpi-scopus-updated" style="font-size:0.72rem;opacity:0.75;"></span></div>
   </div>
 </div>
 <script>
@@ -72,6 +80,15 @@ toc: false
       }
       if (uEl && d.updated_date) {
         uEl.textContent = '(' + d.updated_date + ')';
+      }
+      // Scopus boxes stay hidden until the updater has real Scopus numbers.
+      if (d.scopus_h_index && d.scopus_citations) {
+        document.getElementById('kpi-scopus-h').textContent = d.scopus_h_index;
+        document.getElementById('kpi-scopus-c').textContent = Number(d.scopus_citations).toLocaleString('en-US');
+        if (d.scopus_updated_date) document.getElementById('kpi-scopus-updated').textContent = '(' + d.scopus_updated_date + ')';
+        document.getElementById('kpi-scopus-h-box').hidden = false;
+        document.getElementById('kpi-scopus-c-box').hidden = false;
+        document.getElementById('kpi-prize-box').hidden = true;  // the prize is still in the bio above
       }
     })
     .catch(() => {});

@@ -7,7 +7,9 @@ writes Website_JeppeRich/assets/metrics.json (and docs/assets/metrics.json), and
 updates the default fallback numbers in index.qmd and group-cv/index.qmd.
 """
 import json
+import os
 import re
+import urllib.parse
 from datetime import datetime, timezone
 from pathlib import Path
 import urllib.request
@@ -61,6 +63,54 @@ def fetch_openalex(orcid: str) -> dict | None:
     }
 
 
+# Scopus has split the author record in two (both IDs listed on the ORCID record); the metrics
+# below are computed over the union of documents, so they equal those of a merged profile.
+SCOPUS_AUTHOR_IDS = os.environ.get("SCOPUS_AUTHOR_IDS", "7202729520,57210454726")
+
+
+def h_index(cites: list[int]) -> int:
+    """Largest h such that h documents have at least h citations each."""
+    s = sorted(cites, reverse=True)
+    return sum(1 for i, c in enumerate(s, start=1) if c >= i)
+
+
+def fetch_scopus(author_ids: str) -> dict | None:
+    """Scopus Search API over all documents of the given author IDs.
+    Needs env SCOPUS_API_KEY (dev.elsevier.com); off the DTU network also SCOPUS_INSTTOKEN.
+    Returns None (and keeps the previous values) when no key is set."""
+    key = os.environ.get("SCOPUS_API_KEY")
+    if not key:
+        print("SKIP | Scopus: SCOPUS_API_KEY not set")
+        return None
+    headers = {"X-ELS-APIKey": key, "Accept": "application/json"}
+    if os.environ.get("SCOPUS_INSTTOKEN"):
+        headers["X-ELS-Insttoken"] = os.environ["SCOPUS_INSTTOKEN"]
+    ids = [a.strip() for a in author_ids.split(",") if a.strip()]
+    query = urllib.parse.quote(" OR ".join(f"AU-ID({a})" for a in ids))
+    cites, eids, start = [], set(), 0
+    while True:
+        url = (f"https://api.elsevier.com/content/search/scopus?query={query}"
+               f"&field=eid,citedby-count&count=25&start={start}")
+        with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30) as resp:
+            res = json.loads(resp.read().decode("utf-8"))["search-results"]
+        entries = [e for e in res.get("entry", []) if "error" not in e]
+        for e in entries:
+            if e.get("eid") not in eids:  # a document on both profiles counts once
+                eids.add(e.get("eid"))
+                cites.append(int(e.get("citedby-count") or 0))
+        start += len(entries)
+        if not entries or start >= int(res.get("opensearch:totalResults", 0)):
+            break
+    if not cites:
+        return None
+    return {
+        "scopus_documents": len(cites),
+        "scopus_citations": sum(cites),
+        "scopus_h_index": h_index(cites),
+        "scopus_updated_date": datetime.now().strftime("%Y-%m-%d"),
+    }
+
+
 def main():
     existing = {}
     if ASSETS_JSON.exists():
@@ -90,6 +140,14 @@ def main():
             print(f"OK | OpenAlex: H={oa['openalex_h_index']}, i10={oa['openalex_i10_index']}, citations={oa['openalex_citations']}")
     except Exception as e:
         print(f"WARN | OpenAlex fetch failed: {e}")
+
+    try:
+        sc = fetch_scopus(SCOPUS_AUTHOR_IDS)
+        if sc:
+            result.update(sc)
+            print(f"OK | Scopus: H={sc['scopus_h_index']}, citations={sc['scopus_citations']}, documents={sc['scopus_documents']}")
+    except Exception as e:
+        print(f"WARN | Scopus fetch failed (previous values kept): {e}")
 
     ASSETS_JSON.parent.mkdir(parents=True, exist_ok=True)
     ASSETS_JSON.write_text(json.dumps(result, indent=2), encoding="utf-8")

@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-d1d3afa85bcbf9150da39104bf259687.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3376163eb3fe3addd09962feec3fcac7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b8ac7e9f11adf7575e85f33be2e9b57b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-3376163eb3fe3addd09962feec3fcac7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-61904a96c9f8858ee6a2e356c3f9ac97.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-dae620590bd434c51a5bc30efaac6d94.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-61904a96c9f8858ee6a2e356c3f9ac97.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -427,9 +427,17 @@ window.Quarto = {
     <div class="kpi-num" id="kpi-citations">3,571</div>
     <div class="kpi-label">Google Scholar Citations <span id="kpi-updated" style="font-size:0.72rem;opacity:0.75;">(live)</span></div>
   </div>
-  <div class="kpi-box">
+  <div class="kpi-box" id="kpi-prize-box">
     <div class="kpi-num">2025</div>
     <div class="kpi-label">Danish Transport Research Prize</div>
+  </div>
+  <div class="kpi-box kpi-scopus" id="kpi-scopus-h-box" hidden="">
+    <div class="kpi-num" id="kpi-scopus-h"></div>
+    <div class="kpi-label">Scopus H-index</div>
+  </div>
+  <div class="kpi-box kpi-scopus" id="kpi-scopus-c-box" hidden="">
+    <div class="kpi-num" id="kpi-scopus-c"></div>
+    <div class="kpi-label">Scopus Citations <span id="kpi-scopus-updated" style="font-size:0.72rem;opacity:0.75;"></span></div>
   </div>
 </div>
 <script>
@@ -450,6 +458,15 @@ window.Quarto = {
       }
       if (uEl && d.updated_date) {
         uEl.textContent = '(' + d.updated_date + ')';
+      }
+      // Scopus boxes stay hidden until the updater has real Scopus numbers.
+      if (d.scopus_h_index && d.scopus_citations) {
+        document.getElementById('kpi-scopus-h').textContent = d.scopus_h_index;
+        document.getElementById('kpi-scopus-c').textContent = Number(d.scopus_citations).toLocaleString('en-US');
+        if (d.scopus_updated_date) document.getElementById('kpi-scopus-updated').textContent = '(' + d.scopus_updated_date + ')';
+        document.getElementById('kpi-scopus-h-box').hidden = false;
+        document.getElementById('kpi-scopus-c-box').hidden = false;
+        document.getElementById('kpi-prize-box').hidden = true;  // the prize is still in the bio above
       }
     })
     .catch(() => {});
