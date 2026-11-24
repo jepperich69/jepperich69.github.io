@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!prompts/"
   resources:
     - "tools/elasticity/app/**"
     - "tools/elasticity/*.pdf"

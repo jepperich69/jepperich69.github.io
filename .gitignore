@@ -16,3 +16,6 @@ AGENTS.md
 _state/
 _cvbuild/
 papers/_rundown_*.md
+
+# Session prompt logs (agent conversations): never published
+prompts/
