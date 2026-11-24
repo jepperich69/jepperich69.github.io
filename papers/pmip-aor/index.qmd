@@ -1,0 +1,21 @@
+---
+title: "Recasting Mixed-Integer Programs as Probability Problems"
+subtitle: "Status: In review · Annals of Operations Research"
+author: "Jeppe Rich, Kun An"
+date: "2026-11-24"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+A mixed-integer solver reports whether a solution is optimal, but not how stable it is, how many near-optimal alternatives exist, or how uncertain the objective is. This paper introduces **Probabilistic MIP (PMIP)**, which treats the optimization process itself as a source of statistical information.
+
+- **Entropy annealing:** An entropy term is added to the relaxation, and the temperature is lowered gradually. Each stage defines a Boltzmann-like probability measure over feasible integer solutions. Dual-guided rounding converts the relaxation to integer solutions, and a short Metropolis–Hastings swap-and-repair step refines them.
+- **Single-run uncertainty:** From one annealing trajectory, the method derives the mean, the variance and credible intervals of the objective without repeated solver calls. It runs in polynomial time, with little overhead relative to a standard hybrid solve.
+- **Applications:** In transportation and set-cover problems, the confidence limits bracket the true optimum while the method keeps its computational scalability.
+
+## Abstract
+
+This paper introduces a rapid, information-theoretic framework for mixed-integer optimization that enables simultaneous assessment of solution quality and uncertainty. By embedding an entropy term into the relaxation and gradually annealing the temperature, we transform a deterministic solver into a distributional one, where each annealing stage defines a Boltzmann-like probability measure over feasible integer solutions. The continuous relaxation is converted to integer solutions via dual-guided rounding; in the presence of total unimodularity, this step reduces to solving a standard linear program. From this annealing trajectory, we derive single-run estimates of the mean, variance, and credible intervals of the objective function without repeated solver calls. The method, termed PMIP, operates in polynomial time and adds minimal runtime overhead relative to a standard hybrid solve. It provides a self-consistent answer to the questions *"how good is good?"* and *"how uncertain is uncertain?"*, linking heuristic optimality to the statistical structure of the near-optimal solution space. Applications to transportation and set-cover problems show that the resulting confidence limits reliably bracket the true optimum while preserving computational scalability.

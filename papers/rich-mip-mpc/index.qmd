@@ -1,0 +1,21 @@
+---
+title: "RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization"
+subtitle: "Status: In review · Mathematical Programming Computation"
+author: "Jeppe Rich"
+date: "2026-11-24"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+Large mixed-integer programs force a choice between exact methods, which guarantee optimality but scale poorly, and heuristics, which scale well but give up solution quality and guarantees. This paper presents **RICH**, a hybrid method that combines an entropy-regularized relaxation with structured integerization.
+
+- **Entropy-regularized relaxation:** The linear relaxation is replaced by an entropy-regularized convex program, which is solved by Sinkhorn iterations or iterative proportional fitting (IPF) in near-linear time.
+- **KL rounding:** Integer solutions are recovered by minimum Kullback–Leibler divergence rounding. For transportation and assignment problems the method recovers exact optimal solutions, and for population synthesis it has a zero integrality gap on totally unimodular systems.
+- **Computational results:** Population synthesis reaches exact marginals in under 2 seconds for 160×160 tables, and transportation problems are solved optimally in under 1 second for 300×300 instances. For set covering from 100×3,000 to 300×5,000, the hybrid reaches good feasible solutions in about 2 seconds, and its advantage over time-limited MIP grows with the instance size.
+
+## Abstract
+
+We present a method for approximating solutions to large-scale mixed-integer programs by combining: (i) entropy-regularized linear relaxation solved via Sinkhorn iterations, and (ii) structured integerization via minimum Kullback–Leibler divergence rounding. The approach leverages information-theoretic projections for scalability while producing high-quality solutions through entropy-aware rounding. The method applies to a host of problems, including transport, network flows, facility location, set covering, and population synthesis. For lattice polytopes (e.g., transportation and assignment), it recovers exact optimal solutions. For population synthesis, it achieves zero integrality gap on totally unimodular systems and provably bounded deviations for more complex non-TU linked-constraint cases. For general set covering, it provides high-quality approximate solutions with the classical logarithmic approximation guarantee. We evaluate on three representative problem classes at varying scales: (i) population synthesis achieving exact marginals in under 2 s for 160×160 tables, (ii) transportation problems solved optimally in under 1 s for 300×300 instances, and (iii) synthetic set covering across three scales (100×3000 to 300×5000), where the hybrid reaches high-quality feasible solutions within about 2 s and its advantage over time-limited MIP becomes more pronounced as instance size grows, with the larger scales retaining a positive gap advantage throughout a 30 s horizon. The method bridges information geometry and combinatorial optimization, providing a scalable, theoretically grounded alternative to traditional MIP heuristics.

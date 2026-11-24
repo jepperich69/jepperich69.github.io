@@ -341,7 +341,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#overview-contribution" id="toc-overview-contribution" class="nav-link active" data-scroll-target="#overview-contribution">Overview &amp; Contribution</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   </ul>
 </nav>
     </div>
@@ -388,6 +389,15 @@ ul.task-list li input[type="checkbox"] {
   <span class="jr-badge badge-st-review">In review</span>
   <a href="mailto:rich@dtu.dk?subject=Preprint%20request%3A%20Modelling%20transport%20market%20adaptation%20using%20synthetic%20pseudo-panels%3A%20Application%20to%20e-bike%20diffusion" class="jr-badge badge-request">Request Preprint</a>
 </div>
+<section id="overview-contribution" class="level2">
+<h2 class="anchored" data-anchor-id="overview-contribution">Overview &amp; Contribution</h2>
+<p>New transport technologies often spread first in small population segments, where repeated cross-sectional surveys contain too few observations to follow adoption over time. This paper introduces a <strong>synthetic pseudo-panel (SPP)</strong> approach and applies it to ten years of e-bike adoption in Denmark.</p>
+<ul>
+<li><strong>Synthetic pseudo-panel:</strong> A conditional variational autoencoder (CVAE) learns the conditional distribution of the survey variables. This allows consistent adoption trajectories to be reconstructed for detailed segments that the raw data cover only sparsely.</li>
+<li><strong>Decomposition of mileage:</strong> The reconstructed trajectories decompose changes in mileage and show how travel is reallocated between modes as preferences shift over time.</li>
+<li><strong>Empirical findings:</strong> Adoption is strongest in suburban areas and city centers and lags in rural regions. Women and older adults are leading adopters and mainly replace bicycle trips, and there is evidence of induced demand among previously non-travelling individuals.</li>
+</ul>
+</section>
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <p>Emerging transport technologies often diffuse through niche segments, where survey-based methods struggle to capture adoption dynamics due to limited sample sizes. To address this, we introduce a synthetic pseudo-panel (SPP) framework employing conditional variational autoencoders (CVAE) to reconstruct consistent adoption trajectories from repeated cross-sectional data. Applied to e-bike adoption in Denmark over a ten-year period, the framework enables decomposition of mileage changes and reveals modal reallocation patterns through shifts in preference distributions over time. Results highlight distinct socio-demographic and geographic pathways, with early signals detectable before they appear in raw data. Adoption is strongest in suburban areas and city centres, while rural regions lag. Women and elderly adults emerge as leading adopters, primarily reallocating bicycle trips, though effects extend to other modes as well. Evidence of induced demand suggests e-bikes may enable mobility among previously non-travelling individuals. The framework is broadly applicable to domains characterised by gradual behavioural diffusion, including automated vehicles, electric mobility, and energy transitions.</p>

@@ -1,0 +1,21 @@
+---
+title: "Future environmental impacts of electric heavy-duty trucks"
+subtitle: "Status: In review · Journal of Cleaner Production"
+author: "Raoul Nicolodi, Jeppe Rich, Alexis Laurent"
+date: "2026-11-24"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+Battery-electric trucks are a main option for decarbonizing long-haul heavy-duty transport, but their life-cycle benefits depend on future electricity supply and vehicle technology. This paper performs a **prospective life cycle assessment** of 40-tonne diesel and battery-electric long-haul trucks for most countries and regions of the world, from 2025 to 2050.
+
+- **Prospective technology:** Changes in battery energy density, vehicle lightweighting and the regulatory gross vehicle weight allowance are represented explicitly, for several battery sizes.
+- **Climate impacts:** The life-cycle climate change impacts of battery-electric trucks fall substantially from 2025, mainly because the electricity system is decarbonized. By 2050 they are about 66–85% lower than those of diesel trucks across the regions analysed.
+- **Other impact categories:** Battery-electric trucks have higher impacts in several categories related to material production, although technological improvements reduce these over time.
+
+## Abstract
+
+Battery-electric trucks (BETs) are a key option for decarbonizing long-haul heavy-duty transport, yet their life-cycle environmental benefits depend on future electricity supply and vehicle technology development. This study performs a prospective life cycle assessment of 40 tonne diesel and battery-electric long-haul trucks, modeled for most countries/regions in the world, from 2025 to 2050 and under different configurations of battery sizes. Prospective changes in battery gravimetric energy density, vehicle lightweighting, and regulatory gross vehicle weight allowances are represented explicitly. Results show that life-cycle climate change impacts of battery-electric trucks decrease substantially from 2025 onwards, driven primarily by electricity system decarbonization. Vehicle-side improvements provide additional reductions and narrow differences between battery-electric truck configurations with different driving ranges. While climate benefits are apparent, battery-electric trucks exhibit higher impacts in several other environmental impacts related to material production, though these are partially mitigated by technological improvements over time. By 2050, battery-electric trucks achieve life-cycle climate change emissions approximately 66–85% lower than those of diesel trucks across the analysed regions. Overall, the results highlight the dominant role of electricity system decarbonization in enabling these reductions, while vehicle technology improvements act as complementary enablers across regions and long-haul applications.

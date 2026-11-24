@@ -8,6 +8,14 @@ toc: true
 
 {{< include _status.md >}}
 
+## Overview & Contribution
+
+Using **18 years of Danish National Travel Survey data** (115,338 weekday diaries), this paper examines whether the spatial and temporal structure of daily mobility has changed in an era of digitization, remote work and a pandemic, or whether people leave home less often but keep their patterns once they do.
+
+- **Action-space representation:** Each diary is represented as the distance from home over the 24-hour day. Spatial reach and temporal rhythm are therefore measured together, for five age groups.
+- **Spatial expansion:** The conditional envelope, which describes where people go when they travel, expands in every age group and significantly in three of them. The expansion is largest for adults aged 56–65 (+12.9%), and it is a long-run trend that was already present before 2019.
+- **Temporal contraction:** The share of the day spent away from home falls by 3.2–6.3% for the age groups below 56, mainly after 2019, and rises by 8.2% for those aged 56–65. All age groups shift their activities earlier in the day.
+
 ## Abstract
 
 How much has daily mobility changed in an era of digitization, remote work, and a global pandemic? Using 18 years of Danish travel data (115,338 weekday diaries), we analyze daily action-spaces—the distance from home over time—across five age groups. We identify a two-regime structure. The *conditional* action-space envelope, which describes where people go when they travel, expands spatially in every age group, and significantly in three of them. The expansion is largest for pre-retirement adults (56–65, +12.9%), lies between +5.8% and +6.6% for the three age groups below 56, and is smallest and not significant for adults aged 66 and above (+2.9%). This expansion is a long-run trend that was already present before 2019. Temporal rhythms within the envelope remain stable. In contrast, the *unconditional* share of the day spent away from home moves in opposite directions on either side of age 56. It declines by 6.3% for 18–30, 6.2% for 31–55 and 3.2% for 10–17, whereas it increases by 8.2% for 56–65. For the groups below 56, this contraction is concentrated after 2019. Before then, their time away from home was rising for 10–17 and 31–55 and declining only slightly for 18–30. All age groups shift their activities earlier in the day and spend less of the evening away from home. The divergence between spatial expansion and temporal contraction therefore applies to the age groups below 56, and its temporal side is largely a development of the most recent survey periods.

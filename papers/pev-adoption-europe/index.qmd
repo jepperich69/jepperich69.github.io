@@ -1,0 +1,23 @@
+---
+title: "Plug-in electric vehicle adoption in Europe: A cross-country analysis of preferences and willingness-to-pay in six markets"
+subtitle: "Status: In review · Transportation Research Part D"
+author: "Stefan E. Mabit, Anders F. Jensen, Símun P. Pálsson, Jeppe Rich"
+date: "2026-11-24"
+toc: true
+---
+
+{{< include _status.md >}}
+
+## Overview & Contribution
+
+The demand for battery electric vehicles (BEVs) and plug-in hybrid electric vehicles (PHEVs) has grown across Europe, but at different rates. This paper compares preferences for both across **six European markets at different stages of adoption**: the Czech Republic, Denmark, Germany, Ireland, Italy and Spain.
+
+- **Harmonized survey:** Stated preference data from a harmonized European survey with 1,000 respondents per country give consistent and comparable data. Revealed preference data of this kind are not available across the six countries.
+- **Mixed logit with country effects:** Mixed logit models with country-specific effects give willingness-to-pay measures for vehicle attributes and preferences for fuel types across population segments.
+- **Empirical findings:** Preferences for BEVs and PHEVs are most negative in the Czech Republic and most positive in Denmark, Italy and Spain. The gap between home and apartment dwellers is largest in Germany, where the ranking depends on access to home charging. The countries therefore face different barriers to adoption.
+
+## Abstract
+
+The demand for battery electric vehicles (BEVs) and plug-in hybrid electric vehicles (PHEVs) has increased across Europe, but at very different rates. Most existing studies focus on single countries, making it challenging to compare preferences and identify why adoption differs. In this paper, we compare preferences for BEVs and PHEVs across six European markets with highly varying adoption levels: the Czech Republic, Denmark, Germany, Ireland, Italy, and Spain.
+
+We estimate mixed logit models with country-specific effects using stated preference data from a harmonised European survey with 1,000 respondents per country. The models are used to calculate willingness-to-pay measures for vehicle attributes and quantify preferences for fuel types across population segments. We observe large differences in preferences between home and apartment dwellers across countries, with the gap particularly pronounced in Germany. Preferences related to both BEVs and PHEVs are most negative in the Czech Republic, and most positive in Denmark, Italy, and Spain. For Germany, the relative ranking is highly dependent on access to home charging. These results indicate that countries face different barriers to electric vehicle adoption. In some cases, improving charging access and economic incentives may be sufficient, while in others, barriers related to attitudes and awareness may require targeted measures beyond infrastructure and pricing.

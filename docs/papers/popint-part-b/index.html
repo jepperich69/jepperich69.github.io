@@ -339,7 +339,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#overview-contribution" id="toc-overview-contribution" class="nav-link active" data-scroll-target="#overview-contribution">Overview &amp; Contribution</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
   </ul>
 </nav>
     </div>
@@ -385,6 +386,15 @@ ul.task-list li input[type="checkbox"] {
   <a href="https://github.com/jepperich69/Pub_PopInt_PartB" class="jr-badge badge-private" target="_blank">GitHub: Private Repo</a>
   <a href="mailto:rich@dtu.dk?subject=Preprint%20request%3A%20From%20Fractions%20to%20Individuals%3A%20Information-Theoretic%20Integerization%20for%20Population%20Synthesis" class="jr-badge badge-request">Request Preprint</a>
 </div>
+<section id="overview-contribution" class="level2">
+<h2 class="anchored" data-anchor-id="overview-contribution">Overview &amp; Contribution</h2>
+<p>Population synthesis produces large, sparse contingency tables with fractional counts, which must be converted to whole persons before an agent-based model can use them. This paper treats integerization as <strong>information-theoretic inference</strong> instead of sampling.</p>
+<ul>
+<li><strong>KL-closest integer table:</strong> Among all integer tables consistent with the margins, the method selects the one closest in Kullback–Leibler divergence to the fractional IPF solution, with each cell set to its floor or its ceiling.</li>
+<li><strong>Deterministic algorithm:</strong> The solution requires two sparse IPF runs and a largest-remainder allocation, so it scales as IPF itself. Identical inputs give identical outputs, and there is no sampling variance.</li>
+<li><strong>Empirical results:</strong> For 98 Danish municipalities with 635,000 joint cells, the integer table overlaps 98.4% with the fractional solution, against 92.1% for multinomial sampling. An extension to 397 million cells is integerized in 16 minutes.</li>
+</ul>
+</section>
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <p>High-dimensional population synthesis produces sparse contingency tables with many fractional counts that must be integerized for agent-based models. Standard sampling approaches introduce stochastic noise. We recast integerization as an information-theoretic inference problem: among all integer tables consistent with the margins, select the one closest to the fractional IPF solution in Kullback–Leibler divergence. We restrict the search to integerizations that assign each cell either its floor or ceiling value, which yields a simple two-step algorithm that is reproducible and efficient. Applied to 98 Danish municipalities with 635,000 joint cells across socio-economic groups, the integer table overlaps 98.4% with the fractional IPF solution, versus 92.1% for multinomial sampling. Identical inputs produce identical outputs, eliminating sampling variance. Primary margins are exact; secondary margins may carry small residuals. The method replaces traditional sampling-based integerization with deterministic inference that yields a single, stable, reproducible solution. The algorithm consists of two sparse IPF runs and a largest-remainder allocation, so it scales as IPF itself; an extension to 397 million cells is integerized in 16 minutes.</p>

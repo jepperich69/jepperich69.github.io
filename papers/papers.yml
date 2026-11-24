@@ -302,6 +302,7 @@ papers:
   - date: 2026-09
     text: Published in Energy Research & Social Science
 - id: Pub_FlowSP1_TBA
+  slug: pev-adoption-europe
   status: in-review
   title: 'Plug-in electric vehicle adoption in Europe: A cross-country analysis of preferences and willingness-to-pay
     in six markets'
@@ -312,6 +313,7 @@ papers:
   links: []
   events: []
 - id: Pub_pLCA_Trucks_TBA
+  slug: bet-lca-trucks
   status: in-review
   title: Future environmental impacts of electric heavy-duty trucks
   authors: Raoul Nicolodi, Jeppe Rich, Alexis Laurent
@@ -331,6 +333,7 @@ papers:
   links: []
   events: []
 - id: Pub_PMIP_AOR
+  slug: pmip-aor
   status: in-review
   title: Recasting Mixed-Integer Programs as Probability Problems
   authors: Jeppe Rich, Kun An
@@ -340,6 +343,7 @@ papers:
   links: []
   events: []
 - id: Pub_MIPEntropy_MPC
+  slug: rich-mip-mpc
   status: in-review
   substatus: major revision
   title: 'RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization'
