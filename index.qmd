@@ -87,7 +87,10 @@ toc: false
       if (d.scopus_h_index && d.scopus_citations) {
         document.getElementById('kpi-scopus-h').textContent = d.scopus_h_index;
         document.getElementById('kpi-scopus-c').textContent = Number(d.scopus_citations).toLocaleString('en-US');
-        if (d.scopus_documents) document.getElementById('kpi-scopus-docs').textContent = '(' + d.scopus_documents + ' docs)';
+        const sParts = [];
+        if (d.scopus_i10_index != null) sParts.push('i10: ' + d.scopus_i10_index);
+        if (d.scopus_documents) sParts.push(d.scopus_documents + ' docs');
+        if (sParts.length) document.getElementById('kpi-scopus-docs').textContent = '(' + sParts.join(' · ') + ')';
         if (d.scopus_updated_date) document.getElementById('kpi-scopus-updated').textContent = '(' + d.scopus_updated_date + ')';
         document.getElementById('kpi-scopus-h-box').hidden = false;
         document.getElementById('kpi-scopus-c-box').hidden = false;

@@ -108,6 +108,7 @@ def fetch_scopus(author_ids: str) -> dict | None:
         "scopus_documents": len(cites),
         "scopus_citations": sum(cites),
         "scopus_h_index": h_index(cites),
+        "scopus_i10_index": sum(1 for c in cites if c >= 10),  # papers with at least 10 citations
         "scopus_updated_date": datetime.now().strftime("%Y-%m-%d"),
     }
 
