@@ -14,7 +14,7 @@ toc: false
       Department of Technology, Management and Economics · Technical University of Denmark (DTU)
     </div>
     <p style="margin-bottom: 0.75rem; max-width: 780px;">
-      I work at the intersection of <strong>stochastic and integer optimization</strong>, <strong>econometric demand modelling</strong>, <strong>population synthesis</strong>, and <strong>sustainable transport systems</strong>. Co-founder and Editor-in-Chief (2023–2026) of the Elsevier <em>Journal of Cycling and Micromobility Research</em>, chief designer of the Danish National Transport Model (LTM), and recipient of the 2025 Danish Transport Research Prize.
+      With a background in Math and Economics, I work at the intersection of <strong>transport models</strong>, <strong>logistics</strong>, <strong>optimization</strong>, <strong>statistical modelling</strong>, <strong>population synthesis</strong>, and <strong>sustainable transport systems</strong>. Co-founder and Editor-in-Chief (2023–2026) of the Elsevier <em>Journal of Cycling and Micromobility Research</em>, chief designer of the Danish National Transport Model (LTM), and recipient of the 2025 Danish Transport Research Prize.
     </p>
     <div class="badge-row">
       <a href="papers/index.qmd" class="jr-badge badge-pdf">📄 Papers &amp; Preprints</a>
