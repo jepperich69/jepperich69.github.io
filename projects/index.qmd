@@ -82,7 +82,7 @@ Acquired external funding with PI responsibility (excluding the €7M National T
 
 | Period | Project | Funder | Scope & Role | Budget |
 |---|---|---|---|---|
-| **2026–2029** | **Traction** | Hedorfs Fond | Research project granted in 2025 and started September 2026, including a PhD (Rasmus Weibull, from October 2026) | DKK 3 million (≈ €400,000) |
+| **2026–2029** | **TRACTION** | Hedorfs Fond | *Road Freight Transport in Denmark: Utilizing Road Pricing Data to Investigate Electrification, Route Choice, Disruption, and Freight System Dynamics* — granted in 2025 and started September 2026, including a PhD (Rasmus Weibull, from October 2026) | DKK 3 million (≈ €400,000) |
 | **2025–2028** | **NaPSTI** | Independent Research Fund Denmark (DFF) | *Navigating the Path to Sustainable Transport Infrastructure* — expansion strategies for combined bicycle and public transport networks (PI) | €400,000 |
 | **2024–2027** | **DESERTLE** | DTU Strategic PhD Initiative | *Developing Absolute Environmentally Sustainable Roadmap for Electrification of Long-Haul Transport in Europe* (with Prof. Alexis Laurent) | €260,000 |
 | **2023–2026** | **Teddy** | Hedorf & FD Fonden | *Towards Electrified Goods Distribution with Heavy-Duty Trucks* — business case, barriers, and charging infrastructure for line-haul distribution (PI) | €480,000 |

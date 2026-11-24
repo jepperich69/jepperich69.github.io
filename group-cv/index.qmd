@@ -46,8 +46,8 @@ In addition to supervising postdocs and 30+ M.Sc./B.Sc. theses, I have supervise
 
 | Period | Researcher | Topic | Co-Supervisors |
 |---|---|---|---|
-| **2026–2028** | **Matthew Davidson** | Postdoc (two years, from December 2026) | Allan Larsen |
-| **2026–2029** | **Rasmus Weibull** | PhD on the *Traction* project (Hedorfs Fond) | Thomas Kjær Rasmussen |
+| **2026–2028** | **Matthew Davidson** | *Fleet transition modelling under deep uncertainty* (postdoc, two years from December 2026) | Allan Larsen |
+| **2026–2029** | **Rasmus Weibull** | PhD on the *TRACTION* project (Hedorfs Fond) | Thomas Kjær Rasmussen |
 | **2024–2027** | **Raoul Nicolodi** | *Sustainable Roadmap Scenarios for the Electrification of Long-Haul Transport* (DESERTLE) | Prof. Alexis Laurent |
 | **2023–2026** | **Dimitrios Argyros** | *Micromobility Users' Behaviour and Safety from Multiple Large-Scale Data Sources* | Anders Fjendbo Jensen |
 | **2021–2024** | **Tim Unterluggauer** | *Urban Electric Vehicle Charging Infrastructure: Planning, Grid Impact and Grid Integration* | Peter Bach Andersen, Mattia Marinelli |
