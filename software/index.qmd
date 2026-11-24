@@ -1,5 +1,6 @@
 ---
 title: "Code bases and Algorithms"
+description: "Open code bases and algorithms by Jeppe Rich (DTU), including optimization and sampling libraries."
 subtitle: "The group's algorithm library, research infrastructure and field tools, plus every repository under @jepperich69"
 toc: true
 ---

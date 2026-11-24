@@ -1,5 +1,6 @@
 ---
 title: "AI Research Infrastructure (AI_auto)"
+description: "How Jeppe Rich's research group uses AI agents in a reproducible research workflow."
 subtitle: "Multi-agent verification, Overleaf Git sync, and automated deliverables for quantitative research"
 toc: true
 ---

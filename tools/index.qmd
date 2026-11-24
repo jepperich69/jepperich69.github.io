@@ -1,5 +1,6 @@
 ---
 title: "Interactive Tools & Calculators"
+description: "Interactive tools and calculators from Jeppe Rich's transport research at DTU."
 subtitle: "Browser-based transport demand, elasticity, and welfare models"
 toc: false
 ---

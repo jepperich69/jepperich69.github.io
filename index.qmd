@@ -1,5 +1,8 @@
 ---
 title: ""
+pagetitle: "Professor of Transport Modelling, Optimization & Econometrics at DTU"
+description: "Jeppe Rich, Professor at DTU Management: transport models, discrete choice, optimization, econometrics and population synthesis. Papers, code, tools and CV."
+include-in-header: _person_jsonld.html
 page-layout: full
 toc: false
 ---

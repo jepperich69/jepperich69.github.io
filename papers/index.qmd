@@ -1,5 +1,6 @@
 ---
 title: "Papers & Publications"
+description: "Journal papers, papers in review and working papers by Jeppe Rich (DTU) on transport modelling, choice models and optimization."
 subtitle: "Classified by peer-review status: Accepted · In review · Work-in-progress"
 toc: true
 ---

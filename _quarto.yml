@@ -11,9 +11,14 @@ project:
     - "group-cv/*.pdf"
     - "assets/**"
     - "CNAME"
+    - "robots.txt"
 
 website:
   title: "Jeppe Rich"
+  site-url: "https://www.jepperich.com"
+  image: assets/profile.jpeg
+  open-graph: true
+  twitter-card: true
   description: "Professor of Transport Modelling, Optimization & Econometrics at DTU Management"
   favicon: assets/profile.jpeg
   page-navigation: true

@@ -1,5 +1,6 @@
 ---
 title: "CV"
+description: "CV of Jeppe Rich, Professor of Transport Modelling at DTU: bio, awards, PhD supervision, talks and full CV PDF."
 subtitle: "Biography, PhD & Postdoc supervision, editorial roles, and contact information"
 toc: true
 ---

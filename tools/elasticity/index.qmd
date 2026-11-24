@@ -1,5 +1,6 @@
 ---
 title: "Danish Transport Cost & Fare Elasticity Calculator"
+description: "Interactive calculator for Danish transport cost and fare elasticities based on the Danish National Transport Model (LTM 2.3)."
 subtitle: "Interactive LTM 2.3 surrogate rebased to 2023 Danish National Travel Survey (TU) data"
 page-layout: full
 toc: false

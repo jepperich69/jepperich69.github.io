@@ -1,5 +1,6 @@
 ---
 title: "Collaborative & Applied Projects"
+description: "Collaborative and applied research projects and grants led by Jeppe Rich at DTU Management."
 subtitle: "Research grants, national transport model infrastructure, and private/collaborative GitHub repositories"
 toc: true
 ---

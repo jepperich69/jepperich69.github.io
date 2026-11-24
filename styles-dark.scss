@@ -88,3 +88,6 @@ $link-color: #60a5fa;
 .badge-st-wip      { background-color: rgba(217, 119, 6, 0.2);  color: #fcd34d; border-color: rgba(251, 191, 36, 0.35); }
 .badge-st-wp       { background-color: rgba(100, 116, 139, 0.25); color: #e2e8f0; border-color: rgba(148, 163, 184, 0.35); }
 .jr-card-event, .paper-history { color: #94a3b8; }
+
+/* SEO: page descriptions go to <meta>; the subtitle is the visible lede */
+.quarto-title-block .description { display: none; }

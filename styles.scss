@@ -244,3 +244,6 @@ $font-family-monospace: "JetBrains Mono", "Fira Code", Consolas, monospace;
 .jr-card li {
   margin-bottom: 0.3rem;
 }
+
+/* SEO: page descriptions go to <meta>; the subtitle is the visible lede */
+.quarto-title-block .description { display: none; }
