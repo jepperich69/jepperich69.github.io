@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T15:27:23Z",
+  "updated_at": "2026-11-24T16:22:31Z",
   "updated_date": "2026-11-24",
   "source": "Google Scholar",
   "citations_all": 3571,
@@ -11,5 +11,9 @@
   "openalex_works": 125,
   "openalex_citations": 2634,
   "openalex_h_index": 30,
-  "openalex_i10_index": 52
+  "openalex_i10_index": 52,
+  "scopus_documents": 73,
+  "scopus_citations": 2050,
+  "scopus_h_index": 27,
+  "scopus_updated_date": "2026-11-24"
 }
