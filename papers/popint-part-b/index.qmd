@@ -10,7 +10,7 @@ toc: true
 
 ## Video: three-minute summary (hEART 2026, Paris)
 
-{{< video https://www.youtube.com/embed/HTEGKEocVOc >}}
+{{< video https://www.youtube.com/embed/s1IWpXCHAh4 >}}
 
 ## Overview & Contribution
 
