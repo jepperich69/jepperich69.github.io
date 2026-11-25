@@ -8,6 +8,10 @@ toc: true
 
 {{< include _status.md >}}
 
+## Video: three-minute summary (hEART 2026, Paris)
+
+{{< video https://www.youtube.com/embed/HTEGKEocVOc >}}
+
 ## Overview & Contribution
 
 Population synthesis produces large, sparse contingency tables with fractional counts, which must be converted to whole persons before an agent-based model can use them. This paper treats integerization as **information-theoretic inference** instead of sampling.
