@@ -46,9 +46,9 @@
       <div class="jr-card-meta"><span class="jr-badge badge-st-review">In review</span> · Transportation Research Part B</div>
       <h3><a href="papers/popint-part-b/index.qmd">From Fractions to Individuals: Information-Theoretic Integerization for Population Synthesis</a></h3>
       <p><strong>Jeppe Rich</strong> · Recasts contingency-table integerization as deterministic Kullback–Leibler inference via two sparse IPF runs and largest-remainder allocation, achieving 98.4% mass overlap across 98 Danish municipalities.</p>
-      
+      <div class="jr-card-event">Latest: Poster presented at hEART 2026, Paris (Sep 2026)</div>
     </div>
-    <div class="badge-row"><a href="papers/popint-part-b/index.qmd" class="jr-badge badge-pdf">Paper Page</a> <a href="https://github.com/jepperich69/Pub_PopInt_PartB" class="jr-badge badge-private" target="_blank">GitHub: Private Repo</a> <a href="mailto:rich@dtu.dk?subject=Preprint%20request%3A%20From%20Fractions%20to%20Individuals%3A%20Information-Theoretic%20Integerization%20for%20Population%20Synthesis" class="jr-badge badge-request">Request Preprint</a></div>
+    <div class="badge-row"><a href="papers/popint-part-b/index.qmd" class="jr-badge badge-pdf">Paper Page</a> <a href="https://github.com/jepperich69/Pub_PopInt_PartB" class="jr-badge badge-private" target="_blank">GitHub: Private Repo</a> <a href="papers/popint-part-b/poster_heart2026.pdf" class="jr-badge badge-pdf">Poster: hEART 2026</a> <a href="mailto:rich@dtu.dk?subject=Preprint%20request%3A%20From%20Fractions%20to%20Individuals%3A%20Information-Theoretic%20Integerization%20for%20Population%20Synthesis" class="jr-badge badge-request">Request Preprint</a></div>
   </div>
 
   <div class="jr-card">

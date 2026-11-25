@@ -3,6 +3,11 @@
 <div class="badge-row" style="margin-bottom: 1.5rem;">
   <span class="jr-badge badge-st-review">In review</span>
   <a href="https://github.com/jepperich69/Pub_PopInt_PartB" class="jr-badge badge-private" target="_blank">GitHub: Private Repo</a>
+  <a href="poster_heart2026.pdf" class="jr-badge badge-pdf">Poster: hEART 2026</a>
   <a href="mailto:rich@dtu.dk?subject=Preprint%20request%3A%20From%20Fractions%20to%20Individuals%3A%20Information-Theoretic%20Integerization%20for%20Population%20Synthesis" class="jr-badge badge-request">Request Preprint</a>
 </div>
 ```
+
+::: {.paper-history}
+**History:** Poster presented at hEART 2026, Paris (Sep 2026)
+:::

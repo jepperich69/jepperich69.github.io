@@ -167,7 +167,11 @@ papers:
   - label: 'GitHub: Private Repo'
     url: https://github.com/jepperich69/Pub_PopInt_PartB
     kind: private
-  events: []
+  - label: 'Poster: hEART 2026'
+    url: poster_heart2026.pdf
+  events:
+  - date: 2026-09
+    text: Poster presented at hEART 2026, Paris
 - id: Pub_EbikeAdaptation_TRC
   status: in-review
   title: 'Modelling transport market adaptation using synthetic pseudo-panels: Application to e-bike diffusion'
@@ -207,12 +211,14 @@ papers:
   events: []
 - id: Pub_NapstiGranularity_TBA
   label: Pub_NapstiGranularity
-  title: 'Optimal Stop Spacing and Service Frequency in Public Transport Networks: A Continuous Fixed-Point Approach'
+  title: 'Optimal Stop Spacing and Service Frequency in Public Transport Networks: A Continuous Fixed-Point
+    Approach'
   authors: Jeppe Rich, Lawrence Duncan, Oded Cats, David Watling, Mads Paulsen, Thomas Kjær Rasmussen
   slug: stop-spacing-part-b
   featured: true
   status: in-review
-  summary: Joint stop spacing and service frequency under a fixed budget, solved to global optimality by a fixed point of closed-form blocks and applied to 450 bus segments in Copenhagen.
+  summary: Joint stop spacing and service frequency under a fixed budget, solved to global optimality
+    by a fixed point of closed-form blocks and applied to 450 bus segments in Copenhagen.
   links:
   - label: 'GitHub: Private Repo'
     url: https://github.com/jepperich69/Napsti_Paper1
