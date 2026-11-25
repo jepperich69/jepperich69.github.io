@@ -359,7 +359,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Code bases and Algorithms</h1>
-<p class="subtitle lead">The group’s algorithm library, research infrastructure and field tools, plus every repository under <span class="citation" data-cites="jepperich69">@jepperich69</span></p>
+<p class="subtitle lead">My algorithm library, research infrastructure and field tools, plus every repository under <span class="citation" data-cites="jepperich69">@jepperich69</span></p>
 </div>
 
 <div>
@@ -381,14 +381,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The three code bases below are the core of the group’s software. Algorithms developed for individual papers are moved into <code>jr_optlib</code>, so the library is the one place to find them. Paper-specific code is also linked from each paper’s entry in <a href="../papers/index.html">Papers</a>, and collaborative projects are described under <a href="../projects/index.html">Projects</a>.</p>
+<p>The three code bases below are the core of my software. Algorithms developed for individual papers are moved into <code>jr_optlib</code>, so the library is the one place to find them. Paper-specific code is also linked from each paper’s entry in <a href="../papers/index.html">Papers</a>, and collaborative projects are described under <a href="../projects/index.html">Projects</a>.</p>
 <div class="card-stack">
 
   <div class="jr-card">
     <div>
       <div class="jr-card-meta">Python · Optimization, sampling and choice-model library</div>
       <h3 class="anchored">jr_optlib</h3>
-      <p>The group's library of optimization and sampling primitives. Each primitive ships with an <strong>oracle</strong>, an independent check that re-derives a property the true answer must have (feasibility, a duality or gap certificate, agreement with an independent solver, or an invariant under a known transformation). A solve is therefore followed by a certification, and every result is labelled CERTIFIED, CHECKED, FAIL or UNVALIDATED. The runtime needs only NumPy; SciPy, Gurobi and numba are optional. The library contains:</p>
+      <p>My library of optimization and sampling primitives. Each primitive ships with an <strong>oracle</strong>, an independent check that re-derives a property the true answer must have (feasibility, a duality or gap certificate, agreement with an independent solver, or an invariant under a known transformation). A solve is therefore followed by a certification, and every result is labelled CERTIFIED, CHECKED, FAIL or UNVALIDATED. The runtime needs only NumPy; SciPy, Gurobi and numba are optional. The library contains:</p>
       <ul>
         <li><strong>Transportation and optimal transport:</strong> IPF / raking (Furness), entropic optimal transport (Sinkhorn, with dual scalings), exact min-cost transport by LP, and a family of rounders that turn fractional plans into integer tables without breaking the marginals.</li>
         <li><strong>Population synthesis and integerization:</strong> sparse N-dimensional IPF over long record tables, and a floor split, anchor-conditioned PPS and anchor-preserving swap repair that give an integer population matching the controlling margins.</li>

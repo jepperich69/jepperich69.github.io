@@ -1,6 +1,6 @@
 ---
 title: "AI Research Infrastructure (AI_auto)"
-description: "How Jeppe Rich's research group uses AI agents in a reproducible research workflow."
+description: "How Jeppe Rich uses AI agents in a reproducible research workflow."
 subtitle: "Multi-agent verification, Overleaf Git sync, and automated deliverables for quantitative research"
 toc: true
 ---
@@ -17,7 +17,7 @@ Modern quantitative research involves coordinating concurrent manuscripts, mathe
 ## Core Design Principles
 
 1. **Standalone Overleaf + GitHub Separation:** Every paper project (`Pub_*`, `Pro_*`, `PhD_*`) isolates `Overleaf_source/` as a direct Git remote to Overleaf (`helpi 3` pull, `helpi 4` push) while `code/` is a separate Git repository pushed to GitHub (`helpi 23`).
-2. **Machine-Verified Mathematics (SymPy Gate):** LLMs have no built-in symbolic engine and can make silent algebraic errors. Our infrastructure enforces a strict rule: every non-trivial algebraic derivation, Taylor expansion, moment derivation, and numerical calibration must be verified via executable **SymPy** scripts (`_math_checks/`) before entering a manuscript.
+2. **Machine-Verified Mathematics (SymPy Gate):** LLMs have no built-in symbolic engine and can make silent algebraic errors. My infrastructure enforces a strict rule: every non-trivial algebraic derivation, Taylor expansion, moment derivation, and numerical calibration must be verified via executable **SymPy** scripts (`_math_checks/`) before entering a manuscript.
 3. **Multi-Agent Convergence Forum (`helpi 25`):** Complex modeling questions, literature audits, and pre-submission referee stress-tests are debated in an automated multi-round **Convergence Forum** where agents adopt distinct adversarial roles (*Critic*, *Advocate*, *Realist*, and *Moderator*) against a shared blackboard state until convergence.
 4. **Routine Scientific Code Review (`helpi 32`):** Before closing any session that modifies model code or empirical claims, an advisory review checks scientific correspondence between the paper's equations and the code, verifies reuse of verified [`jr_optlib`](https://github.com/jepperich69/jr_optlib) primitives, and audits numerical reproducibility.
 5. **Automated Communication Deliverables:**

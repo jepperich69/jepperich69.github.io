@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="How Jeppe Rich’s research group uses AI agents in a reproducible research workflow.">
+<meta name="description" content="How Jeppe Rich uses AI agents in a reproducible research workflow.">
 
 <title>AI Research Infrastructure (AI_auto) – Jeppe Rich</title>
 <style>
@@ -83,13 +83,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta property="og:title" content="AI Research Infrastructure (AI_auto) – Jeppe Rich">
-<meta property="og:description" content="How Jeppe Rich’s research group uses AI agents in a reproducible research workflow.">
+<meta property="og:description" content="How Jeppe Rich uses AI agents in a reproducible research workflow.">
 <meta property="og:image" content="https://www.jepperich.com/assets/profile.jpeg">
 <meta property="og:site_name" content="Jeppe Rich">
 <meta property="og:image:height" content="385">
 <meta property="og:image:width" content="275">
 <meta name="twitter:title" content="AI Research Infrastructure (AI_auto) – Jeppe Rich">
-<meta name="twitter:description" content="How Jeppe Rich’s research group uses AI agents in a reproducible research workflow.">
+<meta name="twitter:description" content="How Jeppe Rich uses AI agents in a reproducible research workflow.">
 <meta name="twitter:image" content="https://www.jepperich.com/assets/profile.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -366,7 +366,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    How Jeppe Rich’s research group uses AI agents in a reproducible research workflow.
+    How Jeppe Rich uses AI agents in a reproducible research workflow.
   </div>
 </div>
 
@@ -392,7 +392,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="core-design-principles">Core Design Principles</h2>
 <ol type="1">
 <li><strong>Standalone Overleaf + GitHub Separation:</strong> Every paper project (<code>Pub_*</code>, <code>Pro_*</code>, <code>PhD_*</code>) isolates <code>Overleaf_source/</code> as a direct Git remote to Overleaf (<code>helpi 3</code> pull, <code>helpi 4</code> push) while <code>code/</code> is a separate Git repository pushed to GitHub (<code>helpi 23</code>).</li>
-<li><strong>Machine-Verified Mathematics (SymPy Gate):</strong> LLMs have no built-in symbolic engine and can make silent algebraic errors. Our infrastructure enforces a strict rule: every non-trivial algebraic derivation, Taylor expansion, moment derivation, and numerical calibration must be verified via executable <strong>SymPy</strong> scripts (<code>_math_checks/</code>) before entering a manuscript.</li>
+<li><strong>Machine-Verified Mathematics (SymPy Gate):</strong> LLMs have no built-in symbolic engine and can make silent algebraic errors. My infrastructure enforces a strict rule: every non-trivial algebraic derivation, Taylor expansion, moment derivation, and numerical calibration must be verified via executable <strong>SymPy</strong> scripts (<code>_math_checks/</code>) before entering a manuscript.</li>
 <li><strong>Multi-Agent Convergence Forum (<code>helpi 25</code>):</strong> Complex modeling questions, literature audits, and pre-submission referee stress-tests are debated in an automated multi-round <strong>Convergence Forum</strong> where agents adopt distinct adversarial roles (<em>Critic</em>, <em>Advocate</em>, <em>Realist</em>, and <em>Moderator</em>) against a shared blackboard state until convergence.</li>
 <li><strong>Routine Scientific Code Review (<code>helpi 32</code>):</strong> Before closing any session that modifies model code or empirical claims, an advisory review checks scientific correspondence between the paper’s equations and the code, verifies reuse of verified <a href="https://github.com/jepperich69/jr_optlib"><code>jr_optlib</code></a> primitives, and audits numerical reproducibility.</li>
 <li><strong>Automated Communication Deliverables:</strong>
