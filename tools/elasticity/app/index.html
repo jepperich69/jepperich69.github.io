@@ -85,7 +85,8 @@ details.card.guide { background: color-mix(in srgb, var(--accent-soft) 45%, var(
 .guide-item p { margin: 0; font-size: 0.82rem; color: var(--ink) }
 .card-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px }
 .card-head p { margin: 2px 0 0; color: var(--muted); max-width: 75ch }
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
+@media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 .tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; display: grid; gap: 2px; align-content: start }
 .tile .v { font-size: 1.6rem; font-weight: 500; line-height: 1.2 }
 .tile .s { font-size: 0.78rem; color: var(--muted) }
@@ -232,11 +233,6 @@ details summary { cursor: pointer; font-weight: 600 }
     </aside>
 
     <main>
-      <section class="headline" aria-labelledby="h2Head">
-        <h2 id="h2Head">Four headline scenarios</h2>
-        <p class="muted" id="pHead">Move a slider to choose a scenario; the detailed controls on the left follow and can be adjusted from there.</p>
-        <div class="hcards" id="hcards"></div>
-      </section>
       <details class="card guide">
         <summary id="guideTitle">How to understand the model — in plain words</summary>
         <div data-lang-block="en">
@@ -288,22 +284,6 @@ details summary { cursor: pointer; font-weight: 600 }
         <div id="bars"></div>
       </section>
 
-      <section class="card" id="dist">
-        <div class="card-head">
-          <div><h2 id="h2Dist">Who is affected</h2><p id="distNote"></p></div>
-          <div class="status">
-            <div class="seg" role="group" aria-label="Measure">
-              <button data-dist="spend" aria-pressed="true" id="btnDistSpend">Change in spending, DKK/person/yr</button>
-              <button data-dist="burden" aria-pressed="false" id="btnDistBurden">Welfare (rule of half), DKK/person/yr</button>
-              <button data-dist="share" aria-pressed="false" id="btnDistShare">% of income</button>
-              <button data-dist="vkm" aria-pressed="false" id="btnDistVkm">Car km</button>
-              <button data-dist="trips" aria-pressed="false" id="btnDistTrips">Tours</button>
-            </div>
-            <button data-copy="dist">Copy CSV</button>
-          </div>
-        </div>
-        <div class="tbl"><table id="distTbl"></table></div>
-      </section>
 
       <section class="card">
         <div class="card-head">
@@ -326,6 +306,22 @@ details summary { cursor: pointer; font-weight: 600 }
         </div>
         <div class="bands" id="bands"></div>
         <small class="muted" id="bandFoot">PT fares above 100 km tour length are extrapolated from a fit on trips under 50 km (pale bars).</small>
+      </section>
+      <section class="card" id="dist">
+        <div class="card-head">
+          <div><h2 id="h2Dist">Who is affected</h2><p id="distNote"></p></div>
+          <div class="status">
+            <div class="seg" role="group" aria-label="Measure">
+              <button data-dist="spend" aria-pressed="true" id="btnDistSpend">Change in spending, DKK/person/yr</button>
+              <button data-dist="burden" aria-pressed="false" id="btnDistBurden">Welfare (rule of half), DKK/person/yr</button>
+              <button data-dist="share" aria-pressed="false" id="btnDistShare">% of income</button>
+              <button data-dist="vkm" aria-pressed="false" id="btnDistVkm">Car km</button>
+              <button data-dist="trips" aria-pressed="false" id="btnDistTrips">Tours</button>
+            </div>
+            <button data-copy="dist">Copy CSV</button>
+          </div>
+        </div>
+        <div class="tbl"><table id="distTbl"></table></div>
       </section>
 
       <section class="card">
@@ -1057,7 +1053,8 @@ function afterCalibration() {
   const worst = Math.max(...E.PURPOSES.map(p => S.cal.purposes[p].rmse));
   setStatus(`<span class="chip ok">${MODEL_LABEL[S.model]} · ${isDa() ? "største tur-RMSE" : "worst trip RMSE"} ${num(worst, 3)}</span>` + (S.overrides.length ? `<span class="chip warn">${S.overrides.length} ${isDa() ? "ændret mål" : `target override${S.overrides.length > 1 ? "s" : ""}`}</span>` : ""));
   renderStatic();
-  if (!S.headInit) { S.headInit = true; activateHead("km"); } else { render(); renderHeadCards(); }
+  if (!S.headInit) { S.headInit = true; $("CC").value = 10; $("tpl").value = "b:fuel10"; }
+  render();
   renderFitAndScData();
 }
 
@@ -1189,10 +1186,7 @@ function render() {
     ? `Simpel skalering${res.ownership.active ? " (fast bilejerskab)" : ""}`
     : `Log-linear pivot${res.ownership.active ? " (ownership held fixed)" : ""}`;
   $("tiles").innerHTML = tiles.map(([l, v, p, b]) => `<div class="tile"><span class="lbl">${l}</span><span class="v ${cls(v)}">${pct(v)}</span>
-    <span class="s">${pivLbl}: ${pct(p)}</span><span class="s">${b}</span></div>`).join("") +
-    (isDa()
-      ? `<div class="tile"><span class="lbl">Personer pr. bil (belægning)</span><span class="v">${num(tot.occupancy1, 3)}</span><span class="s">Basis ${num(tot.occupancy0, 3)} personer pr. bil-km</span><span class="s">10–84 år (TU)</span></div>`
-      : `<div class="tile"><span class="lbl">Car occupancy</span><span class="v">${tot.occupancy1.toFixed(3)}</span><span class="s">Base ${tot.occupancy0.toFixed(3)} persons per car-km</span><span class="s">Ages 10–84 (TU)</span></div>`);
+    <span class="s">${pivLbl}: ${pct(p)}</span><span class="s">${b}</span></div>`).join("");
   renderOwnership(res.ownership); renderDist(res, lam); renderPurpose(res); renderBands(res); renderBars(tot);
 }
 function renderBars(tot) {
@@ -1265,7 +1259,7 @@ function renderDist(res, lam) {
       vkm: "Procentvis ændring i kørte kilometer i bil.",
       trips: "Procentvis ændring i samlet antal ture på tværs af alle transportmidler."
     }[S.dist];
-    $("distNote").textContent = `Husstande opdelt i 5 indkomstgrupper (K1 = laveste 20 %, K5 = højeste 20 %; gennemsnitlig husstandsindkomst i 2023-priser står i parentes) og antal biler. ${unit}${res.ownership?.active ? " Scenarie med ændret bilejerskab: rækkerne fastholder grupperne fra udgangspunktet, og kronebeløbene dækker kun løbende kørselsudgifter og billetpriser, ikke faste ejerafgifter." : ""}${money ? (S.dist === "spend" ? " Positive tal (rød) er flere udgifter; negative tal (grøn) er færre." : " Positive tal (rød) er et velfærdstab; negative tal (grøn) en gevinst. Beløbet styres især af, hvor meget gruppen allerede kører eller rejser kollektivt i dag.") : ""}${S.dist === "share" ? " Inden for hver række måles alle bilgrupper mod den samme gennemsnitlige personindkomst i kvintilen." : ""}`;
+    $("distNote").textContent = `Husstande opdelt i 5 indkomstgrupper (K1 = laveste 20 %, K5 = højeste 20 %; gennemsnitlig husstandsindkomst i 2023-priser står i parentes) og antal biler. ${unit}${res.ownership?.active ? " Scenarie med ændret bilejerskab: rækkerne fastholder grupperne fra udgangspunktet, og kronebeløbene dækker kun løbende kørselsudgifter og billetpriser, ikke faste ejerafgifter." : ""}${money ? " Kronebeløbene er en tilnærmelse: velfærdsmålet bygger på halvdelsreglen (rule-of-the-half), og ingen af målene medregner tid." : ""}${money ? (S.dist === "spend" ? " Positive tal (rød) er flere udgifter; negative tal (grøn) er færre." : " Positive tal (rød) er et velfærdstab; negative tal (grøn) en gevinst. Beløbet styres især af, hvor meget gruppen allerede kører eller rejser kollektivt i dag.") : ""}${S.dist === "share" ? " Inden for hver række måles alle bilgrupper mod den samme gennemsnitlige personindkomst i kvintilen." : ""}`;
   } else {
     const unit = {
       spend: "Change in annual spending on driving (fuel and tyres) and tickets in DKK per person aged 10–84 (2025 prices; year = weekdays × 300, a provisional assumption): new price × new use minus old price × old use. Fixed car costs and time are not included.",
@@ -1274,7 +1268,7 @@ function renderDist(res, lam) {
       vkm: "Percentage change in car vehicle-kilometres.",
       trips: "Percentage change in total tours across all modes."
     }[S.dist];
-    $("distNote").textContent = `Households split into 5 income groups (Q1 = lowest 20%, Q5 = highest 20%; mean household income in 2023 prices shown in parentheses) and number of cars. ${unit}${res.ownership?.active ? " Ownership scenario: rows refer to baseline ownership groups. The monetary figures cover operating-cost and fare changes only, not fixed ownership costs or total welfare." : ""}${money ? (S.dist === "spend" ? " Positive values (red) mean more spending; negative values (green) less." : " Positive values (red) mean a welfare loss; negative values (green) a gain. The amount depends mainly on how much each group already travels today.") : ""}${S.dist === "share" ? " All car-ownership groups within a quintile use the same mean personal income denominator." : ""}`;
+    $("distNote").textContent = `Households split into 5 income groups (Q1 = lowest 20%, Q5 = highest 20%; mean household income in 2023 prices shown in parentheses) and number of cars. ${unit}${res.ownership?.active ? " Ownership scenario: rows refer to baseline ownership groups. The monetary figures cover operating-cost and fare changes only, not fixed ownership costs or total welfare." : ""}${money ? " The DKK figures are an approximation: the welfare measure uses the rule of half, and neither measure includes time." : ""}${money ? (S.dist === "spend" ? " Positive values (red) mean more spending; negative values (green) less." : " Positive values (red) mean a welfare loss; negative values (green) a gain. The amount depends mainly on how much each group already travels today.") : ""}${S.dist === "share" ? " All car-ownership groups within a quintile use the same mean personal income denominator." : ""}`;
   }
 }
 function renderPurpose(res) {
@@ -1305,11 +1299,12 @@ function renderBands(res) {
       : "Long trips are affected more strongly by per-km cost or time changes than short trips. Here mode and trip length are chosen jointly.");
   const p = $("bandPurpose").value || "commute", bd = E.bands(S.inp, res).filter(b => b.purpose === p), modes = ["sov", "hov", "carp", "pt"];
   const vals = bd.filter(b => modes.includes(b.mode)).map(b => b.trips1 / b.trips0 - 1).filter(Number.isFinite);
-  const max = Math.max(0.005, ...vals.map(Math.abs));
-  const W = 260, H = 150, Lf = 46, R = 8, T = 10, B = 26, plotW = W - Lf - R, plotH = H - T - B, y0 = T + plotH / 2, y = v => y0 - v / max * plotH / 2;
+  const W = 260, H = 150, Lf = 46, R = 8, T = 10, B = 26, plotW = W - Lf - R, plotH = H - T - B, y0 = T + plotH / 2;
   $("bands").innerHTML = modes.map(m => {
     const rows = E.BANDS.map(band => bd.find(b => b.mode === m && b.band === band)).filter(Boolean);
     if (!rows.length) return "";
+    // own scale per graph (user 2026-11-28): a common axis made small responses look flat
+    const max = Math.max(0.0005, ...rows.map(b => Math.abs(b.trips1 / b.trips0 - 1)).filter(Number.isFinite)), y = v => y0 - v / max * plotH / 2;
     const bw = plotW / E.BANDS.length;
     const bars = rows.map((b, i) => {
       const v = b.trips1 / b.trips0 - 1, x = Lf + i * bw + bw * 0.18, top = Math.min(y(v), y0), h = Math.abs(y(v) - y0);
