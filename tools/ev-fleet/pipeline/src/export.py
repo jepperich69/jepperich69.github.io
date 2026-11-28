@@ -128,6 +128,13 @@ def main(argv=None) -> int:
     if a.app_data is not None:
         APP_DATA = a.app_data
     out = build(a.panels, a.fits)
+    if out.get("fiscal") is None and (APP_DATA / "forecast.json").exists():
+        # keep last month's tax/CO2 block rather than let the section disappear; flag it as stale
+        old = json.loads((APP_DATA / "forecast.json").read_text("utf-8")).get("fiscal")
+        if old:
+            old["stale_from"] = old.get("stale_from") or json.loads((APP_DATA / "forecast.json").read_text("utf-8"))["vintage"]
+            out["fiscal"] = old
+            print(f"fiscal block carried over from {old['stale_from']} (stale)")
     (APP_DATA / "vintages").mkdir(parents=True, exist_ok=True)
     text = json.dumps(out, separators=(",", ":"), allow_nan=False)
     _write_atomic(APP_DATA / "vintages" / f"{out['vintage']}.json", lambda f: f.write_text(text, "utf-8"))

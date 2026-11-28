@@ -38,6 +38,19 @@ import dst  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FIRST, HORIZON = 2015, 2040
+RULE_YEAR = 2026     # the frozen rules; observed years from here on use the RULE_YEAR BEV registration tax
+
+
+def rule_year_sales(b: dict, sales: np.ndarray, yrs: np.ndarray) -> np.ndarray:
+    """BEV sales in RULE_YEAR per draw: observed if the year is complete, else observed months +
+    forecast months. (Before 2026-11-28 a complete 2026 gave 0 -> division error -> no fiscal block.)"""
+    if RULE_YEAR in b["years"]:
+        return np.full(sales.shape[0], float(b["sales"][b["years"].index(RULE_YEAR)]))
+    part = b["partial"].get(RULE_YEAR, {"months": 0, "sales": 0})
+    s = part["sales"] + sales[:, yrs == RULE_YEAR].sum(1)
+    if part["months"] + int((yrs == RULE_YEAR).sum()) != 12:
+        raise ValueError(f"{RULE_YEAR} is neither complete nor covered by observed + forecast months")
+    return s
 
 PARAMS = {
     "km": {"v": 13_600, "src": "SKM (Dec 2025) Regnemetode ved afgiftsaendringer for personbiler, p.5: "
@@ -114,11 +127,17 @@ def run(panels: Path = ROOT / "Data" / "panels", fits: Path = ROOT / "Data" / "f
     out = {"params": PARAMS, "price_base": f"{base} CPI (2026 tax rates)", "reg_ice": round(p["reg_ice"]),
            "grid_g_per_kWh": g, "observed": [], "scenario": []}
     cum = defaultdict(float)
+    z = np.load(fits / "simulation.npz")
+    months = [str(m) for m in z["months"]]
+    yrs = np.array([int(m[:4]) for m in months])
+    stock, sales = z["stock_BEV"].astype(float), z["sales_BEV"].astype(float)
+    reg_bev_26 = p["reg_bev_2026_total"] / float(np.median(rule_year_sales(b, sales, yrs)))
+    reg_bev_y = lambda y: reg_bev_obs if y < RULE_YEAR else reg_bev_26
     for y, n_s, n_x in zip(b["years"], b["sales"], b["stock"]):
         if y < FIRST:
             continue
         gy = g.get(y, g[min(g)] if g and y < min(g) else (g[max(g)] if g else 0.0))
-        e = per_bev(p, reg_bev_obs, gy)
+        e = per_bev(p, reg_bev_y(y), gy)
         row = {"year": y, "bev_sales": n_s, "bev_stock_mean": round(n_x),
                "reg_gap_mkr": n_s * e["reg"] / 1e6, "fuel_gap_mkr": n_x * e["fuel"] / 1e6,
                "owner_gap_mkr": n_x * e["owner"] / 1e6, "el_tax_mkr": n_x * e["el"] / 1e6,
@@ -129,7 +148,7 @@ def run(panels: Path = ROOT / "Data" / "panels", fits: Path = ROOT / "Data" / "f
             cum[k] += row[k]
         out["observed"].append({k: (round(v, 1) if isinstance(v, float) else v) for k, v in row.items()})
     for r in out["observed"]:                      # lifetime cost per tonne for the year's sales cohort
-        e = per_bev(p, reg_bev_obs, r["grid_g_per_kWh"])
+        e = per_bev(p, reg_bev_y(r["year"]), r["grid_g_per_kWh"])
         L = p["life"]
         r["cohort_kr_per_t_national"] = round((e["reg"] + L * e["annual"]) / (L * e["co2_national"]))
         r["cohort_kr_per_t_physical"] = round((e["reg"] + L * e["annual"]) / (L * e["co2_physical"]))
@@ -140,14 +159,6 @@ def run(panels: Path = ROOT / "Data" / "panels", fits: Path = ROOT / "Data" / "f
         "to_date_kr_per_t_physical_not_comparable": round(cum["total_gap_mkr"] * 1e6 / (cum["co2_physical_kt"] * 1e3))}
 
     # scenario: frozen 2026 rules on the fleet forecast
-    z = np.load(fits / "simulation.npz")
-    months = [str(m) for m in z["months"]]
-    yrs = np.array([int(m[:4]) for m in months])
-    stock, sales = z["stock_BEV"].astype(float), z["sales_BEV"].astype(float)
-    y26 = 2026
-    part = b["partial"].get(y26, {"months": 0, "sales": 0})
-    s26 = part["sales"] + sales[:, yrs == y26].sum(1)                     # observed months + forecast
-    reg_bev_26 = p["reg_bev_2026_total"] / np.median(s26)
     g_frozen = g[max(g)] if g else 0.0
     e = per_bev(p, reg_bev_26, g_frozen)
     out["scenario_reg_bev_2026"] = round(reg_bev_26)
@@ -156,7 +167,7 @@ def run(panels: Path = ROOT / "Data" / "panels", fits: Path = ROOT / "Data" / "f
         "national": round((e["reg"] + L * e["annual"]) / (L * e["co2_national"])),
         "physical": round((e["reg"] + L * e["annual"]) / (L * e["co2_physical"]))}
     cum_gap, cum_co2n, cum_co2p = 0.0, 0.0, 0.0
-    for y in range(y26 + 1, HORIZON + 1):
+    for y in range(max(b["years"][-1], RULE_YEAR) + 1, HORIZON + 1):
         m = yrs == y
         if m.sum() != 12:
             continue
@@ -181,16 +192,15 @@ def app_block(sim: dict, panels: Path, n_draws: int = 200) -> dict:
     months = sim["months"]
     yrs = np.array([int(m[:4]) for m in months])
     stock, sales = sim["stock"]["BEV"][:n_draws], sim["sales"]["BEV"][:n_draws]
-    part = b["partial"].get(2026, {"months": 0, "sales": 0})
-    s26 = part["sales"] + sales[:, yrs == 2026].sum(1)
-    sc_years = [y for y in range(2027, HORIZON + 1) if (yrs == y).sum() == 12]
+    s26 = rule_year_sales(b, sales, yrs)
+    sc_years = [y for y in range(max(b["years"][-1], RULE_YEAR) + 1, HORIZON + 1) if (yrs == y).sum() == 12]
     defaults = {k: v["v"] for k, v in PARAMS.items()}
     defaults["reg_ice"] = round(P["reg_ice_2020"] * cpi[base] / cpi[2020], -2)
     defaults["reg_bev_obs"] = round(P["reg_bev_2020"] * cpi[base] / cpi[2020], -2)
     defaults["reg_bev_2026"] = round(P["reg_bev_2026_total"] / float(np.median(s26)), -2)
     defaults["grid_g_per_kWh"] = g[max(g)] if g else None
     return {
-        "price_base": base,
+        "price_base": base, "rule_year": RULE_YEAR,
         "defaults": {k: v for k, v in defaults.items() if k not in ("reg_ice_2020", "reg_bev_2020", "reg_bev_2026_total")},
         "sources": {k: v["src"] for k, v in PARAMS.items()},
         "observed": {"years": yrs_obs,

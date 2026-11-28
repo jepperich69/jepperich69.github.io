@@ -336,7 +336,7 @@ const quant = (arr, q) => { const s = arr.slice().sort((a, b) => a - b), k = (s.
 function fiscalCompute(p) {
   const F = D.fiscal, ob = F.observed, sc = F.scenario;
   const obs = ob.years.map((y, k) => {
-    const g = ob.grid[k] ?? p.grid_g_per_kWh ?? 0, e = perBev(p, p.reg_bev_obs, g);
+    const g = ob.grid[k] ?? p.grid_g_per_kWh ?? 0, e = perBev(p, y < (F.rule_year || 2026) ? p.reg_bev_obs : p.reg_bev_2026, g);
     return { y, reg: ob.sales[k] * e.reg / 1e9, run: ob.stock[k] * e.run / 1e9,
              co2n: ob.stock[k] * e.co2n / 1e6, co2p: ob.stock[k] * e.co2p / 1e6, e };
   });
@@ -380,7 +380,8 @@ function fiscal() {
     [t.f_scn_y.replace("{y}", s30.y), bn(s30.q50), `${num(s30.q05)}–${num(s30.q95)} · ${t.f_scn_note}`],
     [`${t.f_scn_cum} ${r.scn[0].y}–${sEnd.y}`, bn(sEnd.cum50), `${fmt(sEnd.cum05)}–${fmt(sEnd.cum95)} · ${t.f_scn_note}`],
   ];
-  document.getElementById("ftiles").innerHTML =
+  const stale = F.stale_from ? `<p class="muted">⚠ ${lang === "da" ? "Afgiftsberegningen kunne ikke opdateres; tallene er fra" : "The tax calculation could not be updated; figures are from"} ${mlabel(F.stale_from)}.</p>` : "";
+  document.getElementById("ftiles").innerHTML = stale +
     tiles.map(([l, v, s]) => `<div class="ftile"><p class="label">${l}</p><p class="v">${v}</p><p class="muted">${s}</p></div>`).join("") +
     stiles.map(([l, v, s]) => `<div class="ftile scn"><p class="label">${l}</p><p class="v">${v}</p><p class="muted">${s}</p></div>`).join("");
   chartFiscal(r);
