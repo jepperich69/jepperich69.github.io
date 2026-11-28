@@ -39,7 +39,7 @@ const T = {
          grid_g_per_kWh: "CO2 i elnettet (g/kWh), regneeksempel", life: "Bilens levetid (år)" },
   },
   en: {
-    kicker: "Electric cars in the Danish car fleet", beta: "BETA version", auto: "Updated automatically every month when Statistics Denmark publishes new figures.", updated: "Last updated", title: "The EV counter", subtitle: "Monthly forecast from Statistics Denmark data",
+    kicker: "Electric cars in the Danish car fleet", beta: "BETA version", auto: "Updated automatically every month when Statistics Denmark publishes new figures.", updated: "Last updated", title: "EV Adaptation model Denmark", subtitle: "Monthly forecast from Statistics Denmark data",
     vintage: "Data up to", bev_now: "Electric cars in the fleet now", expected_1m: "1 million electric cars expected",
     since: "since", of_way: "of the way to 1 million", left: "to go", kpis: "Key figures", milestones: "Milestones",
     ms_note: "Median and 90% interval. Change against last month's forecast.",

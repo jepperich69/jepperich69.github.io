@@ -22,7 +22,7 @@ toc: false
     <div class="badge-row">
       <a href="papers/index.qmd" class="jr-badge badge-pdf">📄 Papers &amp; Preprints</a>
       <a href="software/index.qmd" class="jr-badge badge-public">⚙️ Code bases &amp; Algorithms</a>
-      <a href="tools/elasticity/index.qmd" class="jr-badge badge-tool">🧮 LTM 2.3 Elasticity Calculator</a>
+      <a href="tools/elasticity/index.qmd" class="jr-badge badge-tool">🧮 Transport Elasticity Calculator</a>
       <a href="projects/index.qmd" class="jr-badge badge-private">🔒 Collaborative Projects &amp; Repos</a>
       <a href="ai-workflow/index.qmd" class="jr-badge badge-video">🤖 AI Research Infrastructure</a>
       <a href="group-cv/cv_jeppe_rich.pdf" class="jr-badge badge-request" target="_blank">⬇️ Full CV (PDF)</a>
@@ -121,7 +121,7 @@ toc: false
   <div class="jr-card">
     <div>
       <div class="jr-card-meta">Interactive Browser Model · Client-Side JS Engine</div>
-      <h3><a href="tools/elasticity/index.qmd">Danish Transport Cost &amp; Fare Elasticity Calculator (LTM 2.3 Surrogate)</a></h3>
+      <h3><a href="tools/elasticity/index.qmd">Transport Elasticity Calculator Denmark (BETA)</a></h3>
       <p>Fast interactive surrogate of the Danish National Transport Model (LTM 2.3), rebased to 2023 TU data. Compute demand, mode-shift, revenue, and distributional rule-of-half welfare impacts across income quintiles, car ownership, and tour lengths directly in your browser.</p>
     </div>
     <div class="badge-row">
