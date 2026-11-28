@@ -10,6 +10,7 @@ toc: false
 <div class="badge-row" style="margin-bottom: 1rem;">
   <a href="app/index.html" class="jr-badge badge-tool" target="_blank">⤢ Open the model in a full browser tab</a>
   <a href="app/methods.pdf" class="jr-badge badge-pdf" target="_blank">📄 Methods note (PDF)</a>
+  <a href="verification.qmd" class="jr-badge badge-tool">✔ Verification and review</a>
 </div>
 ```
 
@@ -18,7 +19,17 @@ toc: false
 This is a **beta version**. The forecast and the tax calculation are under development, and the methods note describes the model, its backtest and its limitations.
 
 ```{=html}
-<div class="tool-iframe-wrap" style="height: 1100px;">
-  <iframe src="app/index.html" title="Elbil-tælleren: electric cars in the Danish car fleet" loading="lazy"></iframe>
-</div>
+<iframe id="evapp" src="app/index.html" title="Elbil-tælleren: electric cars in the Danish car fleet" scrolling="no" style="display:block; width:100%; height:1400px; border:0; overflow:hidden; margin:1rem 0 1.5rem 0;"></iframe>
+<script>
+/* grow the frame to the app's full height: one scrollbar (the page's), no inner one */
+(function () {
+  var f = document.getElementById("evapp");
+  function fit() { try { var d = f.contentDocument; if (d) f.style.height = d.documentElement.scrollHeight + "px"; } catch (e) {} }
+  f.addEventListener("load", function () {
+    fit();
+    try { new ResizeObserver(fit).observe(f.contentDocument.body); } catch (e) { setInterval(fit, 1000); }
+  });
+  window.addEventListener("resize", fit);
+})();
+</script>
 ```

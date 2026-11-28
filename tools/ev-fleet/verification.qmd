@@ -1,0 +1,79 @@
+---
+title: "EV Adaptation model Denmark: verification"
+description: "How the EV Adaptation model (Elbil-tælleren) is checked: automated tests, a monthly release gate, a symbolic check of the methods note, a backtest and an independent code review."
+subtitle: "Version 0.1 (BETA) · checks run on 28 November 2026"
+toc: true
+---
+
+This page lists every check that has been run on the model behind [Elbil-tælleren](index.qmd), with the results, including the failures and the open issues. Nothing here is a formal proof. The tests compare the code against independent oracles, the symbolic check recomputes the equations and numbers of the methods note, and the review is a second opinion by a different AI model.
+
+## Summary
+
+| Check | Result |
+|---|---|
+| Automated tests (Python, development repository) | 66 of 66 pass |
+| Monthly release gate (every refit) | R-hat < 1.01, no divergent transitions, effective sample size > 400; otherwise last month's forecast stays online |
+| Symbolic check of the methods note (SymPy) | 138 claims checked: 136 pass, 2 failed and corrected in the note; 19 not machine-checkable |
+| Rolling-origin backtest (3 origins, 7 comparisons) | Observed BEV stock inside the 80% band in 7 of 7; a development comparison, not an independent test |
+| Independent code review (Codex, 28 November 2026) | 11 findings: 3 fixed, 1 partly fixed, 2 addressed in the text, 5 open |
+
+## Automated tests
+
+The tests run with `python -m pytest src` in the development repository; the production subset of the code is published in [`tools/ev-fleet/pipeline/`](https://github.com/jepperich69/jepperich69.github.io/tree/main/tools/ev-fleet/pipeline).
+
+| Area | What is checked |
+|---|---|
+| Share model | The Kalman-filter likelihoods equal a direct evaluation of the same multivariate normal density (an independent oracle); the logistic curve, the sampling variance, the December/January dummies, and that fuel shares sum to one |
+| Market size | Gompertz end points and its differential equation; the AR(1) likelihood against a direct multivariate normal; recovery of known Gompertz parameters from simulated data; the exit-rate identity |
+| Stock-flow simulation | The stock-flow identity holds every month and draw; negative sales are clipped without breaking it |
+| Exits by fuel | Conservation in the exit allocation; the share- and age-linked exit rules recover known slopes and saturate; the observed young share from BIL21 excludes the all-ages row; the age anchor is the year of the starting rate |
+| Tax and CO2 module | Per-car figures against a hand calculation; components add up; scenario quantiles are ordered; the turn-of-the-year case (2026 complete, no 2026 months in the forecast) |
+| Export and data | The month-over-month archive; observed headline inputs; earlier survival-model code |
+
+## Monthly release gate
+
+The model is refitted automatically when Statistics Denmark publishes a new month ([GitHub Action](https://github.com/jepperich69/jepperich69.github.io/blob/main/.github/workflows/ev_fleet_monthly.yml)). A fit is published only if every parameter has R-hat below 1.01, there are no divergent transitions, and the effective sample size exceeds 400. If a fetch, a fit or the export fails, nothing is committed and the previous forecast stays online.
+
+## Symbolic check of the methods note
+
+Every labelled equation and numeric claim in the [methods note](app/methods.pdf) was translated into SymPy and recomputed, with the numbers checked against the model output files ([report](app/verification/math_check_report_2026-11-28.md), [re-runnable script](app/verification/math_check_verify_2026-11-28.py)).
+
+- **138 claims checked, 136 passed.** The identities of the Gompertz curve, the logistic share curve, the exit-rate rules and the stock-flow identity hold, and every cell of the backtest table matches the backtest output.
+- **2 failed, both corrected in the note.** The note said that BEVs were 2% of the fleet at the December 2020 origin; the share was 1.2% (2% is the share a year later). It also gave 8–21% for how often the BEV scrappage floor binds; the current backtest gives 11–24%, and that number is now generated from the backtest output.
+- **19 claims are not machine-checkable**, for example modelling assumptions and statements about the data sources.
+
+The check is conditional on the translation from LaTeX to SymPy, which the report prints for every claim.
+
+## Backtest
+
+At each origin the data are cut, the model is refitted, and the forecast is compared with the stock that was later observed. Error of the median BEV stock forecast:
+
+| Origin | After 1 year | After 2 years | After 3 years |
+|---|---|---|---|
+| December 2020 | −21% | −9% | −7% |
+| December 2022 | −1% | −7% | −12% |
+| December 2024 | −3% | | |
+
+The model beats a linear trend and a frozen-share baseline at every origin and horizon, but it still underpredicts the BEV stock. This is a retrospective comparison made during development, not an independent test: the exit rule, its 60-month window and the prior on the long-run BEV share were chosen after these results had been seen. The monthly archive of forecasts is the proper test, and it starts with version 0.1.
+
+## Independent code review
+
+On 28 November 2026 the code, data, methods note and app were reviewed by Codex (OpenAI), with the instruction to find what is wrong or misleading.
+
+| # | Finding | Status |
+|---|---|---|
+| 1 | The tax figures rest on assumed tax rates (the 2020 average registration tax comes from a parliamentary answer that has not been verified against the source) | Open: to be labelled as an illustration against an all-petrol comparison |
+| 2 | The tax section would have disappeared in January 2027 | Fixed, with a regression test |
+| 3 | The exit rate and its age anchor referred to different dates | Fixed: anchored at the year of the starting rate |
+| 4 | The young-share proxy overstated the young fleet, because exported cars stayed in the count | Fixed: observed ages from Statistics Denmark (BIL21) |
+| 5 | The bands leave out monthly sales noise and the dependence between model layers | Open |
+| 6 | The backtest uses choices made with hindsight | Addressed: stated in the methods note and on this page |
+| 7 | Registration tax on used imports and export refunds is not included | Open: the registration component covers new cars only, which should be stated |
+| 8 | A revision of history without a new month does not trigger a refit, and a failed run leaves no visible warning | Partly fixed: a failed tax calculation is now flagged on the page |
+| 9 | A suppressed count in the source data could become a zero | Open |
+| 10 | A milestone that has been reached would keep moving into the future | Open (relevant from about 2028) |
+| 11 | Some labels state more than is computed (for example a fixed 15-year life in a label) | Addressed in part |
+
+## What is not checked
+
+The model's assumptions themselves (the long-run BEV share, the import rule, the link between the age of the fleet and its exit rate) are not verified by any of these checks; the methods note states them and the backtest tests their combined effect. The tax and CO2 figures are illustrations built on stated assumptions, which can be changed on the page.

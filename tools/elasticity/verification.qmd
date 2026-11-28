@@ -1,0 +1,58 @@
+---
+title: "Transport Elasticity Calculator Denmark: verification"
+description: "How the Transport Elasticity Calculator is checked: automated tests, cross-validation, a symbolic check of the documentation and an independent code review."
+subtitle: "Version 0.1 (BETA) · checks run on 28 November 2026"
+toc: true
+---
+
+This page lists every check that has been run on the model behind the [Transport Elasticity Calculator](index.qmd), with the results, including the failures and the open issues. Nothing here is a formal proof. The tests compare the engine against independent oracles and accounting identities, the symbolic check recomputes the equations and numbers of the documentation, and the review is a second opinion by a different AI model.
+
+## Summary
+
+| Check | Result |
+|---|---|
+| Engine tests (JavaScript) | 33 of 33 pass |
+| Ownership-module and page tests | all pass (identity, conservation, cost monotonicity, invariance to the reference cost, no jumps between nearby costs; scenario to tables in the page) |
+| Cross-validation of the model choice | Held-out own elasticities: nested logit 0.21, IPDL 0.44, MNL 0.87 (RMSE) |
+| Symbolic check of the documentation (SymPy) | 171 claims checked: 168 pass, 3 fail (open, see below); 29 not machine-checkable |
+| Independent code review (Codex, 28 November 2026) | 11 findings: 6 fixed, 4 disclosed on the page, 1 open |
+
+## Automated tests
+
+The engine tests (`node code/engine/test_engine2.js`) check, among other things: that a zero shock reproduces the base exactly; that tour-length bands add up to the totals; that cell totals equal the travel-survey totals; that the calibration fits the LTM targets within its tolerance and is reproducible; that own elasticities are negative after rebasing; that the money results are zero without a shock and roughly linear in it; that at 0% cost sharing the driver carries exactly the vehicle cost; that the change in spending differs from the rule-of-half welfare term as it should; and that a workbook without mileage targets, or with duplicated targets, is rejected.
+
+## Cross-validation
+
+The six purposes have 24 combinations of mode and shock each. In six-fold cross-validation, each model is calibrated without four combinations and then predicts them. Over all purposes, the nested logit has the lowest error on the left-out own elasticities (0.21, against 0.44 for the IPDL and 0.87 for the multinomial logit), which is why it is the default. The comparison with LTM's own nesting order is in the method section of the calculator.
+
+## Symbolic check of the documentation
+
+Every labelled equation and numeric claim in the [model documentation](model_documentation.pdf) was translated into SymPy and recomputed, with the numbers checked against the generated tables ([report](app/verification/math_check_report_2026-11-28.md), [re-runnable script](app/verification/math_check_verify_2026-11-28.py)).
+
+- **168 of 171 claims pass.** The nested-logit response formula re-derives from the choice probabilities and reduces to the multinomial logit at a logsum parameter of one; the shrinkage, generalized-time, money-share, ownership and Levenberg–Marquardt identities hold; the tables are internally consistent, and the macros in the abstract and text match the generated tables.
+- **3 fail, all in the text of the documentation, to be corrected:** the sentence after the nested-logit shift equation states the utility change with the opposite sign of the equation; the sign convention of the IPDL coefficient is not stated and differs from the nested logit; and the text says that walk and bike tours become slightly shorter under a higher car cost, which holds for walk (−0.026) but not for bike (+0.004).
+- **29 claims are not machine-checkable**, for example results of model runs that are not in the generated tables and the sources of the priors.
+
+The check is conditional on the translation from LaTeX to SymPy, which the report prints for every claim.
+
+## Independent code review
+
+On 28 November 2026 the engine, the data builder, the page and the documentation were reviewed by Codex (OpenAI), with the instruction to find what is wrong or misleading.
+
+| # | Finding | Status |
+|---|---|---|
+| 1 | The "who pays" table showed the rule-of-half term labelled as savings or expenses | Fixed: change in spending (default) and welfare (rule of half) shown separately |
+| 2 | At 0% cost sharing nobody paid for a shared car | Fixed: the driver pays what passengers do not, with a test |
+| 3 | Cost and time have different distance exponents, so the implied value of time varies with tour length | Disclosed in the method section (about 70% of the input value at 100 km) |
+| 4 | An undocumented affordability cutoff made car ownership states vanish in one step | Fixed, with a test |
+| 5 | Under the IPDL, the tour-length bands do not add up to the total kilometres | Disclosed next to the band table |
+| 6 | An uploaded workbook without mileage targets was accepted, and missing targets became zeros | Fixed, with a test |
+| 7 | The elasticity table ignores the cost-sharing slider | Disclosed next to the table |
+| 8 | New trips (induced travel) are close to fixed by construction | Disclosed next to the results |
+| 9 | Money results mixed 2023 and 2025 prices | Fixed (fares converted to 2025 prices); the 300 days per year is stated as a provisional assumption |
+| 10 | The page claimed a cross-validation error of 0.07 for the nested logit; the stored result is 0.21 | Fixed |
+| 11 | A destination-length node pools somewhat different distances across modes | Open: a structural change that needs recalibration |
+
+## What is not checked
+
+The model is calibrated to the elasticities of the Danish National Transport Model (LTM 2.3) and inherits their quality; it does not validate them. The car-ownership module is experimental: its sensitivity is an assumption taken from the literature, and its effect on travel is not validated against independent LTM ownership scenarios.

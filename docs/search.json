@@ -7,11 +7,18 @@
     "text": "These interactive tools run 100% client-side in your browser (compiled JavaScript engines with pre-calibrated aggregate parameters). No data leaves your browser, and underlying restricted micro-data pipelines (such as raw TU travel survey tabulations) remain isolated in private project repositories.\n\n\n  \n    \n      Transport demand & welfare · Denmark (2023 baseline) · BETA\n      Transport Elasticity Calculator Denmark (BETA)\n      \n        A fast, calibrated Nested Logit / Multinomial Logit surrogate of the Danish National Transport Model (LTM 2.3, Rich 2022), rebased to 2023 with Danish National Travel Survey (TU 0624v1), TERESA 6.21 value-of-time, and TØE 2.2 unit cost data. Available in Danish and English.\n      \n      \n        Evaluate uniform or differentiated changes in car driving cost, car travel time, public transport fares, public transport travel time, and annual car ownership cost across trip purposes, distance bands, income quintiles, and household car-ownership segments.\n      \n    \n    \n      🚀 Open Calculator & Documentation\n      ⤢ Launch Full-Window App\n    \n  \n\n  \n    \n      Electric-car fleet forecast · Denmark · BETA · updated monthly\n      EV Adaptation model Denmark (BETA)\n      \n        Counts the battery-electric cars in the Danish car fleet and forecasts when it reaches one million, when electric cars outnumber petrol cars, and the fleet composition to 2040. A small Bayesian stock-flow model is refitted automatically every month from Statistics Denmark data. Available in Danish and English.\n      \n      \n        Also shows the car tax revenue the state does not collect because electric cars replace petrol cars, and the CO2 saved, with adjustable assumptions.\n      \n    \n    \n      🚗 Open the EV Adaptation model\n      📄 Methods note (PDF)"
   },
   {
+    "objectID": "tools/ev-fleet/index.html",
+    "href": "tools/ev-fleet/index.html",
+    "title": "EV Adaptation model Denmark (BETA, version 0.1)",
+    "section": "",
+    "text": "⤢ Open the model in a full browser tab\n  📄 Methods note (PDF)\n  ✔ Verification and review\n\nOverview: The EV Adaptation model (Danish: Elbil-tælleren) counts the battery-electric cars (BEVs) in the Danish passenger-car fleet and forecasts when the fleet reaches one million BEVs, later milestones, and the fleet composition to 2040. A small stock-flow model is refitted automatically every month when Statistics Denmark publishes new registration and stock figures (tables BIL51 and BIL52). The tool also shows the car tax revenue the state does not collect because BEVs replace petrol cars, and the CO2 this saves, with adjustable assumptions. The page is in Danish and English; switch language in the app header.\nThis is a beta version. The forecast and the tax calculation are under development, and the methods note describes the model, its backtest and its limitations."
+  },
+  {
     "objectID": "tools/elasticity/index.html",
     "href": "tools/elasticity/index.html",
     "title": "Transport Elasticity Calculator Denmark (BETA, version 0.1)",
     "section": "",
-    "text": "⤢ Open the calculator in a full browser tab\n  📄 Download Technical Model Documentation (PDF)\n  🔒 Source Data Repo: Private (TU / TERESA Restricted)\n\nOverview: This interactive model is a calibrated fast surrogate of the Danish National Transport Model (LTM 2.3, Rich 2022), rebased to 2023 using Danish National Travel Survey (TU 0624v1), TERESA 6.21 values of time, TØE 2.2 vehicle operating costs, and distance-dependent public transport fare profiles (Argyros, Jensen & Rich, 2026; Rich & Fox, 2024). The model reverse-engineers LTM 2.3 from its elasticities: its response parameters are calibrated so that it reproduces LTM’s elasticities. Wherever LTM’s structure and coefficients are known, they are imposed rather than calibrated, and the model is rebased to the 2023 travel pattern. The calibrated parameters are reduced-form and are not LTM’s own. The calculator is available in Danish and English; switch language in the app header.\n\n100% browser-based: All calibration, scenario evaluation, and rule-of-half distributional welfare calculations run locally in your browser via engine2.js.\nCustom workbooks: You can save scenarios locally or upload a modified .xlsx input workbook directly inside the interface to recalibrate in ~8 seconds."
+    "text": "⤢ Open the calculator in a full browser tab\n  📄 Download Technical Model Documentation (PDF)\n  ✔ Verification and review\n  🔒 Source Data Repo: Private (TU / TERESA Restricted)\n\nOverview: This interactive model is a calibrated fast surrogate of the Danish National Transport Model (LTM 2.3, Rich 2022), rebased to 2023 using Danish National Travel Survey (TU 0624v1), TERESA 6.21 values of time, TØE 2.2 vehicle operating costs, and distance-dependent public transport fare profiles (Argyros, Jensen & Rich, 2026; Rich & Fox, 2024). The model reverse-engineers LTM 2.3 from its elasticities: its response parameters are calibrated so that it reproduces LTM’s elasticities. Wherever LTM’s structure and coefficients are known, they are imposed rather than calibrated, and the model is rebased to the 2023 travel pattern. The calibrated parameters are reduced-form and are not LTM’s own. The calculator is available in Danish and English; switch language in the app header.\n\n100% browser-based: All calibration, scenario evaluation, and rule-of-half distributional welfare calculations run locally in your browser via engine2.js.\nCustom workbooks: You can save scenarios locally or upload a modified .xlsx input workbook directly inside the interface to recalibrate in ~8 seconds."
   },
   {
     "objectID": "projects/index.html",
@@ -462,10 +469,108 @@
     "text": "All repositories\nEvery repository under @jepperich69. Public repositories are linked. Private repositories hold restricted data, client models or unpublished work, and are available to collaborators on request.\n\n\n\nRepository\nWhat it is\nStatus\nVisibility\n\n\n\n\njr_optlib\nOptimization, sampling and choice-model library (above)\nLibrary\nPublic\n\n\nai-infrastructure\nAI research infrastructure (above)\nInfrastructure\nPublic\n\n\nnotetaker-app\nVoice and photo capture app (above)\nTool\nPublic\n\n\nRICH-MIP\nCode for RICH: A Rapid Information-Theoretic Hybrid Algorithm for Mixed-Integer Optimization; its entropy set-cover method is in jr_optlib\nIn review\nPublic\n\n\nML_entropy\nInformation-theoretic machine learning: near-optimal transparent classifiers\nResearch code\nPublic\n\n\nPub_ActionSpace_TG\nReproduction code: generational action-space dynamics (Journal of Transport Geography, 2026)\nAccepted\nPublic\n\n\nPub_ActionSpace_NatComm\nReproduction code: the diverging action space in daily mobility\nIn review\nPublic\n\n\nPub_Seed_TBA\nStatistical sufficiency and maximum-entropy seed construction for synthetic populations\nWork in progress\nPublic\n\n\nPub_PopInt_Part2_TBA\nInformation-theoretic constraint pricing and feasibility certificates for population synthesis\nWork in progress\nPublic\n\n\nPub_PopInt_PartB\nReproduction code: contingency-table integerization as Kullback–Leibler inference\nIn review\nPrivate\n\n\nNapsti_Paper1\nJoint stop spacing and service frequency under a fixed budget\nIn review\nPrivate\n\n\nStopDensity\nStop density in public transport networks\nResearch code\nPrivate\n\n\nGMM4_INT\nInternational demand models of the Danish national transport model (GMM 4.0)\nProject\nPrivate\n\n\ngmm-household-synth\nHousehold population synthesis for the Danish national transport model\nProject\nPrivate\n\n\nPub_DistributionNetworks_TBA\nElectrification and automation in national freight distribution networks\nWork in progress\nPrivate\n\n\nPub_AssesTiming_Raoul_TBA\nStrategic timing of commercial fleet electrification\nWork in progress\nPrivate\n\n\nPub_PMIP_VSP\nVehicle scheduling for heavy-duty fleet electrification and automation\nWork in progress\nPrivate\n\n\npmip-vsp-code\nSolver code for the vehicle-scheduling project\nWork in progress\nPrivate\n\n\nPub_MH_VSP\nMetropolis–Hastings vehicle-scheduling solver with an electric-bus benchmark\nResearch code\nPrivate\n\n\nPub_SAA_PMIP_MC\nRisk-sensitive optimization for stochastic mixed-integer programs\nWork in progress\nPrivate\n\n\nPub_QP_SAA_MC\nRisk-averse stochastic programming under correlated Gaussian uncertainty\nWork in progress\nPrivate\n\n\nlogsum-risk-programming\nResearch code for risk-sensitive stochastic programming\nWork in progress\nPrivate\n\n\nPub_DP_Logsum_TBA\nExact dynamic programming for risk-sensitive sequential decisions\nWork in progress\nPrivate\n\n\nPub_DP_RL_TBA\nDynamic programming combined with reinforcement learning for risk-sensitive decisions\nWork in progress\nPrivate\n\n\nPMIP-solver\nProbabilistic mixed-integer programming solver\nSolver\nPrivate\n\n\nMIP-Variance\nProbabilistic MIP: variance experiments\nResearch code\nPrivate\n\n\nnotetaker-inbox\nPrivate spool for the NoteTaker app\nInfrastructure\nPrivate"
   },
   {
-    "objectID": "tools/ev-fleet/index.html",
-    "href": "tools/ev-fleet/index.html",
-    "title": "EV Adaptation model Denmark (BETA, version 0.1)",
+    "objectID": "tools/elasticity/verification.html",
+    "href": "tools/elasticity/verification.html",
+    "title": "Transport Elasticity Calculator Denmark: verification",
     "section": "",
-    "text": "⤢ Open the model in a full browser tab\n  📄 Methods note (PDF)\n\nOverview: The EV Adaptation model (Danish: Elbil-tælleren) counts the battery-electric cars (BEVs) in the Danish passenger-car fleet and forecasts when the fleet reaches one million BEVs, later milestones, and the fleet composition to 2040. A small stock-flow model is refitted automatically every month when Statistics Denmark publishes new registration and stock figures (tables BIL51 and BIL52). The tool also shows the car tax revenue the state does not collect because BEVs replace petrol cars, and the CO2 this saves, with adjustable assumptions. The page is in Danish and English; switch language in the app header.\nThis is a beta version. The forecast and the tax calculation are under development, and the methods note describes the model, its backtest and its limitations."
+    "text": "This page lists every check that has been run on the model behind the Transport Elasticity Calculator, with the results, including the failures and the open issues. Nothing here is a formal proof. The tests compare the engine against independent oracles and accounting identities, the symbolic check recomputes the equations and numbers of the documentation, and the review is a second opinion by a different AI model."
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#summary",
+    "href": "tools/elasticity/verification.html#summary",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\nCheck\nResult\n\n\n\n\nEngine tests (JavaScript)\n33 of 33 pass\n\n\nOwnership-module and page tests\nall pass (identity, conservation, cost monotonicity, invariance to the reference cost, no jumps between nearby costs; scenario to tables in the page)\n\n\nCross-validation of the model choice\nHeld-out own elasticities: nested logit 0.21, IPDL 0.44, MNL 0.87 (RMSE)\n\n\nSymbolic check of the documentation (SymPy)\n171 claims checked: 168 pass, 3 fail (open, see below); 29 not machine-checkable\n\n\nIndependent code review (Codex, 28 November 2026)\n11 findings: 6 fixed, 4 disclosed on the page, 1 open"
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#automated-tests",
+    "href": "tools/elasticity/verification.html#automated-tests",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "Automated tests",
+    "text": "Automated tests\nThe engine tests (node code/engine/test_engine2.js) check, among other things: that a zero shock reproduces the base exactly; that tour-length bands add up to the totals; that cell totals equal the travel-survey totals; that the calibration fits the LTM targets within its tolerance and is reproducible; that own elasticities are negative after rebasing; that the money results are zero without a shock and roughly linear in it; that at 0% cost sharing the driver carries exactly the vehicle cost; that the change in spending differs from the rule-of-half welfare term as it should; and that a workbook without mileage targets, or with duplicated targets, is rejected."
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#cross-validation",
+    "href": "tools/elasticity/verification.html#cross-validation",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "Cross-validation",
+    "text": "Cross-validation\nThe six purposes have 24 combinations of mode and shock each. In six-fold cross-validation, each model is calibrated without four combinations and then predicts them. Over all purposes, the nested logit has the lowest error on the left-out own elasticities (0.21, against 0.44 for the IPDL and 0.87 for the multinomial logit), which is why it is the default. The comparison with LTM’s own nesting order is in the method section of the calculator."
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#symbolic-check-of-the-documentation",
+    "href": "tools/elasticity/verification.html#symbolic-check-of-the-documentation",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "Symbolic check of the documentation",
+    "text": "Symbolic check of the documentation\nEvery labelled equation and numeric claim in the model documentation was translated into SymPy and recomputed, with the numbers checked against the generated tables (report, re-runnable script).\n\n168 of 171 claims pass. The nested-logit response formula re-derives from the choice probabilities and reduces to the multinomial logit at a logsum parameter of one; the shrinkage, generalized-time, money-share, ownership and Levenberg–Marquardt identities hold; the tables are internally consistent, and the macros in the abstract and text match the generated tables.\n3 fail, all in the text of the documentation, to be corrected: the sentence after the nested-logit shift equation states the utility change with the opposite sign of the equation; the sign convention of the IPDL coefficient is not stated and differs from the nested logit; and the text says that walk and bike tours become slightly shorter under a higher car cost, which holds for walk (−0.026) but not for bike (+0.004).\n29 claims are not machine-checkable, for example results of model runs that are not in the generated tables and the sources of the priors.\n\nThe check is conditional on the translation from LaTeX to SymPy, which the report prints for every claim."
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#independent-code-review",
+    "href": "tools/elasticity/verification.html#independent-code-review",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "Independent code review",
+    "text": "Independent code review\nOn 28 November 2026 the engine, the data builder, the page and the documentation were reviewed by Codex (OpenAI), with the instruction to find what is wrong or misleading.\n\n\n\n\n\n\n\n\n#\nFinding\nStatus\n\n\n\n\n1\nThe “who pays” table showed the rule-of-half term labelled as savings or expenses\nFixed: change in spending (default) and welfare (rule of half) shown separately\n\n\n2\nAt 0% cost sharing nobody paid for a shared car\nFixed: the driver pays what passengers do not, with a test\n\n\n3\nCost and time have different distance exponents, so the implied value of time varies with tour length\nDisclosed in the method section (about 70% of the input value at 100 km)\n\n\n4\nAn undocumented affordability cutoff made car ownership states vanish in one step\nFixed, with a test\n\n\n5\nUnder the IPDL, the tour-length bands do not add up to the total kilometres\nDisclosed next to the band table\n\n\n6\nAn uploaded workbook without mileage targets was accepted, and missing targets became zeros\nFixed, with a test\n\n\n7\nThe elasticity table ignores the cost-sharing slider\nDisclosed next to the table\n\n\n8\nNew trips (induced travel) are close to fixed by construction\nDisclosed next to the results\n\n\n9\nMoney results mixed 2023 and 2025 prices\nFixed (fares converted to 2025 prices); the 300 days per year is stated as a provisional assumption\n\n\n10\nThe page claimed a cross-validation error of 0.07 for the nested logit; the stored result is 0.21\nFixed\n\n\n11\nA destination-length node pools somewhat different distances across modes\nOpen: a structural change that needs recalibration"
+  },
+  {
+    "objectID": "tools/elasticity/verification.html#what-is-not-checked",
+    "href": "tools/elasticity/verification.html#what-is-not-checked",
+    "title": "Transport Elasticity Calculator Denmark: verification",
+    "section": "What is not checked",
+    "text": "What is not checked\nThe model is calibrated to the elasticities of the Danish National Transport Model (LTM 2.3) and inherits their quality; it does not validate them. The car-ownership module is experimental: its sensitivity is an assumption taken from the literature, and its effect on travel is not validated against independent LTM ownership scenarios."
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html",
+    "href": "tools/ev-fleet/verification.html",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "",
+    "text": "This page lists every check that has been run on the model behind Elbil-tælleren, with the results, including the failures and the open issues. Nothing here is a formal proof. The tests compare the code against independent oracles, the symbolic check recomputes the equations and numbers of the methods note, and the review is a second opinion by a different AI model."
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#summary",
+    "href": "tools/ev-fleet/verification.html#summary",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Summary",
+    "text": "Summary\n\n\n\n\n\n\n\nCheck\nResult\n\n\n\n\nAutomated tests (Python, development repository)\n66 of 66 pass\n\n\nMonthly release gate (every refit)\nR-hat &lt; 1.01, no divergent transitions, effective sample size &gt; 400; otherwise last month’s forecast stays online\n\n\nSymbolic check of the methods note (SymPy)\n138 claims checked: 136 pass, 2 failed and corrected in the note; 19 not machine-checkable\n\n\nRolling-origin backtest (3 origins, 7 comparisons)\nObserved BEV stock inside the 80% band in 7 of 7; a development comparison, not an independent test\n\n\nIndependent code review (Codex, 28 November 2026)\n11 findings: 3 fixed, 1 partly fixed, 2 addressed in the text, 5 open"
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#automated-tests",
+    "href": "tools/ev-fleet/verification.html#automated-tests",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Automated tests",
+    "text": "Automated tests\nThe tests run with python -m pytest src in the development repository; the production subset of the code is published in tools/ev-fleet/pipeline/.\n\n\n\n\n\n\n\nArea\nWhat is checked\n\n\n\n\nShare model\nThe Kalman-filter likelihoods equal a direct evaluation of the same multivariate normal density (an independent oracle); the logistic curve, the sampling variance, the December/January dummies, and that fuel shares sum to one\n\n\nMarket size\nGompertz end points and its differential equation; the AR(1) likelihood against a direct multivariate normal; recovery of known Gompertz parameters from simulated data; the exit-rate identity\n\n\nStock-flow simulation\nThe stock-flow identity holds every month and draw; negative sales are clipped without breaking it\n\n\nExits by fuel\nConservation in the exit allocation; the share- and age-linked exit rules recover known slopes and saturate; the observed young share from BIL21 excludes the all-ages row; the age anchor is the year of the starting rate\n\n\nTax and CO2 module\nPer-car figures against a hand calculation; components add up; scenario quantiles are ordered; the turn-of-the-year case (2026 complete, no 2026 months in the forecast)\n\n\nExport and data\nThe month-over-month archive; observed headline inputs; earlier survival-model code"
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#monthly-release-gate",
+    "href": "tools/ev-fleet/verification.html#monthly-release-gate",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Monthly release gate",
+    "text": "Monthly release gate\nThe model is refitted automatically when Statistics Denmark publishes a new month (GitHub Action). A fit is published only if every parameter has R-hat below 1.01, there are no divergent transitions, and the effective sample size exceeds 400. If a fetch, a fit or the export fails, nothing is committed and the previous forecast stays online."
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#symbolic-check-of-the-methods-note",
+    "href": "tools/ev-fleet/verification.html#symbolic-check-of-the-methods-note",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Symbolic check of the methods note",
+    "text": "Symbolic check of the methods note\nEvery labelled equation and numeric claim in the methods note was translated into SymPy and recomputed, with the numbers checked against the model output files (report, re-runnable script).\n\n138 claims checked, 136 passed. The identities of the Gompertz curve, the logistic share curve, the exit-rate rules and the stock-flow identity hold, and every cell of the backtest table matches the backtest output.\n2 failed, both corrected in the note. The note said that BEVs were 2% of the fleet at the December 2020 origin; the share was 1.2% (2% is the share a year later). It also gave 8–21% for how often the BEV scrappage floor binds; the current backtest gives 11–24%, and that number is now generated from the backtest output.\n19 claims are not machine-checkable, for example modelling assumptions and statements about the data sources.\n\nThe check is conditional on the translation from LaTeX to SymPy, which the report prints for every claim."
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#backtest",
+    "href": "tools/ev-fleet/verification.html#backtest",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Backtest",
+    "text": "Backtest\nAt each origin the data are cut, the model is refitted, and the forecast is compared with the stock that was later observed. Error of the median BEV stock forecast:\n\n\n\nOrigin\nAfter 1 year\nAfter 2 years\nAfter 3 years\n\n\n\n\nDecember 2020\n−21%\n−9%\n−7%\n\n\nDecember 2022\n−1%\n−7%\n−12%\n\n\nDecember 2024\n−3%\n\n\n\n\n\nThe model beats a linear trend and a frozen-share baseline at every origin and horizon, but it still underpredicts the BEV stock. This is a retrospective comparison made during development, not an independent test: the exit rule, its 60-month window and the prior on the long-run BEV share were chosen after these results had been seen. The monthly archive of forecasts is the proper test, and it starts with version 0.1."
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#independent-code-review",
+    "href": "tools/ev-fleet/verification.html#independent-code-review",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "Independent code review",
+    "text": "Independent code review\nOn 28 November 2026 the code, data, methods note and app were reviewed by Codex (OpenAI), with the instruction to find what is wrong or misleading.\n\n\n\n\n\n\n\n\n#\nFinding\nStatus\n\n\n\n\n1\nThe tax figures rest on assumed tax rates (the 2020 average registration tax comes from a parliamentary answer that has not been verified against the source)\nOpen: to be labelled as an illustration against an all-petrol comparison\n\n\n2\nThe tax section would have disappeared in January 2027\nFixed, with a regression test\n\n\n3\nThe exit rate and its age anchor referred to different dates\nFixed: anchored at the year of the starting rate\n\n\n4\nThe young-share proxy overstated the young fleet, because exported cars stayed in the count\nFixed: observed ages from Statistics Denmark (BIL21)\n\n\n5\nThe bands leave out monthly sales noise and the dependence between model layers\nOpen\n\n\n6\nThe backtest uses choices made with hindsight\nAddressed: stated in the methods note and on this page\n\n\n7\nRegistration tax on used imports and export refunds is not included\nOpen: the registration component covers new cars only, which should be stated\n\n\n8\nA revision of history without a new month does not trigger a refit, and a failed run leaves no visible warning\nPartly fixed: a failed tax calculation is now flagged on the page\n\n\n9\nA suppressed count in the source data could become a zero\nOpen\n\n\n10\nA milestone that has been reached would keep moving into the future\nOpen (relevant from about 2028)\n\n\n11\nSome labels state more than is computed (for example a fixed 15-year life in a label)\nAddressed in part"
+  },
+  {
+    "objectID": "tools/ev-fleet/verification.html#what-is-not-checked",
+    "href": "tools/ev-fleet/verification.html#what-is-not-checked",
+    "title": "EV Adaptation model Denmark: verification",
+    "section": "What is not checked",
+    "text": "What is not checked\nThe model’s assumptions themselves (the long-run BEV share, the import rule, the link between the age of the fleet and its exit rate) are not verified by any of these checks; the methods note states them and the backtest tests their combined effect. The tax and CO2 figures are illustrations built on stated assumptions, which can be changed on the page."
   }
 ]

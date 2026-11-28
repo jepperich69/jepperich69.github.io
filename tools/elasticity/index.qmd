@@ -10,6 +10,7 @@ toc: false
 <div class="badge-row" style="margin-bottom: 1rem;">
   <a href="app/index.html" class="jr-badge badge-tool" target="_blank">⤢ Open the calculator in a full browser tab</a>
   <a href="model_documentation.pdf" class="jr-badge badge-pdf" target="_blank">📄 Download Technical Model Documentation (PDF)</a>
+  <a href="verification.qmd" class="jr-badge badge-tool">✔ Verification and review</a>
   <span class="jr-badge badge-private" title="Raw TU data preparation scripts live in a private DTU project repository">🔒 Source Data Repo: Private (TU / TERESA Restricted)</span>
 </div>
 ```
@@ -20,7 +21,17 @@ toc: false
 - **Custom workbooks:** You can save scenarios locally or upload a modified `.xlsx` input workbook directly inside the interface to recalibrate in ~8 seconds.
 
 ```{=html}
-<div class="tool-iframe-wrap">
-  <iframe src="app/index.html" title="Transport Elasticity Calculator Denmark" loading="lazy"></iframe>
-</div>
+<iframe id="elastapp" src="app/index.html" title="Transport Elasticity Calculator Denmark" scrolling="no" style="display:block; width:100%; height:1400px; border:0; overflow:hidden; margin:1rem 0 1.5rem 0;"></iframe>
+<script>
+/* grow the frame to the app's full height: one scrollbar (the page's), no inner one */
+(function () {
+  var f = document.getElementById("elastapp");
+  function fit() { try { var d = f.contentDocument; if (d) f.style.height = d.documentElement.scrollHeight + "px"; } catch (e) {} }
+  f.addEventListener("load", function () {
+    fit();
+    try { new ResizeObserver(fit).observe(f.contentDocument.body); } catch (e) { setInterval(fit, 1000); }
+  });
+  window.addEventListener("resize", fit);
+})();
+</script>
 ```
