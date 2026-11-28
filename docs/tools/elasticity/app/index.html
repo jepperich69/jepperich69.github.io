@@ -139,7 +139,7 @@ details summary { cursor: pointer; font-weight: 600 }
   <header class="top">
     <div>
       <h1><span id="hdrTitle">Elasticitetsmodel</span> <span class="beta-badge">BETA</span></h1>
-      <p id="hdrDesc">Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and household expenses respond across trip purposes, income groups and car ownership.</p>
+      <p id="hdrDesc">Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and travel spending per person respond across trip purposes, income groups and car ownership.</p>
     </div>
     <div class="status">
       <div class="seg" id="langSeg" role="group" aria-label="Language / Sprog">
@@ -389,7 +389,7 @@ details summary { cursor: pointer; font-weight: 600 }
     <main data-lang-block="en">
       <section class="card prose">
         <h2>What the model is</h2>
-        <p>A fast surrogate of the Danish national model LTM 2.3 for uniform percentage changes in car cost per km, car travel time, public-transport fare and public-transport time. It reproduces LTM's tour elasticities by trip purpose and mode, applies them to the 2023 travel pattern from the Danish travel survey (TU), and splits the result by income quintile, household car ownership and tour length. It is not a network model: shocks apply everywhere at once, and there is no route, destination-zone or time-of-day detail.</p>
+        <p>A fast surrogate of the Danish national model LTM 2.3 for uniform percentage changes in car cost per km, car travel time, public-transport fare and public-transport time. It approximately reproduces selected LTM tour, length and mileage elasticities by trip purpose and mode, applies them to the 2023 travel pattern from the Danish travel survey (TU), and splits the result by income quintile, household car ownership and tour length. It is not a network model: shocks apply everywhere at once, and there is no route, destination-zone or time-of-day detail.</p>
         <p>The model reverse-engineers LTM 2.3 from its elasticities: its response parameters are calibrated so that it reproduces LTM's elasticities. Wherever LTM's structure and coefficients are known, they are imposed rather than calibrated, and the model is rebased to the 2023 travel pattern. The calibrated parameters are reduced-form and are not LTM's own.</p>
         <p>Purposes: commute, education, escort, shopping, leisure, business. Modes: walk, bike, car driver alone (SOV), car driver with passengers (HOV), car passenger, public transport (incl. long-distance bus). Domestic air is excluded. Primary-tour elasticities are applied to all tours.</p>
       </section>
@@ -413,7 +413,7 @@ details summary { cursor: pointer; font-weight: 600 }
         <p><b>Multinomial logit (MNL), mode × tour length.</b> Each cell chooses among six modes in six tour-length bands, with a length distribution inside each band, or not to travel. Every alternative competes with every other in the same way. The aggregate responses still differ between modes because cells and tour lengths differ: a car-cost rise hits long car tours hardest, so the modes that are common at those lengths gain most. This is the simplest model to explain, and it gives national car-kilometre results close to the other two.</p>
         <p><b>Nested logit (NL), mode × tour length (default).</b> The LTM 2.3 mode–destination structure, with the destination represented by tour length (Rich, 2022, Tables 5.1 and 8.49). For commute, escort, shopping, leisure and business, length is on top and mode below, p(m|d)p(d): a traveller changes mode more readily than destination. For education, mode is on top, p(d|m)p(m). The logsum parameter θ (0 &lt; θ ≤ 1) is calibrated per purpose; θ = 1 gives the MNL. Values below 1, as in LTM (0.50–0.92), mean less than perfect substitution across the upper level.</p>
         <div class="eq">ΔV_{m,l} = −β_m [ (l/20)^φC · h_C + (l/20)^φT · h_T ]          h_C + h_T = ln(1 + sC x_cost + (1 − sC) x_time)</div>
-        <p>The utility change grows with tour length <code>l</code> (exponent φ, separately for cost and time), so long tours shorten or change mode. Walk and bike are distributed over lengths by LTM's linear time utility (time coefficients from Rich, 2022, Table 8.25, at 5 and 15 km/h). Base shares are the observed TU shares, so a scenario is evaluated in closed form, without solving equations. Bands and kilometres are model output and add up to the totals.</p>
+        <p>The utility change grows with tour length <code>l</code> (exponent φ, separately for cost and time), so long tours shorten or change mode. Because cost and time have different exponents, the value of time implied by the model varies with tour length and differs from the value of time put in; for a 100 km commute it is about 70% of it. Walk and bike are distributed over lengths by LTM's linear time utility (time coefficients from Rich, 2022, Table 8.25, at 5 and 15 km/h). Base shares are the observed TU shares, so a scenario is evaluated in closed form, without solving equations. Bands and kilometres are model output and add up to the totals.</p>
         <p><b>IPDL over modes.</b> The inverse product differentiation logit (Fosgerau, Monardo and de Palma, 2024) with four overlapping nesting dimensions across modes; the fourth separates walk from bike.</p>
         <div class="eq">δ_j = (1 − Σ_d μ_d) ln s_j + Σ_d μ_d ln s_{d(j)} − ln s_0          Δδ_j = β_j ln(1 + sC_j x_cost + (1 − sC_j) x_time)</div>
         <p>Tour length follows a log-linear pivot on LTM's length elasticities, and bands are split by LTM's distance profiles. The IPDL fits the trip elasticities best in sample and predicts held-out cross-elasticities best. It predicts held-out own elasticities poorly (cross-validation RMSE 0.44, against 0.21 for the NL), and LTM itself has no nests between modes.</p>
@@ -421,7 +421,7 @@ details summary { cursor: pointer; font-weight: 600 }
       </section>
       <section class="card prose">
         <h2>Calibration</h2>
-        <p>Per purpose, the parameters are fitted on the TU 2009–11 cells (income quintile × cars, each with its own shares and relative value of time), so that the cells aggregated reproduce the LTM 2.3 elasticities. Calibrating one representative traveller and then applying segmented cells understated elasticities by about a third; calibrating on the same cells removes that aggregation bias and mirrors the disaggregate model behind the targets.</p>
+        <p>Per purpose, the parameters are fitted on the TU 2009–11 cells (income quintile × cars, each with its own shares and relative value of time), so that the cells aggregated reproduce the LTM 2.3 elasticities. Calibrating one representative traveller and then applying segmented cells understated elasticities by about a third; calibrating on the same cells removes this demonstrated discrepancy between a representative traveller and the cells. It does not by itself show that the income pattern of the responses is right.</p>
         <p><b>NL and MNL.</b> Free parameters: θ (NL only), four β, the length exponents φ for car and PT with a separate cost exponent, a share tilt per mode, and the SOV and PT money shares. Targets: 24 trip elasticities (weight 1), 24 mileage elasticities (1), 24 average-length elasticities (0.3) and 48 band elasticities (0.1). Levenberg–Marquardt from three starting points.</p>
         <p><b>IPDL.</b> Free parameters: four nest weights μ, the share tilt, four β and the money shares. Targets: the 24 trip elasticities. Levenberg–Marquardt from two starting points.</p>
         <p>In both, the tilt (alternative-specific shifts absorbing differences between TU tour shares and LTM's weights) is penalised toward zero, and the money shares toward priors from TOEE fuel + tyres cost, TERESA value of time and the PT fare.</p>
@@ -476,7 +476,7 @@ details summary { cursor: pointer; font-weight: 600 }
     <main data-lang-block="da" hidden>
       <section class="card prose">
         <h2>Hvad modellen er (teknisk dokumentation)</h2>
-        <p>En hurtig surrogatmodel for Landstrafikmodellen (LTM 2.3) til beregning af ensartede procentvise ændringer i bilomkostning pr. km, rejsetid i bil, billetpris i kollektiv trafik og rejsetid i kollektiv trafik. Modellen genskaber LTM's turelasticiteter fordelt på turformål og transportmiddel, anvender dem på 2023-rejsemønsteret fra Transportvaneundersøgelsen (TU) og opdeler resultaterne på indkomstkvintiler, husstandens bilrådighed og turlængde. Det er ikke en netværksmodel: stød påføres ensartet overalt, og der er ingen rute-, zone- eller tidsrumsdetaljer.</p>
+        <p>En hurtig surrogatmodel for Landstrafikmodellen (LTM 2.3) til beregning af ensartede procentvise ændringer i bilomkostning pr. km, rejsetid i bil, billetpris i kollektiv trafik og rejsetid i kollektiv trafik. Modellen genskaber med god tilnærmelse udvalgte af LTM's tur-, længde- og kilometerelasticiteter fordelt på turformål og transportmiddel, anvender dem på 2023-rejsemønsteret fra Transportvaneundersøgelsen (TU) og opdeler resultaterne på indkomstkvintiler, husstandens bilrådighed og turlængde. Det er ikke en netværksmodel: stød påføres ensartet overalt, og der er ingen rute-, zone- eller tidsrumsdetaljer.</p>
         <p>Modellen er bygget baglæns fra LTM 2.3's elasticiteter: dens adfærdsparametre kalibreres, så den genskaber LTM's elasticiteter. Hvor LTM's struktur og koefficienter er kendte, lægges de ind direkte i stedet for at blive kalibreret, og modellen er genbaseret til rejsemønsteret i 2023. De kalibrerede parametre er reduceret form og ikke LTM's egne.</p>
         <p>Formål: pendling, uddannelse, ledsagelse, indkøb, fritid og erhverv. Transportmidler: gang, cykel, bilfører alene (SOV), bilfører med passagerer (HOV), bilpassager samt kollektiv trafik (inkl. fjernbus). Indenrigsfly er udeladt. Elasticiteter for primære ture anvendes på alle ture.</p>
       </section>
@@ -500,7 +500,7 @@ details summary { cursor: pointer; font-weight: 600 }
         <p><b>Multinomial logit (MNL), transportmiddel × turlængde.</b> Hver celle vælger mellem seks transportmidler i seks turlængdebånd (med en længdefordeling inden for hvert bånd) eller ikke at rejse. Alle alternativer konkurrerer på lige fod. De aggregerede responser varierer stadig mellem transportmidler, fordi celler og turlængder er forskellige: en stigning i bilomkostninger rammer lange bilture hårdest, så de transportmidler, der fylder meget på lange afstande, vokser mest. Det er den enkleste model at forklare, og den giver nationale bilkilometer tæt på de to andre.</p>
         <p><b>Nested logit (NL), transportmiddel × turlængde (standard).</b> Afspejler LTM 2.3-strukturen for transportmiddel og destination, hvor destinationen er repræsenteret ved turlængde (Rich, 2022, tabel 5.1 og 8.49). For pendling, ledsagelse, indkøb, fritid og erhverv ligger turlængde øverst og transportmiddel nederst, p(m|d)p(d): den rejsende skifter lettere transportmiddel end destination. For uddannelse ligger transportmiddel øverst, p(d|m)p(m). Logsum-parameteren θ (0 &lt; θ ≤ 1) kalibreres pr. formål; θ = 1 giver MNL. Værdier under 1, som i LTM (0,50–0,92), betyder mindre end fuld substitution på øverste niveau.</p>
         <div class="eq">ΔV_{m,l} = −β_m [ (l/20)^φC · h_C + (l/20)^φT · h_T ]          h_C + h_T = ln(1 + sC x_cost + (1 − sC) x_time)</div>
-        <p>Nytteændringen vokser med turlængden <code>l</code> (eksponent φ, separat for pris og tid — en kalibreret cost-dæmpning), så lange ture forkortes eller skifter transportmiddel. Gang og cykel fordeles over turlængder med LTM's lineære tidsnytte (tidskoefficienter fra Rich, 2022, tabel 8.25, ved 5 og 15 km/t). Basisandele er de observerede TU-andele, så et scenarie beregnes på lukket form uden numerisk ligningsløsning. Afstandsbånd og kilometer er direkte modeloutput og summerer eksakt til totalerne.</p>
+        <p>Nytteændringen vokser med turlængden <code>l</code> (eksponent φ, separat for pris og tid — en kalibreret cost-dæmpning), så lange ture forkortes eller skifter transportmiddel. Fordi pris og tid har forskellige eksponenter, varierer den tidsværdi, modellen implicit bruger, med turlængden og afviger fra den indlagte tidsværdi; for en pendlertur på 100 km er den ca. 70 % af den. Gang og cykel fordeles over turlængder med LTM's lineære tidsnytte (tidskoefficienter fra Rich, 2022, tabel 8.25, ved 5 og 15 km/t). Basisandele er de observerede TU-andele, så et scenarie beregnes på lukket form uden numerisk ligningsløsning. Afstandsbånd og kilometer er direkte modeloutput og summerer eksakt til totalerne.</p>
         <p><b>IPDL over transportmidler.</b> Inverse Product Differentiation Logit (Fosgerau, Monardo og de Palma, 2024) med fire overlappende nest-dimensioner på tværs af transportmidler; den fjerde adskiller gang fra cykel.</p>
         <div class="eq">δ_j = (1 − Σ_d μ_d) ln s_j + Σ_d μ_d ln s_{d(j)} − ln s_0          Δδ_j = β_j ln(1 + sC_j x_cost + (1 − sC_j) x_time)</div>
         <p>Turlængden følger en log-lineær pivotering på LTM's længdeelasticiteter, og afstandsbånd fordeles med LTM's afstandsprofiler. IPDL tilpasser turelasticiteterne bedst in-sample og forudsiger udeladte krydselasticiteter bedst, men forudsiger udeladte egenelasticiteter svagt (krydsvaliderings-RMSE 0,44 mod 0,21 for NL), og LTM har ikke selv nests mellem transportmidler.</p>
@@ -508,7 +508,7 @@ details summary { cursor: pointer; font-weight: 600 }
       </section>
       <section class="card prose">
         <h2>Kalibrering</h2>
-        <p>For hvert formål tilpasses parametrene på TU 2009–11-cellerne (indkomstkvintil × biler, hver med egne markedsandele og relativ tidsværdi), så cellerne aggregeret genskaber LTM 2.3-elasticiteterne. Hvis man kalibrerede én repræsentativ rejsende og derefter anvendte modellen på segmenterede celler, ville elasticiteterne blive undervurderet med ca. en tredjedel; kalibrering direkte på cellerne fjerner denne aggregeringsbias.</p>
+        <p>For hvert formål tilpasses parametrene på TU 2009–11-cellerne (indkomstkvintil × biler, hver med egne markedsandele og relativ tidsværdi), så cellerne aggregeret genskaber LTM 2.3-elasticiteterne. Hvis man kalibrerede én repræsentativ rejsende og derefter anvendte modellen på segmenterede celler, ville elasticiteterne blive undervurderet med ca. en tredjedel; kalibrering direkte på cellerne fjerner denne påviste forskel mellem én repræsentativ rejsende og cellerne. Det viser ikke i sig selv, at responsernes fordeling på indkomst er rigtig.</p>
         <p><b>NL og MNL.</b> Frie parametre: θ (kun NL), fire β, længdeeksponenter φ for bil og kollektiv trafik med separat priseksponent, et andels-tilt pr. transportmiddel samt pengeandele for SOV og kollektiv trafik. Mål: 24 turelasticiteter (vægt 1), 24 kilometerelasticiteter (vægt 1), 24 længdeelasticiteter (vægt 0,3) og 48 båndelasticiteter (vægt 0,1). Levenberg–Marquardt fra tre startpunkter.</p>
         <p><b>IPDL.</b> Frie parametre: fire nest-vægte μ, andels-tilt, fire β og pengeandele. Mål: de 24 turelasticiteter. Levenberg–Marquardt fra to startpunkter.</p>
         <p>I begge modeller straffes tiltet (alternativspecifikke forskydninger, der opfanger forskelle mellem TU-turandele og LTM-vægte) mod nul, og pengeandelene straffes mod priors beregnet fra TØE brændstof + dæk, TERESA-tidsværdi og kollektiv billetpris.</p>
@@ -681,7 +681,7 @@ const I18N = {
     },
     ui: {
       hdrTitle: "Elasticitetsmodel",
-      hdrDesc: "Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and household expenses respond across trip purposes, income groups and car ownership.",
+      hdrDesc: "Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and travel spending per person respond across trip purposes, income groups and car ownership.",
       tabLinkExplorer: "Explorer",
       tabLinkData: "Data and assumptions",
       tabLinkMethod: "Method (technical)",
@@ -708,7 +708,7 @@ const I18N = {
       lblOwnEl: "Assumed ownership sensitivity to annual cost (elasticity)",
       hOwnEl: "Assumed response: −0.4 means a 10% higher annual cost reduces total household cars by 4% (De Jong et al., 2009).",
       lblOwnLam: "Income difference in ownership sensitivity (λ)",
-      hOwnLam: "Controls how much more strongly low-income households react to annual car costs than high-income ones. 0 = everyone reacts equally; 0.37 = follows their value of time.",
+      hOwnLam: "Controls how much more strongly low-income households react to annual car costs than high-income ones. 0 = the same utility sensitivity for all income groups (their ownership elasticities still differ with their car mix); 0.37 = follows their value of time.",
       lblLam: "Cost sharing when riding together",
       hLam: "How much passengers chip in toward driving costs; the driver pays the rest. 100% = normal sharing between driver and adult passengers; 0% = driver pays all.",
       lblDisc: "Commuter season-pass discount",
@@ -727,14 +727,14 @@ const I18N = {
       btnDistVkm: "Car km",
       btnDistTrips: "Tours",
       h2Purpose: "By purpose and mode",
-      pPurpose: "How travel changes across everyday trip purposes and transport modes compared with the 2023 baseline (average weekday, national level).",
+      pPurpose: "How travel changes across everyday trip purposes and transport modes compared with the 2023 baseline (average weekday, national level). The total number of tours barely changes: the model moves tours between modes and lengths, and new trips (induced travel) are close to fixed by construction.",
       btnMeasTrips: "Tours",
       btnMeasKm: "Kilometres",
       h2Bands: "By tour length",
       lblBandPurpose: "Purpose",
       bandFoot: "PT fares above 100 km tour length are extrapolated from a fit on trips under 50 km (pale bars).",
       h2Elast: "Elasticities",
-      pElast: "How much tours change (in %) when a price or travel time rises by 1% (measured at +10%). Example: −0.20 means a 10% price increase cuts tours by about 2%. Small numbers below: LTM 2.3 target · model at 2009–11 · LTM 2.3 after pivoting (Pedersen, 2021).",
+      pElast: "How much tours change (in %) when a price or travel time rises by 1% (measured at +10%). Example: −0.20 means a 10% price increase cuts tours by about 2%. Small numbers below: LTM 2.3 target · model at 2009–11 · LTM 2.3 after pivoting (Pedersen, 2021). Computed at the default cost sharing (100%); the cost-sharing slider does not change this table.",
       sumOverride: "Override a target and recalibrate",
       lblOvP: "Purpose",
       lblOvM: "Mode",
@@ -789,7 +789,7 @@ const I18N = {
     },
     ui: {
       hdrTitle: "Elasticitetsmodel",
-      hdrDesc: "Træk i skyderne for at ændre pris eller rejsetid for bil og kollektiv trafik, og se hvad det betyder for hverdagens ture, kørte kilometer og husstandenes økonomi — fordelt på rejseformål, indkomstgrupper og bilrådighed.",
+      hdrDesc: "Træk i skyderne for at ændre pris eller rejsetid for bil og kollektiv trafik, og se hvad det betyder for hverdagens ture, kørte kilometer og udgifterne til transport pr. person — fordelt på rejseformål, indkomstgrupper og bilrådighed.",
       tabLinkExplorer: "Model (overblik)",
       tabLinkData: "Data og forudsætninger",
       tabLinkMethod: "Metode (teknisk)",
@@ -816,7 +816,7 @@ const I18N = {
       lblOwnEl: "Antaget følsomhed for bilejerskab (elasticitet)",
       hOwnEl: "Antaget respons: −0,4 betyder, at 10 % højere årlig biludgift giver 4 % færre biler i alt (De Jong m.fl., 2009).",
       lblOwnLam: "Indkomstforskel i følsomhed for bilejerskab (λ)",
-      hOwnLam: "Styrer hvor meget stærkere lavindkomstgrupper reagerer på faste biludgifter end højindkomstgrupper. 0 = alle reagerer ens; 0,37 = følger deres tidsværdi.",
+      hOwnLam: "Styrer hvor meget stærkere lavindkomstgrupper reagerer på faste biludgifter end højindkomstgrupper. 0 = samme nyttefølsomhed i alle indkomstgrupper (deres ejerskabselasticiteter er stadig forskellige pga. bilsammensætningen); 0,37 = følger deres tidsværdi.",
       lblLam: "Udgiftsdeling når flere kører sammen",
       hLam: "Hvor meget passagerer bidrager til kørselsudgiften; føreren betaler resten. 100 % = normal deling mellem fører og voksne passagerer; 0 % = føreren betaler alt.",
       lblDisc: "Rabat på pendlerkort",
@@ -835,14 +835,14 @@ const I18N = {
       btnDistVkm: "Bil-km",
       btnDistTrips: "Ture",
       h2Purpose: "Fordelt på rejseformål og transportmiddel",
-      pPurpose: "Sådan ændrer rejserne sig på tværs af hverdagens formål og transportmidler sammenlignet med 2023-niveauet (en gennemsnitlig hverdag på landsplan).",
+      pPurpose: "Sådan ændrer rejserne sig på tværs af hverdagens formål og transportmidler sammenlignet med 2023-niveauet (en gennemsnitlig hverdag på landsplan). Det samlede antal ture ændrer sig næsten ikke: modellen flytter ture mellem transportmidler og turlængder, og nye ture (induceret trafik) er næsten fastlagt i modellen.",
       btnMeasTrips: "Ture",
       btnMeasKm: "Kilometer",
       h2Bands: "Fordelt på turlængde (ud og hjem)",
       lblBandPurpose: "Formål",
       bandFoot: "Blege søjler over 100 km viser, at kollektive billetpriser på meget lange rejser er ekstrapoleret fra ture under 50 km.",
       h2Elast: "Pris- og tidselasticiteter",
-      pElast: "Hvor mange procent antallet af ture ændrer sig, når pris eller rejsetid stiger med 1 % (målt ved +10 %). Eksempel: −0,20 betyder, at 10 % højere pris giver ca. 2 % færre ture. Små tal under hovedtallet: LTM 2.3-mål · model i 2009–11 · skaleret LTM (Pedersen, 2021).",
+      pElast: "Hvor mange procent antallet af ture ændrer sig, når pris eller rejsetid stiger med 1 % (målt ved +10 %). Eksempel: −0,20 betyder, at 10 % højere pris giver ca. 2 % færre ture. Små tal under hovedtallet: LTM 2.3-mål · model i 2009–11 · skaleret LTM (Pedersen, 2021). Beregnet ved standard-omkostningsdeling (100 %); skyderen for omkostningsdeling ændrer ikke denne tabel.",
       sumOverride: "Overstyr en målelasticitet og genkalibrer",
       lblOvP: "Formål",
       lblOvM: "Transportmiddel",
@@ -1118,8 +1118,8 @@ function renderDist(res, lam) {
   csv.dist = [["quintile", "household_income_kDKK", "cars_0", "cars_1", "cars_2plus", "all"], ...rows];
   if (isDa()) {
     const unit = {
-      spend: "Ændring i årlige udgifter til kørsel (brændstof og dæk) og billetter i kr. pr. person (10–84 år): ny pris × nyt forbrug minus gammel pris × gammelt forbrug. Faste bilomkostninger og tid indgår ikke.",
-      burden: "Velfærdsændringens pengedel efter halvdelsreglen i kr. pr. person (10–84 år): prisændring × gennemsnittet af forbruget før og efter. Det er ikke en ændring i udgifter; tidsgevinster og -tab indgår ikke.",
+      spend: "Ændring i årlige udgifter til kørsel (brændstof og dæk) og billetter i kr. pr. person (10–84 år, 2025-priser; år = hverdage × 300, en foreløbig antagelse): ny pris × nyt forbrug minus gammel pris × gammelt forbrug. Faste bilomkostninger og tid indgår ikke.",
+      burden: "Velfærdsændringens pengedel efter halvdelsreglen i kr. pr. person (10–84 år, 2025-priser; år = hverdage × 300, en foreløbig antagelse): prisændring × gennemsnittet af forbruget før og efter. Det er ikke en ændring i udgifter; tidsgevinster og -tab indgår ikke.",
       share: "Velfærdsændringens pengedel (halvdelsreglen) i procent af den gennemsnitlige personindkomst i indkomstgruppen.",
       vkm: "Procentvis ændring i kørte kilometer i bil.",
       trips: "Procentvis ændring i samlet antal ture på tværs af alle transportmidler."
@@ -1127,8 +1127,8 @@ function renderDist(res, lam) {
     $("distNote").textContent = `Husstande opdelt i 5 indkomstgrupper (K1 = laveste 20 %, K5 = højeste 20 %; gennemsnitlig husstandsindkomst i 2023-priser står i parentes) og antal biler. ${unit}${res.ownership?.active ? " Scenarie med ændret bilejerskab: rækkerne fastholder grupperne fra udgangspunktet, og kronebeløbene dækker kun løbende kørselsudgifter og billetpriser, ikke faste ejerafgifter." : ""}${money ? (S.dist === "spend" ? " Positive tal (rød) er flere udgifter; negative tal (grøn) er færre." : " Positive tal (rød) er et velfærdstab; negative tal (grøn) en gevinst. Beløbet styres især af, hvor meget gruppen allerede kører eller rejser kollektivt i dag.") : ""}${S.dist === "share" ? " Inden for hver række måles alle bilgrupper mod den samme gennemsnitlige personindkomst i kvintilen." : ""}`;
   } else {
     const unit = {
-      spend: "Change in annual spending on driving (fuel and tyres) and tickets in DKK per person aged 10–84: new price × new use minus old price × old use. Fixed car costs and time are not included.",
-      burden: "Money part of the welfare change by the rule of half, DKK per person aged 10–84: price change × the average of use before and after. This is not a change in spending; time gains and losses are not included.",
+      spend: "Change in annual spending on driving (fuel and tyres) and tickets in DKK per person aged 10–84 (2025 prices; year = weekdays × 300, a provisional assumption): new price × new use minus old price × old use. Fixed car costs and time are not included.",
+      burden: "Money part of the welfare change by the rule of half, DKK per person aged 10–84 (2025 prices; year = weekdays × 300, a provisional assumption): price change × the average of use before and after. This is not a change in spending; time gains and losses are not included.",
       share: "Money part of the welfare change (rule of half) as a percentage of average personal income in the income group.",
       vkm: "Percentage change in car vehicle-kilometres.",
       trips: "Percentage change in total tours across all modes."
@@ -1157,10 +1157,10 @@ function renderPurpose(res) {
 function renderBands(res) {
   $("bandNote").textContent = isDa()
     ? (res.model === "ipdl"
-      ? "Procentvis ændring i antal ture fordelt på turlængde ud og hjem. I IPDL fordeles totalen over afstandsbånd ud fra LTM 2.3-afstandsprofiler."
+      ? "Procentvis ændring i antal ture fordelt på turlængde ud og hjem. I IPDL fordeles totalen over afstandsbånd ud fra LTM 2.3-afstandsprofiler. Båndene er en tilnærmelse: deres kilometer summerer ikke til modellens samlede kilometer. Brug nested logit for afstandsbånd."
       : "Lange ture rammes hårdere af ændringer i kilometerpris eller rejsetid end korte ture. Her vælger de rejsende transportmiddel og turlængde i samspil.")
     : (res.model === "ipdl"
-      ? "Change in tours by out-and-home length. IPDL: the total is split over bands by the LTM 2.3 distance profiles and rescaled to the total tours."
+      ? "Change in tours by out-and-home length. IPDL: the total is split over bands by the LTM 2.3 distance profiles and rescaled to the total tours. The bands are an approximation: their kilometres do not add up to the model's total kilometres. Use the nested logit for bands."
       : "Long trips are affected more strongly by per-km cost or time changes than short trips. Here mode and trip length are chosen jointly.");
   const p = $("bandPurpose").value || "commute", bd = E.bands(S.inp, res).filter(b => b.purpose === p), modes = ["sov", "hov", "carp", "pt"];
   const vals = bd.filter(b => modes.includes(b.mode)).map(b => b.trips1 / b.trips0 - 1).filter(Number.isFinite);

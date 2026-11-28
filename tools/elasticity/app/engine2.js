@@ -60,9 +60,11 @@
     if (err.length) return err;
     const st = Object.fromEntries(sheets.settings.map(r => [r.key, r.value]));
     if (st.schema !== "elasticity-inputs/2") err.push(`schema must be 'elasticity-inputs/2' (found '${st.schema}')`);
-    PURPOSES.forEach(p => MODES.forEach(m => SHOCKS.forEach(k => ["trips", "avg_length"].forEach(me => {
-      const r = sheets.targets.find(t => t.purpose === p && t.mode === m && t.shock === k && t.measure === me);
-      if (!r || !Number.isFinite(r.value)) err.push(`targets: ${p}/${m}/${k}/${me} missing`);
+    // all three measures are calibration targets; a missing mileage target used to become a zero target
+    PURPOSES.forEach(p => MODES.forEach(m => SHOCKS.forEach(k => ["trips", "avg_length", "mileage"].forEach(me => {
+      const rs = sheets.targets.filter(t => t.purpose === p && t.mode === m && t.shock === k && t.measure === me);
+      if (!rs.length || !Number.isFinite(rs[0].value)) err.push(`targets: ${p}/${m}/${k}/${me} missing or not a number`);
+      else if (rs.length > 1) err.push(`targets: ${p}/${m}/${k}/${me} appears ${rs.length} times`);
     }))));
     ["calibration_period", "base_period"].forEach(k => {
       if (!sheets.cell_shares.some(r => r.period === st[k])) err.push(`cell_shares has no rows for ${k} '${st[k]}'`);
@@ -571,6 +573,7 @@
       w: shares(par.tilt), prior_w: shares(z6()), prior_sC: inp.priorSC[p] };
   }
   const isNL = m => m === "nl" || m === "mnl";
+  const FARE_TO_2025 = 1.0329;
   // Cost-sharing sensitivity lam scales what PASSENGERS pay; the driver pays the rest of the
   // vehicle cost: driver share = 1 - lam (1 - s0). lam = 1 gives the LTM shares, lam = 0 the
   // driver pays all, and the shares of one shared car still add up to its cost. (Before
@@ -739,7 +742,9 @@
         a.carSpend += inp.costs.carPerKm * s * ((1 + x[0]) * c.km1[j] - c.km0[j]);
       });
       const paid = c.purpose === "commute" ? 1 - disc : 1;
-      const fare = (T, K) => 2 * inp.costs.fareOffset * T + inp.costs.farePerKm * K;
+      // fares are 2023 prices, car costs fixed 2025 prices (TOEE): put fares in 2025 prices (DST PRIS113,
+      // CPI 2025/2023 = 121.07/117.21 = 1.0329). Money output only; the PT money-share prior is unchanged.
+      const fare = (T, K) => FARE_TO_2025 * (2 * inp.costs.fareOffset * T + inp.costs.farePerKm * K);
       a.pt += paid * x[2] * fare((c.trips0[5] + c.trips1[5]) / 2, (c.km0[5] + c.km1[5]) / 2);
       a.ptSpend += paid * ((1 + x[2]) * fare(c.trips1[5], c.km1[5]) - fare(c.trips0[5], c.km0[5]));
     });
