@@ -140,9 +140,12 @@ def simulate(n: int = N_DRAWS, seed: int = 0, horizon: str = HORIZON,
     lastK = sorted({r["month"] for r in rows})[-K:]
     reg = {(r["month"], r["fuel4"]): float(r["new_reg"]) for r in rows}
     buf_young = {f: np.tile([reg.get((mo, f), 0.0) for mo in lastK], (n, 1)) for f in others}
+    # anchor (Codex #3): the starting rate r0 is the last full year's rate, so y0 is the observed young
+    # share of that same year; the current share is the scaled registration buffer phi * R60 / stock.
+    phi = {f: st["link"][f].get("phi", 1.0) for f in others}
     for f in others:
-        st["link"][f]["y0"] = (float(buf_young[f][0].sum() / X0[f]) if X0[f] >= exits.MIN_STOCK
-                               else float("nan"))
+        y_rate = st["link"][f].get("y_rate", float("nan"))
+        st["link"][f]["y0"] = y_rate if (np.isfinite(y_rate) and X0[f] >= exits.MIN_STOCK) else float("nan")
 
     stock = {f: np.full(n, X0[f]) for f in FUELS}
     path = {f: np.empty((n, H)) for f in FUELS}
@@ -155,7 +158,7 @@ def simulate(n: int = N_DRAWS, seed: int = 0, horizon: str = HORIZON,
         t_mid = yr + (int(mo[5:]) - 0.5) / 12
         s12 = buf_bev.sum(1) / np.maximum(buf_tot.sum(1), 1.0)
         dm = {f"rate_{f}": exits.exit_rate(m, st, f, exit_rule, s12=s12, h_years=t_mid - (st["last_year"] + 0.5),
-                                           young=buf_young[f].sum(1) / np.maximum(stock[f], 1.0))
+                                           young=phi[f] * buf_young[f].sum(1) / np.maximum(stock[f], 1.0))
               for f in others}
         if import_rule == "sales":
             kw = {"import_ratio": m["kappa"] * exits.fade(t_mid, st)}

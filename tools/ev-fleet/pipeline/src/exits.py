@@ -43,7 +43,30 @@ MIN_RATE = -0.10             # floor on a non-BEV annual exit rate (negative = n
 LINK_FIRST = {"petrol": 2016, "diesel": 2016}   # share-linked exit rates; PHEV stays flat
 LINK_MIN_YEARS = 4
 DAMP = 0.8                   # damped-trend benchmark, per year
-YOUNG_MONTHS = 60            # age proxy: new registrations of the last 60 months / stock
+YOUNG_MONTHS = 60            # rolling registration buffer for the forecast (scaled to BIL21 by phi)
+YOUNG_AGES = 5               # observed young share: cars aged 0-4 at 1 January (BIL21)
+BIL21_DRIV = {"BEV": "20225", "PHEV": "20232", "petrol": "20205", "diesel": "20210"}
+
+
+def bil21_young(path: Path) -> dict:
+    """{fuel: {year: share of the 1 January stock aged 0..YOUNG_AGES-1}} from age_fuel.csv (BIL21)."""
+    if not path.exists():
+        return {}
+    tot, yng = defaultdict(float), defaultdict(float)
+    code = {v: k for k, v in BIL21_DRIV.items()}
+    for r in csv.DictReader(path.open(encoding="utf-8")):
+        f = code.get(r["driv"])
+        if f is None or r["age"] == "IALT":          # IALT = all ages; single ages + 24OV add up to it
+            continue
+        key = (f, int(r["year"]))
+        tot[key] += float(r["stock"])
+        if r["age"].isdigit() and int(r["age"]) < YOUNG_AGES:
+            yng[key] += float(r["stock"])
+    out = defaultdict(dict)
+    for (f, y), t in tot.items():
+        if t >= MIN_STOCK:
+            out[f][y] = yng[(f, y)] / t
+    return dict(out)
 
 
 def history(path: Path = ROOT / "Data" / "panels" / "fuel4_monthly.csv") -> dict:
@@ -75,19 +98,36 @@ def history(path: Path = ROOT / "Data" / "panels" / "fuel4_monthly.csv") -> dict
     out["rate_total"] = rt.tolist()
     tot_r = np.sum([out["sales"][f] for f in FUELS], axis=0)
     out["bev_share"] = (np.array(out["sales"]["BEV"]) / tot_r).tolist()
-    # young share at the start of year y: registrations in the YOUNG_MONTHS months to Dec y-1 / stock
+    # Young share at the start of year y (2026-11-28, Codex #4): OBSERVED share of the 1 January stock
+    # aged 0-4 (BIL21). The registration proxy (60-month registrations / stock) overstates it, because
+    # exported young cars stay in the numerator (Jan 2026 diesel 13.6% vs 5.6% observed); it is kept as
+    # young_reg and, scaled by phi = observed / proxy in the latest BIL21 year, rolls the share forward.
     months = sorted({mo for mo, _ in S})
-    out["young"] = {}
+
+    def reg_proxy(f, dec):                                    # registrations to month `dec` / stock then
+        if dec not in months:
+            return float("nan")
+        end = months.index(dec)
+        st0 = S[(dec, f)]
+        if end - YOUNG_MONTHS + 1 < 0 or st0 < MIN_STOCK:
+            return float("nan")
+        return sum(RM[(months[j], f)] for j in range(end - YOUNG_MONTHS + 1, end + 1)) / st0
+
+    b21 = bil21_young(path.parent / "age_fuel.csv")
+    out["young_reg"], out["young"], out["young_phi"], out["young_source"] = {}, {}, {}, {}
     for f in FUELS:
-        yv = []
-        for y in years:
-            end = months.index(f"{y - 1}-12")
-            st0 = S[(months[end], f)]
-            if end - YOUNG_MONTHS + 1 < 0 or st0 < MIN_STOCK:
-                yv.append(float("nan"))
-            else:
-                yv.append(sum(RM[(months[j], f)] for j in range(end - YOUNG_MONTHS + 1, end + 1)) / st0)
-        out["young"][f] = yv
+        out["young_reg"][f] = [reg_proxy(f, f"{y - 1}-12") for y in years]
+        obs = b21.get(f, {})
+        if obs:
+            out["young"][f] = [obs.get(y, float("nan")) for y in years]
+            yb = max(y for y in obs if f"{y - 1}-12" in months)       # latest BIL21 year inside the panel
+            px = reg_proxy(f, f"{yb - 1}-12")
+            out["young_phi"][f] = obs[yb] / px if np.isfinite(px) and px > 0 else 1.0
+            out["young_source"][f] = f"BIL21 ages 0-{YOUNG_AGES - 1}; phi from {yb}"
+        else:                                                     # no age table: fall back to the proxy
+            out["young"][f] = out["young_reg"][f]
+            out["young_phi"][f] = 1.0
+            out["young_source"][f] = "registration proxy (no BIL21 in the panel)"
     ok = rt >= MIN_RATE_TOTAL
     for f in FUELS:
         s0, e = np.array(out["stock0"][f], float), np.array(out["exits"][f], float)
@@ -166,7 +206,9 @@ def rate_links(h: dict, st: dict) -> dict:
         first = LINK_FIRST.get(f)
         use = np.isfinite(r) & (years >= (first if first else 9999))
         res = {"r0": v["level"], "b": 0.0, "b_se": 0.0, "resid_sd": v["sd"], "g": 0.0, "n_years": int(use.sum()),
-               "a": 0.0, "a_se": 0.0, "resid_sd_age": v["sd"], "y0": float("nan")}
+               "a": 0.0, "a_se": 0.0, "resid_sd_age": v["sd"], "y0": float("nan"),
+               "y_rate": float(h.get("young", {}).get(f, [np.nan])[-1]),          # young share in r0's year
+               "phi": float(h.get("young_phi", {}).get(f, 1.0))}
         yg = np.array(h.get("young", {}).get(f, [np.nan] * len(years)), float)
         use_a = use & np.isfinite(yg)
         if first and use_a.sum() >= LINK_MIN_YEARS:

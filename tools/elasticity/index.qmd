@@ -1,5 +1,5 @@
 ---
-title: "Transport Elasticity Calculator Denmark (BETA)"
+title: "Transport Elasticity Calculator Denmark (BETA, version 0.1)"
 description: "Interactive transport elasticity calculator for Denmark, calibrated by default to the Danish National Transport Model (LTM 2.3) and recalibratable to other elasticities."
 subtitle: "Trip, mileage and household-cost responses to car and public transport prices and travel times, on 2023 Danish travel survey (TU) data. Calibrated to the Danish National Transport Model (LTM 2.3) by default."
 page-layout: full

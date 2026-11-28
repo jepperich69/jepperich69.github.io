@@ -3,7 +3,7 @@
 
 const T = {
   da: {
-    kicker: "Elbiler i den danske bilpark", beta: "BETA-version", auto: "Opdateres automatisk hver måned, når Danmarks Statistik offentliggør nye tal.", updated: "Senest opdateret", title: "Elbil-tælleren", subtitle: "Månedlig prognose fra Danmarks Statistiks data",
+    kicker: "Elbiler i den danske bilpark", beta: "BETA · v0.1", auto: "Opdateres automatisk hver måned, når Danmarks Statistik offentliggør nye tal.", updated: "Senest opdateret", title: "Elbil-tælleren", subtitle: "Månedlig prognose fra Danmarks Statistiks data",
     vintage: "Data til og med", bev_now: "Elbiler i bilparken nu", expected_1m: "1 million elbiler ventes",
     since: "siden", of_way: "af vejen til 1 million", left: "mangler", kpis: "Nøgletal", milestones: "Milepæle",
     ms_note: "Median og 90%-interval. Ændring mod sidste måneds prognose.",
@@ -39,7 +39,7 @@ const T = {
          grid_g_per_kWh: "CO2 i elnettet (g/kWh), regneeksempel", life: "Bilens levetid (år)" },
   },
   en: {
-    kicker: "Electric cars in the Danish car fleet", beta: "BETA version", auto: "Updated automatically every month when Statistics Denmark publishes new figures.", updated: "Last updated", title: "EV Adaptation model Denmark", subtitle: "Monthly forecast from Statistics Denmark data",
+    kicker: "Electric cars in the Danish car fleet", beta: "BETA · v0.1", auto: "Updated automatically every month when Statistics Denmark publishes new figures.", updated: "Last updated", title: "EV Adaptation model Denmark", subtitle: "Monthly forecast from Statistics Denmark data",
     vintage: "Data up to", bev_now: "Electric cars in the fleet now", expected_1m: "1 million electric cars expected",
     since: "since", of_way: "of the way to 1 million", left: "to go", kpis: "Key figures", milestones: "Milestones",
     ms_note: "Median and 90% interval. Change against last month's forecast.",

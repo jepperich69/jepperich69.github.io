@@ -1,5 +1,5 @@
 ---
-title: "EV Adaptation model Denmark (BETA)"
+title: "EV Adaptation model Denmark (BETA, version 0.1)"
 description: "Monthly forecast of battery-electric cars in the Danish car fleet, updated automatically from Statistics Denmark."
 subtitle: "Elbil-tælleren: electric cars in the Danish car fleet, monthly forecast from Statistics Denmark data"
 page-layout: full

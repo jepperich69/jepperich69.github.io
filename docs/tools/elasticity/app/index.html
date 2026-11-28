@@ -147,12 +147,22 @@ details summary { cursor: pointer; font-weight: 600 }
 .hcard output { font-family: var(--font-data); color: var(--ink) }
 .hcard input[type=range] { width: 100% }
 .hcard .hc { font-size: .88rem; margin: 0; line-height: 1.4 }
+.bars-legend { display: flex; gap: 6px 14px; align-items: center; font-size: .85rem; color: var(--muted); margin: 4px 0 6px; flex-wrap: wrap }
+.bars-legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: -8px }
+.sw.s1, .bar1 { background: var(--accent); fill: var(--accent) }
+.sw.s2, .bar2 { background: var(--s2); fill: var(--s2) }
+:root { --s2: #E69F00 }
+@media (prefers-color-scheme: dark) { :root { --s2: #F0B33A } }
+#bars svg { width: 100%; height: auto; display: block }
+#bars text { font-size: 12px; fill: var(--muted); font-family: var(--font-body) }
+#bars text.v { fill: var(--ink); font-family: var(--font-data) }
+.beta-badge .ver { font-weight: 600; letter-spacing: 0; margin-left: 4px }
 </style>
 
 <div class="wrap">
   <header class="top">
     <div>
-      <h1><span id="hdrTitle">Elasticitetsmodel</span> <span class="beta-badge">BETA</span></h1>
+      <h1><span id="hdrTitle">Elasticitetsmodel</span> <span class="beta-badge">BETA<span class="ver">v0.1</span></span></h1>
       <p id="hdrDesc">Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and travel spending per person respond across trip purposes, income groups and car ownership.</p>
     </div>
     <div class="status">
@@ -175,15 +185,6 @@ details summary { cursor: pointer; font-weight: 600 }
   <div id="tab-explorer" class="layout">
     <aside class="controls" aria-label="Scenario">
       <div class="ctl">
-        <label for="model" id="lblModel">Calculation model</label>
-        <select id="model">
-          <option value="nl" id="optModelNl">Nested logit: mode × tour length</option>
-          <option value="mnl" id="optModelMnl">Multinomial logit: mode × tour length</option>
-          <option value="ipdl" id="optModelIpdl">IPDL over modes, length pivot</option>
-        </select>
-        <small id="modelNote"></small>
-      </div>
-      <div class="ctl">
         <label for="tpl" id="lblTpl">Scenario template</label>
         <select id="tpl"></select>
         <small id="tplNote">Pick a ready-made example scenario, or move the sliders below to test your own.</small>
@@ -201,7 +202,16 @@ details summary { cursor: pointer; font-weight: 600 }
         <input type="range" id="OC" min="-50" max="100" step="1" value="0"><small id="ownControlNote">Experimental: what happens if owning a car gets more expensive (e.g. annual tax)? First, some households shed a car; next, having fewer cars reduces driving. Works with NL and MNL.</small></div>
       <div class="status"><button id="reset">Reset</button><span class="chip warn" id="shockWarn" hidden>Beyond ±20%: large change — curve shape is extrapolated</span></div>
       <div class="group">
-        <div class="lbl" id="lblAssumpHead">Assumptions</div>
+        <div class="lbl" id="lblAssumpHead">Advanced: model and assumptions</div>
+        <div class="ctl">
+        <label for="model" id="lblModel">Calculation model</label>
+        <select id="model">
+          <option value="nl" id="optModelNl">Nested logit: mode × tour length</option>
+          <option value="mnl" id="optModelMnl">Multinomial logit: mode × tour length</option>
+          <option value="ipdl" id="optModelIpdl">IPDL over modes, length pivot</option>
+        </select>
+        <small id="modelNote"></small>
+      </div>
         <div class="ctl"><label for="ownBase" id="lblOwnBase">Reference ownership cost (DKK/car/year, 2023 prices)</label>
           <input type="number" id="ownBase" min="1000" max="100000" step="1000" value="20000"><small id="hOwnBase">Yardstick (20,000 DKK/year) used to translate a tax in DKK into a percentage on the slider above. Changing this number does not change the elasticities.</small></div>
         <div class="ctl"><label for="ownEl" id="lblOwnEl">Assumed ownership sensitivity to annual cost (elasticity)</label>
@@ -272,6 +282,11 @@ details summary { cursor: pointer; font-weight: 600 }
       </details>
 
       <section aria-label="Headline"><div class="tiles" id="tiles"></div></section>
+      <section class="card">
+        <div class="card-head"><div><h2 id="h2Bars">Change by mode</h2><p id="pBars">Change in tours and person-km by transport mode, all purposes, compared with 2023.</p></div></div>
+        <div class="bars-legend"><span class="sw s1"></span><span id="lgTours">Tours</span><span class="sw s2"></span><span id="lgKm">Person-km</span></div>
+        <div id="bars"></div>
+      </section>
 
       <section class="card" id="dist">
         <div class="card-head">
@@ -701,6 +716,9 @@ const I18N = {
     ui: {
       hdrTitle: "Elasticitetsmodel",
       h2Head: "Four headline scenarios",
+      h2Bars: "Change by mode",
+      pBars: "Change in tours and person-km by transport mode, all purposes, compared with 2023.",
+      lgTours: "Tours", lgKm: "Person-km",
       pHead: "Move a slider to choose a scenario; the detailed controls on the left follow and can be adjusted from there.",
       hdrDesc: "Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and travel spending per person respond across trip purposes, income groups and car ownership.",
       tabLinkExplorer: "Explorer",
@@ -723,7 +741,7 @@ const I18N = {
       ownControlNote: "Experimental: what happens if owning a car gets more expensive (e.g. annual tax)? First, some households shed a car; next, having fewer cars reduces driving. Works with NL and MNL.",
       reset: "Reset",
       shockWarn: "Beyond ±20%: large change — curve shape is extrapolated",
-      lblAssumpHead: "Assumptions",
+      lblAssumpHead: "Advanced: model and assumptions",
       lblOwnBase: "Reference ownership cost (DKK/car/year, 2023 prices)",
       hOwnBase: "Yardstick (20,000 DKK/year) used to translate a tax in DKK into a percentage on the slider above. Changing this number does not change the elasticities.",
       lblOwnEl: "Assumed ownership sensitivity to annual cost (elasticity)",
@@ -811,6 +829,9 @@ const I18N = {
     ui: {
       hdrTitle: "Elasticitetsmodel",
       h2Head: "Fire hovedscenarier",
+      h2Bars: "Ændring fordelt på transportmiddel",
+      pBars: "Ændring i ture og personkilometer pr. transportmiddel, alle formål, sammenlignet med 2023.",
+      lgTours: "Ture", lgKm: "Personkilometer",
       pHead: "Flyt en skyder for at vælge et scenarie; de detaljerede skydere til venstre følger med og kan justeres derfra.",
       hdrDesc: "Træk i skyderne for at ændre pris eller rejsetid for bil og kollektiv trafik, og se hvad det betyder for hverdagens ture, kørte kilometer og udgifterne til transport pr. person — fordelt på rejseformål, indkomstgrupper og bilrådighed.",
       tabLinkExplorer: "Model (overblik)",
@@ -833,7 +854,7 @@ const I18N = {
       ownControlNote: "Eksperimentel: hvad sker der, hvis det bliver dyrere at eje bil (f.eks. ejerafgift)? Først vælger nogle husstande bilen fra, og færre biler giver derefter mindre bilkørsel. Virker for NL og MNL.",
       reset: "Nulstil",
       shockWarn: "Over ±20 %: stor ændring — kurvens præcise form er ekstrapoleret",
-      lblAssumpHead: "Forudsætninger",
+      lblAssumpHead: "Avanceret: model og forudsætninger",
       lblOwnBase: "Typisk fast årlig biludgift (kr./bil/år, 2023-priser)",
       hOwnBase: "Målestok (20.000 kr./år) til at omregne en afgift i kroner til procent på skyderen ovenfor. Ændrer ikke selve elasticiteterne.",
       lblOwnEl: "Antaget følsomhed for bilejerskab (elasticitet)",
@@ -1172,7 +1193,24 @@ function render() {
     (isDa()
       ? `<div class="tile"><span class="lbl">Personer pr. bil (belægning)</span><span class="v">${num(tot.occupancy1, 3)}</span><span class="s">Basis ${num(tot.occupancy0, 3)} personer pr. bil-km</span><span class="s">10–84 år (TU)</span></div>`
       : `<div class="tile"><span class="lbl">Car occupancy</span><span class="v">${tot.occupancy1.toFixed(3)}</span><span class="s">Base ${tot.occupancy0.toFixed(3)} persons per car-km</span><span class="s">Ages 10–84 (TU)</span></div>`);
-  renderOwnership(res.ownership); renderDist(res, lam); renderPurpose(res); renderBands(res);
+  renderOwnership(res.ownership); renderDist(res, lam); renderPurpose(res); renderBands(res); renderBars(tot);
+}
+function renderBars(tot) {
+  const el = $("bars"); if (!el) return;
+  const rows = E.MODES.map((m, j) => ({ m, t: tot.trips1[j] / tot.trips0[j] - 1, k: tot.km1[j] / tot.km0[j] - 1 }));
+  const mx = Math.max(0.01, ...rows.flatMap(r => [Math.abs(r.t), Math.abs(r.k)]));
+  const W = 760, L = 150, R = 20, rowH = 34, H = rows.length * rowH + 6, x0 = L + (W - L - R) / 2, sc = ((W - L - R) / 2 - 60) / mx;  // 60 px kept for value labels
+  let g = `<line x1="${x0}" x2="${x0}" y1="0" y2="${H}" stroke="var(--line)"/>`;
+  rows.forEach((r, i) => {
+    const y = i * rowH + 4;
+    g += `<text x="${L - 10}" y="${y + 18}" text-anchor="end">${MODE_LABEL[r.m]}</text>`;
+    [[r.t, "bar1", 0], [r.k, "bar2", 13]].forEach(([v, c, dy]) => {
+      const w = Math.abs(v) * sc, xs = v < 0 ? x0 - w : x0;
+      g += `<rect class="${c}" x="${xs.toFixed(1)}" y="${y + dy}" width="${Math.max(w, 0.5).toFixed(1)}" height="11" rx="2"><title>${MODE_LABEL[r.m]}: ${pct(v, 1)}</title></rect>`;
+      g += `<text class="v" x="${(v < 0 ? xs - 4 : xs + w + 4).toFixed(1)}" y="${y + dy + 10}" text-anchor="${v < 0 ? "end" : "start"}">${pct(v, 1)}</text>`;
+    });
+  });
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${isDa() ? "Ændring pr. transportmiddel" : "Change by mode"}">${g}</svg>`;
 }
 function renderOwnership(own) {
   const qPfx = isDa() ? "K" : "Q";
