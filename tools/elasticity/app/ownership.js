@@ -83,6 +83,17 @@
     });
     return { rows, K, change, active: change !== 0 };
   }
+  // Direct fixed-cost burden per household (person-weighted, as the ownership shares), per quintile:
+  // m = expected cars per household (2+ counted as 2); spending change K1 m1 - K0 m0; money part of the
+  // welfare change by the rule of half (K1 - K0)(m0 + m1)/2; that as a share of household income Y.
+  // Per household, not per person: household sizes are not in the data.
+  function fixedCost(own) {
+    const K1 = own.K[1], K0 = own.change > -1 ? K1 / (1 + own.change) : 0, m = p => p[1] + 2 * p[2];
+    return own.rows.map(r => {
+      const m0 = m(r.p), m1 = m(r.p1), roh = (K1 - K0) * (m0 + m1) / 2;
+      return { q: r.q, N: r.N, m0, m1, spend: K1 * m1 - K0 * m0, roh, shareOfHhIncome: roh / r.Y };
+    });
+  }
   // Quintile elasticity of expected cars w.r.t. K, numerically at a 1% change.
   function quintileElasticities(model, h = 0.01) {
     const s = scenario(model, h), m = p => p[1] + 2 * p[2];
@@ -120,7 +131,7 @@
     });
     return { ...res, cells, ownership: own };
   }
-  const api = { CARS, COEFFICIENTS, modeEffect, frequencyZero, prepare, scenario, quintileElasticities, apply };
+  const api = { CARS, COEFFICIENTS, modeEffect, frequencyZero, prepare, scenario, quintileElasticities, apply, fixedCost };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.CarOwnership = api;
 })(typeof window !== "undefined" ? window : globalThis);

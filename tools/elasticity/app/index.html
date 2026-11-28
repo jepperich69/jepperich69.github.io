@@ -133,6 +133,20 @@ details summary { cursor: pointer; font-weight: 600 }
 .step { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px }
 .step .k { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--surface); display: grid; place-items: center; font-size: 0.75rem; font-weight: 700 }
 .saved-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center }
+.headline { margin-bottom: 14px }
+.headline h2 { margin: 0 0 2px }
+.headline .muted { color: var(--muted); margin: 0 0 10px; font-size: .9rem }
+.hcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px }
+.hcard { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--line); border-radius: var(--r);
+  padding: 10px 12px; cursor: pointer; display: grid; gap: 6px; align-content: start }
+.hcard.active { border-top-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset }
+.hcard.disabled { opacity: .55; cursor: default }
+.hcard .ht { font-weight: 700 }
+.hcard .tag { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--warn); margin-left: 4px }
+.hcard .hr { display: flex; justify-content: space-between; gap: 8px; font-size: .85rem; color: var(--muted) }
+.hcard output { font-family: var(--font-data); color: var(--ink) }
+.hcard input[type=range] { width: 100% }
+.hcard .hc { font-size: .88rem; margin: 0; line-height: 1.4 }
 </style>
 
 <div class="wrap">
@@ -208,7 +222,12 @@ details summary { cursor: pointer; font-weight: 600 }
     </aside>
 
     <main>
-      <details class="card guide" open>
+      <section class="headline" aria-labelledby="h2Head">
+        <h2 id="h2Head">Four headline scenarios</h2>
+        <p class="muted" id="pHead">Move a slider to choose a scenario; the detailed controls on the left follow and can be adjusted from there.</p>
+        <div class="hcards" id="hcards"></div>
+      </section>
+      <details class="card guide">
         <summary id="guideTitle">How to understand the model — in plain words</summary>
         <div data-lang-block="en">
           <div class="guide-grid">
@@ -253,10 +272,6 @@ details summary { cursor: pointer; font-weight: 600 }
       </details>
 
       <section aria-label="Headline"><div class="tiles" id="tiles"></div></section>
-      <section class="card">
-        <div class="card-head"><div><h2 id="h2Own">Car ownership</h2><p id="ownNote"></p></div><button data-copy="ownership">Copy CSV</button></div>
-        <div class="tbl"><table id="ownTbl"></table></div>
-      </section>
 
       <section class="card" id="dist">
         <div class="card-head">
@@ -321,6 +336,10 @@ details summary { cursor: pointer; font-weight: 600 }
         </details>
       </section>
 
+      <section class="card">
+        <div class="card-head"><div><h2 id="h2Own">Car ownership</h2><p id="ownNote"></p></div><button data-copy="ownership">Copy CSV</button></div>
+        <div class="tbl"><table id="ownTbl"></table></div>
+      </section>
       <section class="card">
         <div class="card-head"><div><h2 id="h2Wb">Workbook and calibration</h2><p id="pWb">All inputs come from one Excel workbook. Upload an edited copy to test your own data; the page checks it and recalibrates automatically. See <a href="#data">Data and assumptions</a> for the contents.</p></div></div>
         <div class="two">
@@ -681,6 +700,8 @@ const I18N = {
     },
     ui: {
       hdrTitle: "Elasticitetsmodel",
+      h2Head: "Four headline scenarios",
+      pHead: "Move a slider to choose a scenario; the detailed controls on the left follow and can be adjusted from there.",
       hdrDesc: "Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and travel spending per person respond across trip purposes, income groups and car ownership.",
       tabLinkExplorer: "Explorer",
       tabLinkData: "Data and assumptions",
@@ -789,6 +810,8 @@ const I18N = {
     },
     ui: {
       hdrTitle: "Elasticitetsmodel",
+      h2Head: "Fire hovedscenarier",
+      pHead: "Flyt en skyder for at vælge et scenarie; de detaljerede skydere til venstre følger med og kan justeres derfra.",
       hdrDesc: "Træk i skyderne for at ændre pris eller rejsetid for bil og kollektiv trafik, og se hvad det betyder for hverdagens ture, kørte kilometer og udgifterne til transport pr. person — fordelt på rejseformål, indkomstgrupper og bilrådighed.",
       tabLinkExplorer: "Model (overblik)",
       tabLinkData: "Data og forudsætninger",
@@ -1012,7 +1035,9 @@ function afterCalibration() {
   S.reb = E.rebasedElasticities(S.inp, S.cal);
   const worst = Math.max(...E.PURPOSES.map(p => S.cal.purposes[p].rmse));
   setStatus(`<span class="chip ok">${MODEL_LABEL[S.model]} · ${isDa() ? "største tur-RMSE" : "worst trip RMSE"} ${num(worst, 3)}</span>` + (S.overrides.length ? `<span class="chip warn">${S.overrides.length} ${isDa() ? "ændret mål" : `target override${S.overrides.length > 1 ? "s" : ""}`}</span>` : ""));
-  renderStatic(); render(); renderFitAndScData();
+  renderStatic();
+  if (!S.headInit) { S.headInit = true; activateHead("km"); } else { render(); renderHeadCards(); }
+  renderFitAndScData();
 }
 
 // overrides: [{p, j, k, v}] -> restore others, apply these, recalibrate affected purposes
@@ -1029,14 +1054,88 @@ async function setOverrides(list) {
 }
 
 // ---------------------------------------------------------------- scenario
-function scenario() {
-  const x = Object.fromEntries(E.SHOCKS.map(k => [k, +$(k).value / 100]));
+function runScenario(x, oc) {
   const lam = +$("lam").value / 100;
   S.inp.st.commute_pass_discount = +$("disc").value / 100;
   const model = window.CarOwnership.prepare(S.inp, +$("ownBase").value, { target: +$("ownEl").value, lambda: +$("ownLam").value });
-  const ownership = { ...window.CarOwnership.scenario(model, +$("OC").value / 100), byQ: window.CarOwnership.quintileElasticities(model) };
+  const ownership = { ...window.CarOwnership.scenario(model, oc), byQ: window.CarOwnership.quintileElasticities(model) };
   const res = window.CarOwnership.apply(E.run(S.inp, S.cal, x, { costShareScale: lam }), ownership, S.inp, S.cal, E, lam);
   return { x, lam, res };
+}
+function scenario() {
+  return runScenario(Object.fromEntries(E.SHOCKS.map(k => [k, +$(k).value / 100])), +$("OC").value / 100);
+}
+
+// ---------------------------------------------------------------- headline scenario cards
+// Each card has sliders in policy units and maps them onto the detailed sliders (car cost %, fare %, ownership %).
+const HEAD = [
+  { id: "km", da: "Kørselsafgift", en: "Road charge",
+    sl: [{ id: "km", da: "Afgift pr. km", en: "Charge per km", min: 0, max: 1, step: 0.05, v: 0.5, f: v => `${num(v, 2)} ${isDa() ? "kr." : "DKK"}` }],
+    map: v => ({ x: { CC: v[0] / S.inp.costs.carPerKm }, oc: 0 }) },
+  { id: "pt", da: "Billigere kollektiv trafik", en: "Cheaper public transport",
+    sl: [{ id: "pt", da: "Billetpris", en: "Fare", min: -50, max: 0, step: 5, v: -20, f: v => `${v}${isDa() ? " %" : "%"}` }],
+    map: v => ({ x: { PC: v[0] / 100 }, oc: 0 }) },
+  { id: "own", da: "Højere ejerafgift", en: "Higher ownership tax", exp: true,
+    sl: [{ id: "own", da: "Pr. bil pr. år", en: "Per car per year", min: 0, max: 10000, step: 500, v: 5000, f: v => `+${int(v)} ${isDa() ? "kr." : "DKK"}` }],
+    map: v => ({ x: {}, oc: v[0] / +$("ownBase").value }) },
+  { id: "green", da: "Grøn pakke", en: "Green package",
+    sl: [{ id: "gkm", da: "Kørselsafgift pr. km", en: "Road charge per km", min: 0, max: 1, step: 0.05, v: 0.2, f: v => `${num(v, 2)} ${isDa() ? "kr." : "DKK"}` },
+         { id: "gpt", da: "Billetpris", en: "Fare", min: -50, max: 0, step: 5, v: -20, f: v => `${v}${isDa() ? " %" : "%"}` }],
+    map: v => ({ x: { CC: v[0] / S.inp.costs.carPerKm, PC: v[1] / 100 }, oc: 0 }) },
+];
+S.head = "km";                     // active card; null = own scenario set with the detailed sliders
+S.headVals = Object.fromEntries(HEAD.map(c => [c.id, c.sl.map(s => s.v)]));
+const headOk = c => c.id !== "own" || S.model !== "ipdl";
+function headComment(c) {
+  if (!headOk(c)) return isDa() ? "Kræver nested logit eller MNL (vælg beregningsmodel under Avanceret)." : "Requires the nested logit or MNL (choose the calculation model).";
+  const { x, oc } = c.map(S.headVals[c.id]);
+  const { lam, res } = runScenario(Object.fromEntries(E.SHOCKS.map(k => [k, x[k] || 0])), oc);
+  const tot = E.aggregate(res, [])[0];
+  if (c.id === "own") {
+    const fc = window.CarOwnership.fixedCost(res.ownership), N = fc.reduce((s, r) => s + r.N, 0);
+    const dCars = fc.reduce((s, r) => s + r.N * r.m1, 0) / fc.reduce((s, r) => s + r.N * r.m0, 0) - 1;
+    const sp = fc.reduce((s, r) => s + r.N * r.spend, 0) / N;
+    return isDa()
+      ? `Antal biler ${pct(dCars, 1)}, bilkørsel ${pct(tot.dVkm, 1)}. Faste bilomkostninger ${sp >= 0 ? "+" : "−"}${int(Math.abs(sp))} kr. pr. husstand pr. år i gennemsnit. Eksperimentelt modul.`
+      : `Cars ${pct(dCars, 1)}, car driving ${pct(tot.dVkm, 1)}. Fixed car costs ${sp >= 0 ? "+" : "−"}${int(Math.abs(sp))} DKK per household per year on average. Experimental module.`;
+  }
+  const bur = E.burden(S.inp, res, { costShareScale: lam }), N = bur.reduce((s, r) => s + r.persons, 0);
+  const sp = bur.reduce((s, r) => s + r.spendDKK * r.persons, 0) / N;
+  return isDa()
+    ? `Bilkørsel ${pct(tot.dVkm, 1)}, kollektiv trafik ${pct(tot.dPtPkm, 1)} (person-km). Udgifter til transport ${sp >= 0 ? "+" : "−"}${int(Math.abs(sp))} kr. pr. person pr. år i gennemsnit.`
+    : `Car driving ${pct(tot.dVkm, 1)}, public transport ${pct(tot.dPtPkm, 1)} (person-km). Travel spending ${sp >= 0 ? "+" : "−"}${int(Math.abs(sp))} DKK per person per year on average.`;
+}
+function renderHeadCards(only) {
+  const box = $("hcards"); if (!box || !S.inp) return;
+  if (!box.dataset.built || box.dataset.lang !== S.lang) {
+    box.innerHTML = HEAD.map(c => `<div class="hcard" data-card="${c.id}" role="group" aria-label="${isDa() ? c.da : c.en}">
+      <div class="ht">${isDa() ? c.da : c.en}${c.exp ? `<span class="tag">${isDa() ? "eksperimentel" : "experimental"}</span>` : ""}</div>
+      ${c.sl.map((s, i) => `<div><div class="hr"><label for="h_${s.id}">${isDa() ? s.da : s.en}</label><output id="ho_${s.id}"></output></div>
+        <input type="range" id="h_${s.id}" data-card="${c.id}" data-i="${i}" min="${s.min}" max="${s.max}" step="${s.step}" value="${S.headVals[c.id][i]}"></div>`).join("")}
+      <p class="hc" id="hc_${c.id}"></p></div>`).join("");
+    box.dataset.built = "1"; box.dataset.lang = S.lang;
+    box.querySelectorAll("input[type=range]").forEach(el => el.addEventListener("input", () => {
+      S.headVals[el.dataset.card][+el.dataset.i] = +el.value; activateHead(el.dataset.card); }));
+    box.querySelectorAll(".hcard").forEach(el => el.addEventListener("click", ev => {
+      if (ev.target.tagName !== "INPUT" && S.head !== el.dataset.card) activateHead(el.dataset.card); }));
+    only = null;
+  }
+  HEAD.forEach(c => {
+    const el = box.querySelector(`[data-card="${c.id}"]`);
+    el.classList.toggle("active", S.head === c.id); el.classList.toggle("disabled", !headOk(c));
+    el.querySelectorAll("input").forEach(i => { i.disabled = !headOk(c); });
+    c.sl.forEach((s, i) => { $("ho_" + s.id).textContent = s.f(S.headVals[c.id][i]); });
+    if (!only || only === c.id) $("hc_" + c.id).textContent = headComment(c);
+  });
+}
+function activateHead(id) {
+  const c = HEAD.find(h => h.id === id); if (!c || !headOk(c)) return;
+  S.head = id;
+  const { x, oc } = c.map(S.headVals[id]);
+  E.SHOCKS.forEach(k => { $(k).value = Math.round(100 * (x[k] || 0)); });
+  $("OC").value = Math.round(100 * oc);
+  $("tpl").value = "";
+  render(); renderHeadCards(id);
 }
 function pivotTotals(x) {
   const piv = E.pivotRun(S.inp, x), T0 = [0, 0, 0, 0, 0, 0], T1 = [...T0], K0 = [...T0], K1 = [...T0];
@@ -1080,7 +1179,11 @@ function renderOwnership(own) {
   $("ownNote").textContent = isDa()
     ? `Andel af befolkningen i husstande med 0, 1 eller 2+ biler: før → efter. Forudsat årlig fast udgift: ${int(own.K[1])} kr./bil. Når faste biludgifter stiger, tilpasser lavindkomstgrupper bilholdet mere end højindkomstgrupper (lokal følsomhed pr. kvintil: ${own.byQ.map(e => `K${e.q} ${num(e.elasticity, 2)}`).join(", ")}; eksperimentel forudsætning). Færre biler fører derefter til mindre bilkørsel. Faste ejerafgifter indgår ikke i udgiftstabellen nedenfor.`
     : `Share of people living in households with 0, 1 or 2+ cars: baseline → scenario. Reference annual cost: ${int(own.K[1])} DKK/car. Lower-income groups adjust car ownership more strongly when annual costs change (local sensitivity by quintile: ${own.byQ.map(e => `Q${e.q} ${e.elasticity.toFixed(2)}`).join(", ")}; experimental assumption, see Method). Having fewer cars then reduces driving. Fixed ownership costs are excluded from the monetary table below.`;
-  $("ownTbl").innerHTML = `<thead><tr><th>${isDa() ? "Indkomstkvintil" : "Quintile"}</th><th>${isDa() ? "0 biler" : "0 cars"}</th><th>${isDa() ? "1 bil" : "1 car"}</th><th>${isDa() ? "2+ biler" : "2+ cars"}</th></tr></thead><tbody>` + own.rows.map(r => `<tr><td>${qPfx}${r.q}</td>${r.p.map((p, c) => `<td class="n">${pct(p, 1)} → ${pct(r.p1[c], 1)}</td>`).join("")}</tr>`).join("") + `</tbody>`;
+  const fc = window.CarOwnership.fixedCost(own), fcQ = Object.fromEntries(fc.map(r => [r.q, r])), kr = v => `${v >= 0.5 ? "+" : v <= -0.5 ? "−" : ""}${int(Math.abs(v))}`;
+  $("ownTbl").innerHTML = `<thead><tr><th>${isDa() ? "Indkomstkvintil" : "Quintile"}</th><th>${isDa() ? "0 biler" : "0 cars"}</th><th>${isDa() ? "1 bil" : "1 car"}</th><th>${isDa() ? "2+ biler" : "2+ cars"}</th>`
+    + `<th>${isDa() ? "Biler pr. husstand" : "Cars per household"}</th><th>${isDa() ? "Faste udgifter, kr./husstand/år" : "Fixed costs, DKK/household/yr"}</th><th>${isDa() ? "Velfærd (halvdelsreglen), % af husstandsindkomst" : "Welfare (rule of half), % of household income"}</th></tr></thead><tbody>`
+    + own.rows.map(r => { const f = fcQ[r.q]; return `<tr><td>${qPfx}${r.q}</td>${r.p.map((p, c) => `<td class="n">${pct(p, 1)} → ${pct(r.p1[c], 1)}</td>`).join("")}`
+      + `<td class="n">${num(f.m0, 2)} → ${num(f.m1, 2)}</td><td class="n">${kr(f.spend)}</td><td class="n">${pct(f.shareOfHhIncome, 2)}</td></tr>`; }).join("") + `</tbody>`;
   csv.ownership = [["quintile", "cars", "persons_base", "persons_scenario", "share_base", "share_scenario", "annual_cost_per_car_2023_DKK"], ...own.rows.flatMap(r => window.CarOwnership.CARS.map((c, j) => [r.q, c, r.n[j], r.n1[j], r.p[j], r.p1[j], own.K[1]]))];
 }
 function heat(v, max) {
@@ -1369,9 +1472,9 @@ function init() {
   document.querySelectorAll("#langSeg button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
   setLang(initialLang);
   $("model").addEventListener("change", () => setModel($("model").value));
-  E.SHOCKS.forEach(k => $(k).addEventListener("input", () => { $("tpl").value = ""; render(); }));
+  E.SHOCKS.forEach(k => $(k).addEventListener("input", () => { $("tpl").value = ""; S.head = null; render(); renderHeadCards("none"); }));
   ["lam", "disc"].forEach(id => $(id).addEventListener("input", render));
-  $("OC").addEventListener("input", () => { $("tpl").value = ""; render(); });
+  $("OC").addEventListener("input", () => { $("tpl").value = ""; S.head = null; render(); renderHeadCards("none"); });
   $("ownBase").addEventListener("change", () => { if (!$("ownBase").checkValidity() || !$("ownBase").value) { $("ownBase").reportValidity(); return; } $("tpl").value = ""; render(); });
   ["ownEl", "ownLam"].forEach(id => $(id).addEventListener("change", () => { if (!$(id).checkValidity() || $(id).value === "") { $(id).reportValidity(); return; } $("tpl").value = ""; render(); }));
   $("reset").addEventListener("click", () => applyScenario(BUILTIN[0]).then(() => { $("tpl").value = ""; }));
