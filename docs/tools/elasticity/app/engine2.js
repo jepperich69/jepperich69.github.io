@@ -571,11 +571,17 @@
       w: shares(par.tilt), prior_w: shares(z6()), prior_sC: inp.priorSC[p] };
   }
   const isNL = m => m === "nl" || m === "mnl";
+  // Cost-sharing sensitivity lam scales what PASSENGERS pay; the driver pays the rest of the
+  // vehicle cost: driver share = 1 - lam (1 - s0). lam = 1 gives the LTM shares, lam = 0 the
+  // driver pays all, and the shares of one shared car still add up to its cost. (Before
+  // 2026-11-28 both shares were multiplied by lam, so at lam = 0 nobody paid; Codex review #2.)
+  const clamp01 = v => Math.min(1, Math.max(0, v));
+  const shareScale = (cs0, lam) => ({ sov: 1, hov: clamp01(1 - lam * (1 - cs0.hov)), carp: clamp01(cs0.carp * lam) });
   function nlRun(inp, cal, x, lam) {
     const cells = [];
     PURPOSES.forEach(p => {
       // rebased: the 2023 TU shares replace the tilted calibration shares (as for the IPDL)
-      const par = { ...cal.purposes[p], tilt: null }, cs = { sov: 1, hov: Math.min(1, inp.cs[p].hov * lam), carp: Math.min(1, inp.cs[p].carp * lam) };
+      const par = { ...cal.purposes[p], tilt: null }, cs = shareScale(inp.cs[p], lam);
       inp.nl.cells[p].forEach(c => {
         const r = nlCellResponse(par, c, x, cellScale(inp, p, c.quintile), cs, inp.st.s0, par.structure);
         const trips0 = r.T0.map(sum), trips1 = r.T1.map(sum), km0 = r.K0.map(sum), km1 = r.K1.map(sum);
@@ -596,7 +602,7 @@
     if (!isNL(cal.model)) throw new Error("Ownership scenarios currently require NL or MNL");
     const p = cell.purpose, c = inp.nl.cells[p].find(r => r.quintile === cell.quintile && r.cars === cell.cars);
     const par = { ...cal.purposes[p], tilt: null };
-    const cs = { sov: 1, hov: Math.min(1, inp.cs[p].hov * lam), carp: Math.min(1, inp.cs[p].carp * lam) };
+    const cs = shareScale(inp.cs[p], lam);
     return nlCellResponse(par, c, x, cellScale(inp, p, c.quintile), cs, 0, par.structure, modeShift);
   }
   // odds scales for a cell: 2010-2023 update ratio and VoT relative to the average traveller
@@ -612,7 +618,7 @@
     const cells = [];
     let failed = 0;
     PURPOSES.forEach(p => {
-      const par = cal.purposes[p], cs = { sov: 1, hov: Math.min(1, inp.cs[p].hov * lam), carp: Math.min(1, inp.cs[p].carp * lam) };
+      const par = cal.purposes[p], cs = shareScale(inp.cs[p], lam);
       const L = pivot(logEl(inp.avgl[p], inp.st.x_ref), x);
       inp.cells[p].forEach(c => {
         const R = tripRatios(par, c.share, inp.st.s0, cs, x, cellScale(inp, p, c.quintile));
@@ -716,27 +722,34 @@
     return out;
   }
 
-  // ---------------------------------------------------------------- burden (money, rule of half)
-  // DKK per person (10-84) per year, by quintile x cars; time losses are not monetised here. Per-km
-  // charges use the average of base and scenario kilometres, per-trip fare components the average of
-  // base and scenario tours (rule of half).
+  // ---------------------------------------------------------------- burden (money)
+  // DKK per person (10-84) per year, by quintile x cars; time losses are not monetised here.
+  // totalDKK: money part of the consumer-surplus change by the rule of half, price change x
+  //   (base + scenario quantity) / 2. NOT a change in spending.
+  // spendDKK: change in spending, new price x new quantity - old price x old quantity (Codex #1).
   function burden(inp, res, opts = {}) {
     const x = res.x, lam = opts.costShareScale ?? 1, days = inp.st.annual_days, disc = inp.st.commute_pass_discount;
     const acc = {};
     res.cells.forEach(c => {
-      const key = `${c.quintile}|${c.cars}`, a = (acc[key] = acc[key] || { quintile: c.quintile, cars: c.cars, car: 0, pt: 0 });
+      const key = `${c.quintile}|${c.cars}`, a = (acc[key] = acc[key] || { quintile: c.quintile, cars: c.cars, car: 0, pt: 0, carSpend: 0, ptSpend: 0 });
       const cs = inp.cs[c.purpose];
-      [[2, 1], [3, Math.min(1, cs.hov * lam)], [4, Math.min(1, cs.carp * lam)]].forEach(([j, s]) => {
+      const sh = shareScale(cs, lam);
+      [[2, sh.sov], [3, sh.hov], [4, sh.carp]].forEach(([j, s]) => {
         a.car += inp.costs.carPerKm * s * x[0] * (c.km0[j] + c.km1[j]) / 2;
+        a.carSpend += inp.costs.carPerKm * s * ((1 + x[0]) * c.km1[j] - c.km0[j]);
       });
       const paid = c.purpose === "commute" ? 1 - disc : 1;
-      a.pt += paid * x[2] * (2 * inp.costs.fareOffset * (c.trips0[5] + c.trips1[5]) / 2 + inp.costs.farePerKm * (c.km0[5] + c.km1[5]) / 2);
+      const fare = (T, K) => 2 * inp.costs.fareOffset * T + inp.costs.farePerKm * K;
+      a.pt += paid * x[2] * fare((c.trips0[5] + c.trips1[5]) / 2, (c.km0[5] + c.km1[5]) / 2);
+      a.ptSpend += paid * ((1 + x[2]) * fare(c.trips1[5], c.km1[5]) - fare(c.trips0[5], c.km0[5]));
     });
     return Object.values(acc).map(a => {
       const persons = inp.persons[`${a.quintile}|${a.cars}`] || NaN, inc = inp.income[a.quintile];
       const perPerson = (a.car + a.pt) * days / persons;
+      const spend = (a.carSpend + a.ptSpend) * days / persons;
       return { quintile: a.quintile, cars: a.cars, persons, carDKK: a.car * days / persons, ptDKK: a.pt * days / persons,
-        totalDKK: perPerson, shareOfPersonalIncome: inc ? perPerson / (inc.resp * 1000) : NaN };
+        totalDKK: perPerson, shareOfPersonalIncome: inc ? perPerson / (inc.resp * 1000) : NaN,
+        carSpendDKK: a.carSpend * days / persons, ptSpendDKK: a.ptSpend * days / persons, spendDKK: spend };
     }).sort((u, v) => u.quintile - v.quintile || String(u.cars).localeCompare(String(v.cars)));
   }
 

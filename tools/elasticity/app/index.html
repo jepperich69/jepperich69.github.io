@@ -263,7 +263,8 @@ details summary { cursor: pointer; font-weight: 600 }
           <div><h2 id="h2Dist">Who is affected</h2><p id="distNote"></p></div>
           <div class="status">
             <div class="seg" role="group" aria-label="Measure">
-              <button data-dist="burden" aria-pressed="true" id="btnDistBurden">DKK per person/yr</button>
+              <button data-dist="spend" aria-pressed="true" id="btnDistSpend">Change in spending, DKK/person/yr</button>
+              <button data-dist="burden" aria-pressed="false" id="btnDistBurden">Welfare (rule of half), DKK/person/yr</button>
               <button data-dist="share" aria-pressed="false" id="btnDistShare">% of income</button>
               <button data-dist="vkm" aria-pressed="false" id="btnDistVkm">Car km</button>
               <button data-dist="trips" aria-pressed="false" id="btnDistTrips">Tours</button>
@@ -705,7 +706,7 @@ const I18N = {
       lblOwnLam: "Income difference in ownership sensitivity (λ)",
       hOwnLam: "Controls how much more strongly low-income households react to annual car costs than high-income ones. 0 = everyone reacts equally; 0.37 = follows their value of time.",
       lblLam: "Cost sharing when riding together",
-      hLam: "How much passengers chip in toward driving costs. 100% = normal sharing between driver and adult passengers; 0% = driver pays all.",
+      hLam: "How much passengers chip in toward driving costs; the driver pays the rest. 100% = normal sharing between driver and adult passengers; 0% = driver pays all.",
       lblDisc: "Commuter season-pass discount",
       hDisc: "Lowers the ticket expense for commuters in the financial impact table.",
       lblSaveHead: "Save this scenario",
@@ -716,7 +717,8 @@ const I18N = {
       guideTitle: "How to understand the model — in plain words",
       h2Own: "Car ownership",
       h2Dist: "Who is affected",
-      btnDistBurden: "DKK per person/yr",
+      btnDistSpend: "Change in spending, DKK/person/yr",
+      btnDistBurden: "Welfare (rule of half), DKK/person/yr",
       btnDistShare: "% of income",
       btnDistVkm: "Car km",
       btnDistTrips: "Tours",
@@ -812,7 +814,7 @@ const I18N = {
       lblOwnLam: "Indkomstforskel i følsomhed for bilejerskab (λ)",
       hOwnLam: "Styrer hvor meget stærkere lavindkomstgrupper reagerer på faste biludgifter end højindkomstgrupper. 0 = alle reagerer ens; 0,37 = følger deres tidsværdi.",
       lblLam: "Udgiftsdeling når flere kører sammen",
-      hLam: "Hvor meget passagerer bidrager til kørselsudgiften. 100 % = normal deling mellem fører og voksne passagerer; 0 % = føreren betaler alt.",
+      hLam: "Hvor meget passagerer bidrager til kørselsudgiften; føreren betaler resten. 100 % = normal deling mellem fører og voksne passagerer; 0 % = føreren betaler alt.",
       lblDisc: "Rabat på pendlerkort",
       hDisc: "Sænker billetudgiften for pendlere i beregningen af økonomisk konsekvens.",
       lblSaveHead: "Gem dette scenarie",
@@ -823,7 +825,8 @@ const I18N = {
       guideTitle: "Sådan hænger modellen sammen — kort fortalt",
       h2Own: "Bilejerskab i husstandene",
       h2Dist: "Hvem rammes? (Fordeling på indkomst og bilrådighed)",
-      btnDistBurden: "Kr. pr. person/år",
+      btnDistSpend: "Ændring i udgifter, kr./person/år",
+      btnDistBurden: "Velfærd (halvdelsreglen), kr./person/år",
       btnDistShare: "% af indkomst",
       btnDistVkm: "Bil-km",
       btnDistTrips: "Ture",
@@ -881,7 +884,7 @@ const BUILTIN = [
   { id: "b:mix", name: "Car cost +20% and PT fare −20%", x: { CC: 0.20, PC: -0.20 } },
 ];
 const $ = id => document.getElementById(id);
-const S = { lang: "en", sheets: null, inp: null, cal: null, cals: {}, model: "nl", reb: null, orig: {}, overrides: [], dist: "burden", meas: "trips", shock: "CC", tgtShock: "CC", tgtMeas: "trips", name: "" };
+const S = { lang: "en", sheets: null, inp: null, cal: null, cals: {}, model: "nl", reb: null, orig: {}, overrides: [], dist: "spend", meas: "trips", shock: "CC", tgtShock: "CC", tgtMeas: "trips", name: "" };
 const L = () => I18N[S.lang] || I18N.en;
 const isDa = () => S.lang === "da";
 const MODE_LABEL = new Proxy({}, { get: (_, k) => L().modes[k] || k });
@@ -1084,13 +1087,13 @@ function heat(v, max) {
 function renderDist(res, lam) {
   const bur = E.burden(S.inp, res, { costShareScale: lam }), agg = E.aggregate(res, ["quintile", "cars"]);
   const cars = ["0", "1", "2+"], qs = [1, 2, 3, 4, 5], inc = q => S.inp.income[q];
-  const money = S.dist === "burden" || S.dist === "share";
+  const money = S.dist === "burden" || S.dist === "share" || S.dist === "spend";
   const val = (q, c) => {
-    if (money) { const b = bur.find(r => r.quintile === q && r.cars === c); return b ? (S.dist === "burden" ? b.totalDKK : b.shareOfPersonalIncome) : NaN; }
+    if (money) { const b = bur.find(r => r.quintile === q && r.cars === c); return b ? (S.dist === "burden" ? b.totalDKK : S.dist === "spend" ? b.spendDKK : b.shareOfPersonalIncome) : NaN; }
     const g = agg.find(r => r.quintile === q && r.cars === c); return g ? (S.dist === "vkm" ? g.dVkm : g.dTrips) : NaN;
   };
-  const fmt = v => S.dist === "burden" ? int(v) : pct(v, S.dist === "share" ? 2 : 1);
-  const vals = qs.flatMap(q => cars.map(c => val(q, c))).filter(Number.isFinite), max = Math.max(...vals.map(Math.abs), 1e-12);
+  const fmt = v => (S.dist === "burden" || S.dist === "spend") ? int(Math.abs(v) < 0.5 ? 0 : v) : pct(v, S.dist === "share" ? 2 : 1);
+  const vals = qs.flatMap(q => cars.map(c => val(q, c))).filter(Number.isFinite), max = Math.max(...vals.map(Math.abs), (S.dist === "burden" || S.dist === "spend") ? 1 : 1e-6);
   const qPfx = isDa() ? "K" : "Q";
   const carHdr = c => isDa() ? (c === "1" ? "1 bil" : `${c} biler`) : (c === "2+" ? "2+ cars" : c + (c === "1" ? " car" : " cars"));
   let html = `<thead><tr><th>${isDa() ? "Indkomstkvintil (husstandsindkomst)" : "Income quintile (household income)"}</th>${cars.map(c => `<th>${carHdr(c)}</th>`).join("")}<th>${isDa() ? "Alle" : "All"}</th></tr></thead><tbody>`;
@@ -1098,8 +1101,8 @@ function renderDist(res, lam) {
   qs.forEach(q => {
     let all;
     if (money) {
-      const bs = bur.filter(r => r.quintile === q), P = bs.reduce((s, r) => s + r.persons, 0), D = bs.reduce((s, r) => s + r.totalDKK * r.persons, 0);
-      all = S.dist === "burden" ? D / P : D / P / (inc(q).resp * 1000);
+      const bs = bur.filter(r => r.quintile === q), P = bs.reduce((s, r) => s + r.persons, 0), D = bs.reduce((s, r) => s + (S.dist === "spend" ? r.spendDKK : r.totalDKK) * r.persons, 0);
+      all = (S.dist === "burden" || S.dist === "spend") ? D / P : D / P / (inc(q).resp * 1000);
     } else {
       const gs = agg.filter(r => r.quintile === q), k = S.dist === "vkm" ? "km" : "trips", js = S.dist === "vkm" ? [2, 3] : ALL;
       all = gs.reduce((s, g) => s + sum(g[k + "1"], js), 0) / gs.reduce((s, g) => s + sum(g[k + "0"], js), 0) - 1;
@@ -1111,20 +1114,22 @@ function renderDist(res, lam) {
   csv.dist = [["quintile", "household_income_kDKK", "cars_0", "cars_1", "cars_2plus", "all"], ...rows];
   if (isDa()) {
     const unit = {
-      burden: "Årlig merudgift eller besparelse i kr. pr. person (10–84 år, 2025-priser) fra ændrede kørselsudgifter og billetpriser.",
-      share: "Årlig merudgift eller besparelse i procent af den gennemsnitlige personindkomst i indkomstgruppen.",
+      spend: "Ændring i årlige udgifter til kørsel (brændstof og dæk) og billetter i kr. pr. person (10–84 år): ny pris × nyt forbrug minus gammel pris × gammelt forbrug. Faste bilomkostninger og tid indgår ikke.",
+      burden: "Velfærdsændringens pengedel efter halvdelsreglen i kr. pr. person (10–84 år): prisændring × gennemsnittet af forbruget før og efter. Det er ikke en ændring i udgifter; tidsgevinster og -tab indgår ikke.",
+      share: "Velfærdsændringens pengedel (halvdelsreglen) i procent af den gennemsnitlige personindkomst i indkomstgruppen.",
       vkm: "Procentvis ændring i kørte kilometer i bil.",
       trips: "Procentvis ændring i samlet antal ture på tværs af alle transportmidler."
     }[S.dist];
-    $("distNote").textContent = `Husstande opdelt i 5 indkomstgrupper (K1 = laveste 20 %, K5 = højeste 20 %; gennemsnitlig husstandsindkomst i 2023-priser står i parentes) og antal biler. ${unit}${res.ownership?.active ? " Scenarie med ændret bilejerskab: rækkerne fastholder grupperne fra udgangspunktet, og kronebeløbene dækker kun løbende kørselsudgifter og billetpriser, ikke faste ejerafgifter." : ""}${money ? " Positive tal (rød) er en merudgift; negative tal (grøn) er en besparelse. Beregnet som prisændring gange gennemsnitlig rejsemængde før og efter (rule-of-half) — beløbet styres derfor især af, hvor meget gruppen allerede kører eller rejser kollektivt i dag. Rejsetidsændringer er ikke omregnet til kroner her." : ""}${S.dist === "share" ? " Inden for hver række måles alle bilgrupper mod den samme gennemsnitlige personindkomst i kvintilen." : ""}`;
+    $("distNote").textContent = `Husstande opdelt i 5 indkomstgrupper (K1 = laveste 20 %, K5 = højeste 20 %; gennemsnitlig husstandsindkomst i 2023-priser står i parentes) og antal biler. ${unit}${res.ownership?.active ? " Scenarie med ændret bilejerskab: rækkerne fastholder grupperne fra udgangspunktet, og kronebeløbene dækker kun løbende kørselsudgifter og billetpriser, ikke faste ejerafgifter." : ""}${money ? (S.dist === "spend" ? " Positive tal (rød) er flere udgifter; negative tal (grøn) er færre." : " Positive tal (rød) er et velfærdstab; negative tal (grøn) en gevinst. Beløbet styres især af, hvor meget gruppen allerede kører eller rejser kollektivt i dag.") : ""}${S.dist === "share" ? " Inden for hver række måles alle bilgrupper mod den samme gennemsnitlige personindkomst i kvintilen." : ""}`;
   } else {
     const unit = {
-      burden: "Annual money impact in DKK per person aged 10–84 (2025 prices) from changes in driving costs and ticket prices.",
-      share: "Annual money impact as a percentage of average personal income in the income group.",
+      spend: "Change in annual spending on driving (fuel and tyres) and tickets in DKK per person aged 10–84: new price × new use minus old price × old use. Fixed car costs and time are not included.",
+      burden: "Money part of the welfare change by the rule of half, DKK per person aged 10–84: price change × the average of use before and after. This is not a change in spending; time gains and losses are not included.",
+      share: "Money part of the welfare change (rule of half) as a percentage of average personal income in the income group.",
       vkm: "Percentage change in car vehicle-kilometres.",
       trips: "Percentage change in total tours across all modes."
     }[S.dist];
-    $("distNote").textContent = `Households split into 5 income groups (Q1 = lowest 20%, Q5 = highest 20%; mean household income in 2023 prices shown in parentheses) and number of cars. ${unit}${res.ownership?.active ? " Ownership scenario: rows refer to baseline ownership groups. The monetary figures cover operating-cost and fare changes only, not fixed ownership costs or total welfare." : ""}${money ? " Positive values (red) mean an added expense; negative values (green) mean a saving. Calculated as the price change times average travel before and after (rule of half) — so the impact depends mainly on how much each group already travels today. Time savings and losses are not converted to DKK here." : ""}${S.dist === "share" ? " All car-ownership groups within a quintile use the same mean personal income denominator." : ""}`;
+    $("distNote").textContent = `Households split into 5 income groups (Q1 = lowest 20%, Q5 = highest 20%; mean household income in 2023 prices shown in parentheses) and number of cars. ${unit}${res.ownership?.active ? " Ownership scenario: rows refer to baseline ownership groups. The monetary figures cover operating-cost and fare changes only, not fixed ownership costs or total welfare." : ""}${money ? (S.dist === "spend" ? " Positive values (red) mean more spending; negative values (green) less." : " Positive values (red) mean a welfare loss; negative values (green) a gain. The amount depends mainly on how much each group already travels today.") : ""}${S.dist === "share" ? " All car-ownership groups within a quintile use the same mean personal income denominator." : ""}`;
   }
 }
 function renderPurpose(res) {

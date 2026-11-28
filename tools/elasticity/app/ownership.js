@@ -53,6 +53,7 @@
     const rows = Object.keys(inp.income).map(q => {
       const n = CARS.map(c => inp.persons[`${q}|${c}`] || 0), N = sum(n);
       const Y = inp.income[q].hh * 1000;
+      // calibration-time sanity guard on the reference cost (no effect on scenario continuity)
       if (!(N > 0) || !(Y > K[2]) || n.some(v => v <= 0))
         throw new Error(`Ownership model needs positive populations and income above baseline costs in Q${q}`);
       return { q: +q, n, N, Y, p: n.map(v => v / N) };
@@ -73,8 +74,9 @@
     if (!Number.isFinite(change) || change < -1) throw new Error("Invalid ownership cost change");
     const K = model.K.map(k => k * (1 + change));
     const rows = model.rows.map(r => {
-      const v = r.p.map((p, c) => r.Y > K[c]
-        ? Math.log(p) - model.gamma * (K[c] - model.K[c]) * r.w : -Infinity);
+      // No affordability cutoff: the documented form is V = ASC - gamma K c w_q. (A cost-above-income
+      // cutoff removed whole ownership states in one 1% step; Codex review 2026-11-28 #4.)
+      const v = r.p.map((p, c) => Math.log(p) - model.gamma * (K[c] - model.K[c]) * r.w);
       const top = Math.max(...v), w = v.map(x => Math.exp(x - top)), z = sum(w);
       const p1 = change === 0 ? [...r.p] : w.map(x => x / z);
       return { ...r, p1, n1: p1.map(p => p * r.N), ratio: p1.map((p, c) => p / r.p[c]) };
