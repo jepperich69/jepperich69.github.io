@@ -12,8 +12,8 @@ These interactive tools run **100% client-side in your browser** (compiled JavaS
 
   <div class="jr-card">
     <div>
-      <div class="jr-card-meta">National Transport Demand &amp; Welfare Surrogate · Denmark (2023 Baseline)</div>
-      <h3><a href="elasticity/index.qmd">LTM 2.3 Transport Cost &amp; Fare Elasticity Calculator</a></h3>
+      <div class="jr-card-meta">National Transport Demand &amp; Welfare Surrogate · Denmark (2023 Baseline) · BETA</div>
+      <h3><a href="elasticity/index.qmd">LTM 2.3 Transport Cost &amp; Fare Elasticity Calculator (BETA)</a></h3>
       <p>
         A fast, calibrated Nested Logit / Multinomial Logit surrogate of the Danish National Transport Model (LTM 2.3, Rich 2022), rebased to 2023 with Danish National Travel Survey (TU 0624v1), TERESA 6.21 value-of-time, and TØE 2.2 unit cost data. Available in Danish and English.
       </p>

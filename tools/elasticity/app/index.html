@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Elasticitetsmodel</title>
+<title>Elasticitetsmodel (BETA)</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,8 @@ body { background: var(--bg); color: var(--ink); font-family: var(--font-body); 
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 40px }
 h1, h2, h3 { text-wrap: balance; margin: 0 }
 h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em }
+.beta-badge { display: inline-block; vertical-align: middle; font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+  padding: .12rem .5rem; margin-left: .35rem; border-radius: 999px; border: 1px solid currentColor; opacity: .75 }
 h2 { font-size: 1.05rem; font-weight: 650 }
 h3 { font-size: 0.95rem; font-weight: 650 }
 code, .num, td.n, .tile .v { font-family: var(--font-data); font-variant-numeric: tabular-nums }
@@ -136,7 +138,7 @@ details summary { cursor: pointer; font-weight: 600 }
 <div class="wrap">
   <header class="top">
     <div>
-      <h1 id="hdrTitle">Elasticitetsmodel</h1>
+      <h1><span id="hdrTitle">Elasticitetsmodel</span> <span class="beta-badge">BETA</span></h1>
       <p id="hdrDesc">Pull the sliders to change the price or travel time of driving and public transport, and see how everyday trips, mileage and household expenses respond across trip purposes, income groups and car ownership.</p>
     </div>
     <div class="status">
