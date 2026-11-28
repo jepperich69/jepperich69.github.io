@@ -1,0 +1,3 @@
+event,first_month,last_month,months,applies_to,note
+yearend_pull,2020-12,,12,total;shares,"December pull-forward before the annual registration-tax step for EV/PHEV (phase-in from 2021). Seen every December 2020-2025: total +20-45% vs November, BEV share up."
+yearend_slump,2021-01,,1,total;shares,"January payback after the pull-forward: total -30-50% vs December, BEV share down (2024-01: 51% -> 35%)."

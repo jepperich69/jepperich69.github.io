@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elbil-tælleren BETA – elbiler i den danske bilpark</title>
+<link rel="stylesheet" href="style.css?v=2026-11-28d">
+</head>
+<body>
+<header class="band">
+  <div class="top">
+    <div>
+      <p class="kicker" data-i18n="kicker">Elbiler i den danske bilpark</p>
+      <h1><span data-i18n="title">Elbil-tælleren</span> <span class="beta" data-i18n="beta">BETA-version</span></h1>
+      <p class="sub"><span data-i18n="subtitle">Månedlig prognose fra Danmarks Statistiks data</span> · <span data-i18n="vintage">Data til og med</span> <strong id="vintage">…</strong></p>
+    </div>
+    <button id="lang" type="button" aria-label="Switch language">English</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-label">
+    <div class="hero-row">
+      <div>
+        <p id="hero-label" class="label" data-i18n="bev_now">Elbiler i bilparken nu</p>
+        <p class="hero-num" id="bev-now">…</p>
+        <p class="delta-line" id="bev-delta"></p>
+      </div>
+      <div class="hero-goal">
+        <p class="label" data-i18n="expected_1m">1 million elbiler ventes</p>
+        <p class="goal-date" id="m1m">…</p>
+        <p class="muted" id="m1m-band"></p>
+      </div>
+    </div>
+    <div class="progress" role="img" id="progress-aria">
+      <div class="bar"><span id="progress-fill"></span></div>
+      <div class="progress-labels"><span id="progress-pct"></span><span id="progress-left"></span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="kpi-h">
+    <h2 id="kpi-h" class="visually-hidden" data-i18n="kpis">Nøgletal</h2>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section aria-labelledby="ms-h">
+    <h2 id="ms-h" data-i18n="milestones">Milepæle</h2>
+    <p class="muted" data-i18n="ms_note">Median og 90%-interval. Ændring mod sidste måneds prognose i måneder.</p>
+    <div class="tiles" id="milestones"></div>
+  </section>
+
+  <section class="card" aria-labelledby="c1-h">
+    <h2 id="c1-h" data-i18n="c1">Bilparken efter drivmiddel</h2>
+    <p class="muted" data-i18n="c1_note">Faktisk bestand og prognosens median. Prognosen starter ved den lodrette linje.</p>
+    <div class="legend" id="legend1"></div>
+    <div class="chart" id="chart1"></div>
+  </section>
+
+  <section class="card" aria-labelledby="c2-h">
+    <h2 id="c2-h" data-i18n="c2">Antal elbiler med usikkerhed</h2>
+    <p class="muted" data-i18n="c2_note">Median med 80%-interval. Stiplet linje: 1 million.</p>
+    <div class="chart" id="chart2"></div>
+  </section>
+
+  <section class="card" aria-labelledby="c3-h">
+    <h2 id="c3-h" data-i18n="c3">Elbilers andel af salget og af bilparken</h2>
+    <p class="muted" data-i18n="c3_note">Salget skifter hurtigt; bilparken følger efter, fordi biler holder 15–18 år.</p>
+    <div class="legend" id="legend3"></div>
+    <div class="chart" id="chart3"></div>
+  </section>
+
+  <section class="card fiscal" aria-labelledby="f-h" id="fiscal" hidden>
+    <h2 id="f-h" data-i18n="f_title">Statens afgifter og CO2</h2>
+    <p class="muted" data-i18n="f_note">Hvad staten ikke får i afgift, fordi elbiler erstatter benzinbiler, og hvor meget CO2 det sparer. Sammenligning: samme bilpark uden elbiler. Op til i dag med de faktiske elbiler; derefter et regneeksempel, hvor 2026-reglerne fastholdes.</p>
+    <div class="ftiles" id="ftiles"></div>
+    <div class="legend" id="legendF"></div>
+    <div class="chart" id="chartF"></div>
+    <details class="params">
+      <summary data-i18n="f_params">Ret forudsætningerne</summary>
+      <form id="fparams" class="pgrid"></form>
+      <p><button type="button" id="freset" data-i18n="f_reset">Nulstil</button></p>
+      <p class="muted" data-i18n="f_caveat">Budgetomkostningen pr. ton er en overførsel fra staten til bilejerne, ikke en samfundsøkonomisk omkostning. Afgiftsreglerne ændres løbende, så tallene efter i dag er et regneeksempel, ikke en prognose.</p>
+    </details>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary data-i18n="table">Vis tal som tabel</summary>
+      <div id="table"></div>
+    </details>
+  </section>
+
+  <section class="card method">
+    <h2 data-i18n="how">Sådan virker prognosen</h2>
+    <p data-i18n="how_text"></p>
+    <p><a href="methods.pdf" data-i18n="methods">Metodenotat (PDF, engelsk)</a></p>
+    <p class="muted"><span data-i18n="source">Kilde</span>: <span id="source">…</span>.</p>
+  </section>
+</main>
+<footer class="foot">
+  <p><span data-i18n="auto">Opdateres automatisk hver måned, når Danmarks Statistik offentliggør nye tal.</span>
+     <span data-i18n="updated">Senest opdateret</span> <span id="updated">…</span>.</p>
+  <p>© <span id="cyear">2026</span> <a href="https://www.jepperich.com">Jeppe Rich</a> · <a href="https://www.jepperich.com">jepperich.com</a></p>
+</footer>
+<div id="tip" class="tip" role="status" hidden></div>
+<script src="app.js?v=2026-11-28d"></script>
+</body>
+</html>

@@ -27,5 +27,22 @@ These interactive tools run **100% client-side in your browser** (compiled JavaS
     </div>
   </div>
 
+  <div class="jr-card">
+    <div>
+      <div class="jr-card-meta">Electric-car fleet forecast · Denmark · BETA · updated monthly</div>
+      <h3><a href="ev-fleet/index.qmd">Elbil-tælleren (BETA)</a></h3>
+      <p>
+        Counts the battery-electric cars in the Danish car fleet and forecasts when it reaches one million, when electric cars outnumber petrol cars, and the fleet composition to 2040. A small Bayesian stock-flow model is refitted automatically every month from Statistics Denmark data. Available in Danish and English.
+      </p>
+      <p>
+        Also shows the <strong>car tax revenue</strong> the state does not collect because electric cars replace petrol cars, and the <strong>CO2 saved</strong>, with adjustable assumptions.
+      </p>
+    </div>
+    <div class="badge-row">
+      <a href="ev-fleet/index.qmd" class="jr-badge badge-tool">🚗 Open Elbil-tælleren</a>
+      <a href="ev-fleet/app/methods.pdf" class="jr-badge badge-pdf" target="_blank">📄 Methods note (PDF)</a>
+    </div>
+  </div>
+
 </div>
 ```

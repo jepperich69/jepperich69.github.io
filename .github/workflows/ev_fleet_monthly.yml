@@ -1,0 +1,83 @@
+name: Elbil-taelleren monthly update
+
+# Daily cheap check (stdlib only) against Statistics Denmark. Only when a new month has been
+# published does the job install JAX/NumPyro, refit, pass the convergence gate and export.
+# Any failure stops the job before the commit, so the previous forecast stays online.
+
+on:
+  schedule:
+    - cron: '30 7 * * *'     # 07:30 UTC daily
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Refit and publish even if there is no new month"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ev-fleet
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    defaults:
+      run:
+        working-directory: tools/ev-fleet/pipeline
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Fetch Statistics Denmark data (stdlib only)
+        run: python src/fetch.py
+
+      - name: Check for a new month
+        id: check
+        run: python src/check_new.py ../app/data/forecast.json
+
+      - name: Install model dependencies
+        if: steps.check.outputs.new == 'true' || inputs.force
+        run: pip install -r requirements-ci.txt
+
+      - name: Fit market size and exit rate (convergence gate)
+        if: steps.check.outputs.new == 'true' || inputs.force
+        run: python src/total.py
+
+      - name: Fit fuel shares (convergence gate)
+        if: steps.check.outputs.new == 'true' || inputs.force
+        run: python src/shares.py
+
+      - name: Simulate and export the forecast
+        if: steps.check.outputs.new == 'true' || inputs.force
+        run: |
+          python src/export.py --app-data ../app/data
+          mkdir -p ../../../docs/tools/ev-fleet/app/data
+          cp -r ../app/data/. ../../../docs/tools/ev-fleet/app/data/
+
+      - name: Commit and push
+        if: steps.check.outputs.new == 'true' || inputs.force
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/ev-fleet/app/data docs/tools/ev-fleet/app/data \
+                  tools/ev-fleet/pipeline/Data/panels tools/ev-fleet/pipeline/Data/raw
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -m "data: Elbil-taelleren forecast, data to ${{ steps.check.outputs.last }}"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 10
+          done
+          exit 1

@@ -1,0 +1,6 @@
+# Elbil-taelleren monthly pipeline (CI). Pins from the development lock file.
+numpy==2.5.5
+scipy==1.18.1
+jax==0.12.1
+jaxlib==0.12.1
+numpyro==0.22.0

@@ -19,3 +19,7 @@ papers/_rundown_*.md
 
 # Session prompt logs (agent conversations): never published
 prompts/
+
+# Elbil-taelleren pipeline: fits are rebuilt each month
+tools/ev-fleet/pipeline/Data/fits/
+tools/ev-fleet/pipeline/**/__pycache__/

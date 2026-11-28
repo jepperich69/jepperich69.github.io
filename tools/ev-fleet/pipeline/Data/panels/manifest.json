@@ -1,0 +1,79 @@
+{
+  "built_at": "2026-11-28T10:00:08+00:00",
+  "tables": {
+    "BIL51": {
+      "updated": "2026-11-13T08:00:00",
+      "fetched_at": "2026-11-27T05:26:32+00:00",
+      "from_cache": true,
+      "n_rows": 2280
+    },
+    "BIL52": {
+      "updated": "2026-11-13T08:00:00",
+      "fetched_at": "2026-11-27T05:26:36+00:00",
+      "from_cache": true,
+      "n_rows": 2280
+    },
+    "BIL54": {
+      "updated": "2026-11-13T08:00:00",
+      "fetched_at": "2026-11-27T05:26:42+00:00",
+      "from_cache": true,
+      "n_rows": 1272
+    },
+    "BIL21": {
+      "updated": "2026-03-24T08:00:00",
+      "fetched_at": "2026-11-27T05:26:46+00:00",
+      "from_cache": true,
+      "n_rows": 5184
+    },
+    "BEF5": {
+      "updated": "2026-02-12T08:00:00",
+      "fetched_at": "2026-11-27T08:41:33+00:00",
+      "from_cache": true,
+      "n_rows": 4662
+    },
+    "FRDK126": {
+      "updated": "2026-06-12T08:00:00",
+      "fetched_at": "2026-11-27T08:41:36+00:00",
+      "from_cache": true,
+      "n_rows": 4770
+    }
+  },
+  "coverage": {
+    "monthly": [
+      "2011-01",
+      "2026-10"
+    ],
+    "bil54": [
+      "2018-01",
+      "2026-10"
+    ],
+    "age_fuel": [
+      2011,
+      2026
+    ],
+    "population": [
+      1990,
+      2070
+    ]
+  },
+  "checks": {
+    "sum_vs_total_max_abs_diff": {
+      "new_reg": 0,
+      "stock": 0
+    },
+    "phev_bil52_vs_bil54": {
+      "month": "2026-10",
+      "bil52_hybrid": 125185,
+      "bil54_plugin": 125185
+    },
+    "population": {
+      "projection_table": "FRDK126",
+      "last_observed": 2026,
+      "base_year_rel_diff": 0.0
+    },
+    "bil21_vs_bil52_dec_rel_diff_gt_0.1pct": {
+      "2012": -0.01747,
+      "2015": 0.00447
+    }
+  }
+}

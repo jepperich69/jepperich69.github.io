@@ -6,6 +6,7 @@ project:
     - "!prompts/"
   resources:
     - "tools/elasticity/app/**"
+    - "tools/ev-fleet/app/**"
     - "tools/elasticity/*.pdf"
     - "papers/**/*.pdf"
     - "group-cv/*.pdf"
