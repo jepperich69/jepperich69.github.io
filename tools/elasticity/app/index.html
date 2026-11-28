@@ -390,6 +390,7 @@ details summary { cursor: pointer; font-weight: 600 }
       <section class="card prose">
         <h2>What the model is</h2>
         <p>A fast surrogate of the Danish national model LTM 2.3 for uniform percentage changes in car cost per km, car travel time, public-transport fare and public-transport time. It reproduces LTM's tour elasticities by trip purpose and mode, applies them to the 2023 travel pattern from the Danish travel survey (TU), and splits the result by income quintile, household car ownership and tour length. It is not a network model: shocks apply everywhere at once, and there is no route, destination-zone or time-of-day detail.</p>
+        <p>The model reverse-engineers LTM 2.3 from its elasticities: its response parameters are calibrated so that it reproduces LTM's elasticities. Wherever LTM's structure and coefficients are known, they are imposed rather than calibrated, and the model is rebased to the 2023 travel pattern. The calibrated parameters are reduced-form and are not LTM's own.</p>
         <p>Purposes: commute, education, escort, shopping, leisure, business. Modes: walk, bike, car driver alone (SOV), car driver with passengers (HOV), car passenger, public transport (incl. long-distance bus). Domestic air is excluded. Primary-tour elasticities are applied to all tours.</p>
       </section>
       <section class="card prose">
@@ -476,6 +477,7 @@ details summary { cursor: pointer; font-weight: 600 }
       <section class="card prose">
         <h2>Hvad modellen er (teknisk dokumentation)</h2>
         <p>En hurtig surrogatmodel for Landstrafikmodellen (LTM 2.3) til beregning af ensartede procentvise ændringer i bilomkostning pr. km, rejsetid i bil, billetpris i kollektiv trafik og rejsetid i kollektiv trafik. Modellen genskaber LTM's turelasticiteter fordelt på turformål og transportmiddel, anvender dem på 2023-rejsemønsteret fra Transportvaneundersøgelsen (TU) og opdeler resultaterne på indkomstkvintiler, husstandens bilrådighed og turlængde. Det er ikke en netværksmodel: stød påføres ensartet overalt, og der er ingen rute-, zone- eller tidsrumsdetaljer.</p>
+        <p>Modellen er bygget baglæns fra LTM 2.3's elasticiteter: dens adfærdsparametre kalibreres, så den genskaber LTM's elasticiteter. Hvor LTM's struktur og koefficienter er kendte, lægges de ind direkte i stedet for at blive kalibreret, og modellen er genbaseret til rejsemønsteret i 2023. De kalibrerede parametre er reduceret form og ikke LTM's egne.</p>
         <p>Formål: pendling, uddannelse, ledsagelse, indkøb, fritid og erhverv. Transportmidler: gang, cykel, bilfører alene (SOV), bilfører med passagerer (HOV), bilpassager samt kollektiv trafik (inkl. fjernbus). Indenrigsfly er udeladt. Elasticiteter for primære ture anvendes på alle ture.</p>
       </section>
       <section class="card prose">
